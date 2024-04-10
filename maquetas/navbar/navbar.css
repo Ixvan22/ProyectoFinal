@@ -1,3 +1,4 @@
+/* Navbar desktop > 800px */
 .-navbar {
     position: fixed;
     top: 0;
@@ -9,14 +10,14 @@
     clip-path: polygon(0% 0%, 0% 80%, 20% 80%, 22% 100%, 78% 100%, 80% 80%, 100% 80%, 100% 0%);
 }
 
-.-navbar-links {
+.-navbar .-navbar-links {
     position: absolute;
     bottom: 0;
     left: 22%;
     width: 56%;
 }
 
-.-navbar-links ul {
+.-navbar .-navbar-links ul {
     list-style: none;
 
     display: flex;
@@ -29,4 +30,61 @@
     color: #ffffff;
     text-transform: uppercase;
     text-decoration: none;
+}
+
+/* Navbar responsive < 800px */
+@media only screen and (max-width: 800px) {
+    .-navbar-responsive-closed {
+        display: none;
+    }
+
+    .-navbar-icon i {
+        font-size: 20px;
+        cursor: pointer;
+        color: #ffffff;
+        background-color: red;
+        border-bottom-right-radius: 8px;
+    }
+
+    #navbar-icon-open {
+        padding: 20px;
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+
+    #navbar-icon-close {
+        padding: 20px;
+        position: fixed;
+        top: 0;
+        left: 30%;
+    }
+
+    .-navbar-hidden {
+        opacity: 0;
+    }
+
+    .-navbar {
+        position: fixed;
+        top: 0;
+        width: 30%;
+        height: 100%;
+
+        background-color: red;
+        clip-path: none;
+    }
+
+    .-navbar .-navbar-links {
+        padding: 20px;
+        position: initial;
+    }
+
+    .-navbar .-navbar-links ul {
+        list-style: none;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 20px;
+    }
 }

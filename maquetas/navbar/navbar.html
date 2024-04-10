@@ -10,7 +10,7 @@
 </head>
 <body>
     <div class="container-fluid p-0">
-        <div class="-navbar">
+        <div id="navbar" class="-navbar -navbar-responsive-closed">
             <div class="-navbar-links">
                 <ul class="p-0 m-0">
                     <li><a href="">Inicio</a></li>
@@ -18,8 +18,14 @@
                 </ul>
             </div>
         </div>
+        <div class="-navbar-icon">
+            <i id="navbar-icon-open" class="fa-solid fa-bars"></i>
+            <i id="navbar-icon-close" class="fa-solid fa-x -navbar-hidden"></i>
+        </div>
     </div>
     
     <script src="../bootstrap/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/2492101989.js" crossorigin="anonymous"></script>
+    <script src="navbar.js"></script>
 </body>
 </html>
