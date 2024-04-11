@@ -24,6 +24,7 @@ btnWorkday.addEventListener('click', e => {
         // Enviar datos a php
         data = JSON.parse(localStorage.getItem('workday'));
         data.push([date.toLocaleDateString(), date.toLocaleTimeString()]);
+        data = JSON.stringify(data);
         enviarDatos(data);
         localStorage.removeItem('workday');
      }
