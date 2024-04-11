@@ -1,22 +1,51 @@
 const btnWorkday = document.getElementById('btn-workday');
-let btnValue = document.getElementById('btn-workday-value');
+
+let data = [];
 
 btnWorkday.addEventListener('click', e => {
-    btnValue = document.getElementById('btn-workday-value');
-    console.log(btnValue);
     e.preventDefault();
+    let date = new Date();
 
-    if (btnValue.value = 'start') {
+    if (btnWorkday.value == 'start') {
         btnWorkday.classList.remove('btn-success');
         btnWorkday.classList.add('btn-danger');
         
-        btnWorkday.innerHTML = "Finalizar";
-        btnValue.setAttribute('value', 'stop');
+        btnWorkday.innerHTML = 'Finalizar';
+        btnWorkday.value = 'stop';
+
+        data.push([date.toLocaleDateString(), date.toLocaleTimeString()]);
+        localStorage.setItem('data', JSON.stringify(data));
     }
-    else if (btnValue.value = 'stop') {
+    else if (btnWorkday.value == 'stop') {
         btnWorkday.classList.remove('btn-danger');
-        btnValue.classList.add('btn-success');
+        btnWorkday.classList.add('btn-success');
+
+        btnWorkday.innerHTML = 'Iniciar';
+        btnWorkday.value = 'start';
+
+        // Enviar datos a php
+        data = JSON.parse(localStorage.getItem('data'));
+        data.push([date.toLocaleDateString(), date.toLocaleTimeString()]);
+        data = JSON.stringify(data);
+        enviarDatos(data);
      }
 });
 
-console.log(btnValue);
+
+function enviarDatos(data) {
+
+    const headers = new Headers();
+
+    const config = {
+        method: "post",
+        headers: headers,
+        mode: 'cors',
+        cache: 'no-cache',
+        body: data
+    }
+    fetch('fichero.php', config)
+        .then(respuesta => respuesta.json())
+        .then(respuesta => {
+            // Implementar que hacer con la respuesta, enviar alerta de success
+        })
+}
