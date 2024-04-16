@@ -70,3 +70,26 @@
 .-navbar-hidden {
     opacity: 0;
 }
+
+@media only screen and (max-width: 800px) {
+    .-navbar {
+        width: 60%;
+    }
+
+    #navbar-icon-close {
+        left: 60%;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .-navbar {
+        width: 100%;
+    }
+
+    #navbar-icon-close {
+        right: 0%;
+        left: inherit;
+        border-bottom-right-radius: 0px;
+        border-bottom-left-radius: 8px;
+    }
+}
