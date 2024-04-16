@@ -19,7 +19,7 @@
         <main class="-main-vehicles">
             <h2>Mis vehículos</h2>
             <div class="row gy-3">
-                <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                <div class="col-lg-3 col-md-4 col-sm-6 col-12" data-bs-toggle="modal" data-bs-target="#modal-1234ABC">
                     <div class="-card-vehicle">
                         <div class="-card-vehicle-header">
                             <p><span id="-card-vehicle-status-icon"><i class="fa-solid fa-circle" style="color: green;"></i></span> Listo</p>
@@ -36,93 +36,44 @@
                         </div>
                     </div>
                 </div>
-
-
-                <div class="col-lg-3 col-md-4 col-sm-6 col-12">
-                    <div class="-card-vehicle">
-                        <div class="-card-vehicle-header">
-                            <p><span id="-card-vehicle-status-icon"><i class="fa-solid fa-circle" style="color: green;"></i></span> Listo</p>
-                            <p>
-                                <span id="-card-vehicle-status-weight">300</span>
-                                 / 
-                                <span id="-card-vehicle-status-weight-max">500</span>
-                                 
-                                <span id="-card-vehicle-status-weight-type">KG</span>
-                            </p>
-                        </div>
-                        <div class="-card-vehicle-main">
-                            <p>1234ABC</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 col-12">
-                    <div class="-card-vehicle">
-                        <div class="-card-vehicle-header">
-                            <p><span id="-card-vehicle-status-icon"><i class="fa-solid fa-circle" style="color: green;"></i></span> Listo</p>
-                            <p>
-                                <span id="-card-vehicle-status-weight">300</span>
-                                 / 
-                                <span id="-card-vehicle-status-weight-max">500</span>
-                                 
-                                <span id="-card-vehicle-status-weight-type">KG</span>
-                            </p>
-                        </div>
-                        <div class="-card-vehicle-main">
-                            <p>1234ABC</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 col-12">
-                    <div class="-card-vehicle">
-                        <div class="-card-vehicle-header">
-                            <p><span id="-card-vehicle-status-icon"><i class="fa-solid fa-circle" style="color: green;"></i></span> Listo</p>
-                            <p>
-                                <span id="-card-vehicle-status-weight">300</span>
-                                 / 
-                                <span id="-card-vehicle-status-weight-max">500</span>
-                                 
-                                <span id="-card-vehicle-status-weight-type">KG</span>
-                            </p>
-                        </div>
-                        <div class="-card-vehicle-main">
-                            <p>1234ABC</p>
+                <!-- Modal -->
+                <div class="modal fade" id="modal-1234ABC" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Vehículo: <span id="vehiculo-modal-matricula">1234ABC</span></h5>
+                                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form action="." method="post">
+                                <div class="modal-body">
+                                    <div class="-modal-mercancia">
+                                        <div class="row d-flex align-items-center">
+                                            <label class="w-50" for="vehiculo-asignar-mercancia">Añadir mercancia:</label>
+                                            <select class="form-select w-50" id="vehiculo-asignar-mercancia" name="vehiculo-mercancia-asignada">
+                                                <option value="default"></option>
+                                                <option value="123456789123456">123456789123456</option>
+                                            </select>
+                                        </div>
+                                        <div class="row d-flex align-items-center my-2">
+                                            <label class="w-25" for="vehiculo-estado-asignado">Estado</label>
+                                            <select class="form-select w-75" id="vehiculo-estado-asignado" name="vehiculo-estado-asignado">
+                                                <option value="0">Sin mercancia</option>
+                                                <option value="1">Esperando asignación</option>
+                                                <option value="2">Cargando mercancía</option>
+                                                <option value="3">Listo</option>
+                                            </select>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-success" name="guardar-estado-vehículo">Guardar cambios</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 col-12">
-                    <div class="-card-vehicle">
-                        <div class="-card-vehicle-header">
-                            <p><span id="-card-vehicle-status-icon"><i class="fa-solid fa-circle" style="color: green;"></i></span> Listo</p>
-                            <p>
-                                <span id="-card-vehicle-status-weight">300</span>
-                                 / 
-                                <span id="-card-vehicle-status-weight-max">500</span>
-                                 
-                                <span id="-card-vehicle-status-weight-type">KG</span>
-                            </p>
-                        </div>
-                        <div class="-card-vehicle-main">
-                            <p>1234ABC</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 col-12">
-                    <div class="-card-vehicle">
-                        <div class="-card-vehicle-header">
-                            <p><span id="-card-vehicle-status-icon"><i class="fa-solid fa-circle" style="color: green;"></i></span> Listo</p>
-                            <p>
-                                <span id="-card-vehicle-status-weight">300</span>
-                                 / 
-                                <span id="-card-vehicle-status-weight-max">500</span>
-                                 
-                                <span id="-card-vehicle-status-weight-type">KG</span>
-                            </p>
-                        </div>
-                        <div class="-card-vehicle-main">
-                            <p>1234ABC</p>
-                        </div>
-                    </div>
-                </div>
+                    
             </div>
         </main>
 
