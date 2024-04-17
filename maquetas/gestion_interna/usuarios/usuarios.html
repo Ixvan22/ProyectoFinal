@@ -26,14 +26,37 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLongTitle">Nuevo trabajador</h5>
-                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <form action="." method="post">
                             <div class="modal-body">
-                                
+                                <div class="row d-flex align-items-center my-2">
+                                    <label class="w-25" for="nuevo-trabajador-dni">DNI:</label>
+                                    <input type="text" class="w-75 form-control" id="nuevo-trabajador-dni" name="nuevo-trabajador-dni" autocomplete="none"/>
+                                </div>
+                                <div class="row d-flex align-items-center">
+                                    <label class="w-25" for="nuevo-trabajador-nombre">Nombre:</label>
+                                    <input type="text" class="w-75 form-control" id="nuevo-trabajador-nombre" name="nuevo-trabajador-nombre" autocomplete="none"/>
+                                </div>
+                                <div class="row d-flex align-items-center my-2">
+                                    <label class="w-25" for="nuevo-trabajador-apellidos">Apellidos:</label>
+                                    <input type="text" class="w-75 form-control" id="nuevo-trabajador-apellidos" name="nuevo-trabajador-apellidos" autocomplete="none"/>
+                                </div>
+                                <div class="row d-flex align-items-center my-2">
+                                    <label class="w-25" for="nuevo-trabajador-telefono">Teléfono:</label>
+                                    <input type="number" class="w-75 form-control" id="nuevo-trabajador-telefono" name="nuevo-trabajador-telefono" autocomplete="none"/>
+                                </div>
+                                <div class="row d-flex align-items-center my-2">
+                                    <label class="w-25" for="nuevo-trabajador-correo">Correo:</label>
+                                    <input type="email" class="w-75 form-control" id="nuevo-trabajador-correo" name="nuevo-trabajador-correo" autocomplete="none"/>
+                                </div>
+                                <div class="row d-flex align-items-center my-2">
+                                    <label class="d-block" style="width: max-content;" for="nuevo-trabajador-cuenta">Cuenta usuario:</label>
+                                    <input type="checkbox" class="form-check-input p-2" style="width: max-content;" id="nuevo-trabajador-cuenta" name="nuevo-trabajador-cuenta"/>
+                                </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-success" name="guardar-estado-mercancia">Guardar cambios</button>
+                                <button type="button" class="btn btn-success" name="anadir-trabajador">Añadir</button>
                             </div>
                         </form>
                     </div>

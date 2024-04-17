@@ -42,3 +42,14 @@
         gap: 25px;
     }
 }
+
+#nuevo-trabajador-telefono::-webkit-inner-spin-button, 
+#nuevo-trabajador-telefono::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+input[type=number] { 
+    -moz-appearance:textfield; 
+    appearance: textfield;
+}
