@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trabajadores</title>
+
+    <link rel="stylesheet" href="../../bootstrap/bootstrap.min.css"/>
+    <link rel="stylesheet" href="usuarios.css"/>    
+</head>
+<body>
+    <div class="container-fluid p-0">
+        <header class="-header">
+            <div class="-header-location">
+                <a href="">Gestión Interna</a> &gt; <span id="location">Trabajadores</span>
+            </div>
+        </header>
+        <main class="-main-usuarios">
+            <div class="-header-usuarios">
+                <h2>Trabajadores</h2>
+                <div class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal-addUsers">Añadir trabajador</div>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="modal-addUsers" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Nuevo trabajador</h5>
+                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="." method="post">
+                            <div class="modal-body">
+                                
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-success" name="guardar-estado-mercancia">Guardar cambios</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="../../bootstrap/bootstrap.min.js"></script>
+</body>
+</html>
