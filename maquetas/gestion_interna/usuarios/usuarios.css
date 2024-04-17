@@ -32,6 +32,12 @@
     margin-bottom: 50px;
 }
 
+.-header-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;    
+}
+
 @media only screen and (max-width: 600px) {
     .-main-usuarios {
         padding: 0 10px;
@@ -49,7 +55,11 @@
   margin: 0; 
 }
 
-input[type=number] { 
+#nuevo-trabajador-telefono[type=number] { 
     -moz-appearance:textfield; 
     appearance: textfield;
+}
+
+.table {
+    overflow: scroll !important;
 }
