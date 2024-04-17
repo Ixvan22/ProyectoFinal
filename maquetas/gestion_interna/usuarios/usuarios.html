@@ -18,7 +18,10 @@
         <main class="-main-usuarios">
             <div class="-header-usuarios">
                 <h2>Trabajadores</h2>
-                <div class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal-addUsers">Añadir trabajador</div>
+                <div class="-header-buttons">
+                    <a href="" class="btn btn-secondary">Cuentas de usuario</a>
+                    <div class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal-addUsers">Añadir trabajador</div>
+                </div>
             </div>
             <!-- Modal -->
             <div class="modal fade" id="modal-addUsers" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -71,8 +74,8 @@
                         <th scope="col">Apellidos</th>
                         <th scope="col">Teléfono</th>
                         <th scope="col">Correo</th>
-                        <th scope="col">Cuenta</th>
-                        <th scope="col">Eliminar</th>
+                        <th scope="col">Cargo</th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -82,8 +85,8 @@
                         <td>Otto</td>
                         <td>@mdo</td>
                         <td>Mark</td>
-                        <td><a href="" class="btn btn-secondary">Crear</a></td>
-                        <td><a href="" class="btn btn-danger">Eliminar</a></td>
+                        <td>Transportista</td>
+                        <td><a href="" class="btn btn-secondary">Crear cuenta</a><a href="" class="btn btn-danger mx-2">Eliminar trabajador</a></td>
                     </tr>
               </table>
         </main>
