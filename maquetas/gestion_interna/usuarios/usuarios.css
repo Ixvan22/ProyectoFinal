@@ -34,7 +34,6 @@
 
 .-header-buttons {
     display: flex;
-    flex-direction: column;
     gap: 5px;    
 }
 
@@ -46,6 +45,10 @@
     .-header-usuarios {
         flex-direction: column;
         gap: 25px;
+    }
+
+    .-header-buttons {
+        flex-direction: column;
     }
 }
 
