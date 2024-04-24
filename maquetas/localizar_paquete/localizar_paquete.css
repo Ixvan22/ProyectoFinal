@@ -1,0 +1,22 @@
+.-localizar-paquete {
+    background-color: aquamarine;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.-localizar-paquete-card {
+    padding: 10px 20px;
+    border: 1px solid red;
+    height: 30%;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.-localizar-paquete-card-group {
+    display: flex;
+    justify-content: space-between;
+}
