@@ -11,12 +11,16 @@ else {
 }
 
 use app\controllers\viewsController;
+use app\controllers\loginController;
 require_once "./app/views/inc/session_start.php";
 
-
+$insLogin = new loginController();
 $viewsController = new viewsController();
 $vista = $viewsController->obtenerVistasControlador($url[0]);
 
-require_once "./app/views/content/".$vista."-view.php";
+
+// TODO REALIZAR COMPROBACIONES
+
+require_once $vista;
 
 ?>
