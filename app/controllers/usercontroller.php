@@ -7,80 +7,144 @@ class userController extends mainModel
 {
 
     // Controlador para anadir usuarios
-    public function anadirUsuarioControlador()
+    public function anadirUsuarioControlador():string
     {
 
-        $usuario = $this->limpiarCadena($_POST["usuario_usuario"]);
-        $clave1 = $this->limpiarCadena($_POST["usuario_clave1"]);
-        $clave2 = $this->limpiarCadena($_POST["usuario_clave2"]);
-        $tipo = $this->limpiarCadena($_POST["usuario_tipo"]);
+        $dni = $this->limpiarCadena($_POST["nuevo-trabajador-dni"]);
+        $nombre = $this->limpiarCadena($_POST["nuevo-trabajador-nombre"]);
+        $apellidos = $this->limpiarCadena($_POST["nuevo-trabajador-apellidos"]);
+        $telefono = $this->limpiarCadena($_POST["nuevo-trabajador-telefono"]);
+        $correo = $this->limpiarCadena($_POST["nuevo-trabajador-correo"]);
+        $fecha_nacimiento = $this->limpiarCadena($_POST["nuevo-trabajador-fecha-nacimiento"]);
+        $fecha_inicio = $this->limpiarCadena($_POST["nuevo-trabajador-fecha-inicio"]);
+        $cargo = $this->limpiarCadena($_POST["nuevo-trabajador-cargo"]);
 
 
         // Verificar que no existe el usuario
-        $verificarUsuario = "SELECT usuario_usuario FROM usuario WHERE usuario_usuario = '$usuario'";
+        $verificarUsuario = "SELECT dni FROM empleados WHERE dni = '$dni'";
         $verificarUsuario = $this->ejecutarConsulta($verificarUsuario);
 
         if ($verificarUsuario->rowCount() == 1) {
             $alerta = [
                 "tipo" => "limpiar",
                 "icono" => "error",
-                "titulo" => "El usuario ya existe"
+                "titulo" => "El trabajador ya existe"
             ];
 
             return json_encode($alerta);
         }
 
-        // Verificar claves
-        if ($clave1 != $clave2) {
+        // Verificar dni
+        $dni = mb_strtoupper($dni);
+        if (!$this->verificarDatos('[0-9]{8}[A-Z]', $dni)) {
             $alerta = [
                 "tipo" => "limpiar",
                 "icono" => "error",
-                "titulo" => "Las claves no coinciden"
+                "titulo" => "El dni no es válido"
+            ];
+            return json_encode($alerta);
+        }
+
+        // Cambiar formato fechas
+        $fecha_nacimiento = str_replace("-", "", $fecha_nacimiento);
+        $fecha_inicio = str_replace("-", "", $fecha_inicio);
+
+        // Verificar cargo
+        $verificarCargo = "SELECT tipo FROM tipo_cargo where tipo = '$cargo'";
+        $verificarCargo = $this->ejecutarConsulta($verificarCargo);
+
+        if ($verificarCargo->rowCount() == 0) {
+            $alerta = [
+                "tipo" => "limpiar",
+                "icono" => "error",
+                "titulo" => "El cargo es incorrecto"
             ];
 
             return json_encode($alerta);
         }
 
-        $clave = password_hash($clave1, PASSWORD_BCRYPT, ["cost" => 10]);
-
-        // Verificar tipo
-        if ($tipo != "admin" && $tipo != "user") {
-            $alerta = [
-                "tipo" => "limpiar",
-                "icono" => "error",
-                "titulo" => "El tipo no es correcto"
+        // Cuenta web
+        if (isset($_POST["nuevo-trabajador-cuenta"])) {
+            $password = password_hash($dni, PASSWORD_BCRYPT, ["cost" => 10]);
+            $datosCuenta = [
+                [
+                    "campo_nombre" => "dni_empleado",
+                    "campo_marcador" => ":dni_empleado",
+                    "campo_valor" => $dni
+                ],
+                [
+                    "campo_nombre" => "password",
+                    "campo_marcador" => ":password",
+                    "campo_valor" => $password
+                ]
             ];
-
-            return json_encode($alerta);
         }
 
         $datosUsuario = [
             [
-                "campo_nombre" => "usuario_usuario",
-                "campo_marcador" => ":Usuario",
-                "campo_valor" => $usuario
+                "campo_nombre" => "dni",
+                "campo_marcador" => ":dni",
+                "campo_valor" => $dni
             ],
             [
-                "campo_nombre" => "usuario_clave",
-                "campo_marcador" => ":Clave",
-                "campo_valor" => $clave
+                "campo_nombre" => "nombre",
+                "campo_marcador" => ":nombre",
+                "campo_valor" => $nombre
             ],
             [
-                "campo_nombre" => "usuario_tipo",
-                "campo_marcador" => ":Tipo",
-                "campo_valor" => $tipo
+                "campo_nombre" => "apellidos",
+                "campo_marcador" => ":apellidos",
+                "campo_valor" => $apellidos
+            ],
+            [
+                "campo_nombre" => "telefono",
+                "campo_marcador" => ":telefono",
+                "campo_valor" => $telefono
+            ],
+            [
+                "campo_nombre" => "correo",
+                "campo_marcador" => ":correo",
+                "campo_valor" => $correo
+            ],
+            [
+                "campo_nombre" => "fecha_nacimiento",
+                "campo_marcador" => ":fecha_nacimiento",
+                "campo_valor" => $fecha_nacimiento
+            ],
+            [
+                "campo_nombre" => "fecha_inicio_empresa",
+                "campo_marcador" => ":fecha_inicio_empresa",
+                "campo_valor" => $fecha_inicio
+            ],
+            [
+                "campo_nombre" => "cargo",
+                "campo_marcador" => ":cargo",
+                "campo_valor" => $cargo
             ]
         ];
 
-        $anadirUser = $this->guardarDatos("usuario", $datosUsuario);
+        $anadirUser = $this->guardarDatos("empleados", $datosUsuario);
 
-        if ($anadirUser->rowCount() > 0) {
+        if ($anadirUser->rowCount() == 1) {
             $alerta = [
                 "tipo" => "recargar",
                 "icono" => "success",
                 "titulo" => "Usuario añadido",
-                "url" => APP_URL . "addUser/"
+                "url" => APP_URL . "trabajadores"
             ];
+            if (isset($_POST["nuevo-trabajador-cuenta"])) {
+                $anadirCuenta = $this->guardarDatos("cuentas_web", $datosCuenta);
+                if ($anadirCuenta->rowCount() == 0) {
+                    $alerta = [
+                        "tipo" => "recargar",
+                        "icono" => "warning",
+                        "titulo" => "Fallo al crear la cuenta web",
+                        "url" => APP_URL . "trabajadores"
+                    ];
+                }
+
+            }
+
         } else {
             $alerta = [
                 "tipo" => "limpiar",
