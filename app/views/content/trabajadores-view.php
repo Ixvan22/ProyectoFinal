@@ -105,7 +105,7 @@
             </div>
         </main>
     </div>
-    <script src="<?php echo APP_URL ?>app/views/js/ajax.js"></script>
     <?php require_once 'app/views/inc/scripts.php'?>
+    <script src="<?php echo APP_URL ?>app/views/js/ajax.js"></script>
 </body>
 </html>

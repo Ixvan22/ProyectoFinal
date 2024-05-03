@@ -9,7 +9,6 @@ class userController extends mainModel
     // Controlador para anadir usuarios
     public function anadirUsuarioControlador():string
     {
-
         $dni = $this->limpiarCadena($_POST["nuevo-trabajador-dni"]);
         $nombre = $this->limpiarCadena($_POST["nuevo-trabajador-nombre"]);
         $apellidos = $this->limpiarCadena($_POST["nuevo-trabajador-apellidos"]);

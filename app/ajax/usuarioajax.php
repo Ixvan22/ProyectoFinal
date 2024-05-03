@@ -1,14 +1,12 @@
 <?php
 
-spl_autoload_register();
 
 require_once "../config/app.php";
 require_once "../views/inc/session_start.php";
+require_once "../models/mainmodel.php";
+require_once "../controllers/usercontroller.php";
 
-use app\controllers\userController;
-
-
-$insUsusario = new userController();
+$insUsusario = new \app\controllers\userController();
 
 if (isset($_POST["anadir-trabajador"])) {
     echo $insUsusario->anadirUsuarioControlador();
