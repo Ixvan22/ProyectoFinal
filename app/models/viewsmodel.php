@@ -4,7 +4,7 @@ namespace app\models;
 
 class viewsModel {
     protected function obtenerVistasModelo(string $vista):string {
-        $witheList = ['index', 'login', 'usuarios', 'trabajadores'];
+        $witheList = ['index', 'login', 'usuarios', 'trabajadores', 'gestionPrincipal'];
 
         if (in_array($vista, $witheList)) {
             if (is_file("./app/views/content/".$vista."-view.php")) {

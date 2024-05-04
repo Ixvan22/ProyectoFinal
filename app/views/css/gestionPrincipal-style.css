@@ -1,0 +1,50 @@
+.-header {
+    padding: 40px;
+    padding-left: 80px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.-header-location a {
+    color: #000000;
+    text-decoration: none;
+}
+
+.-header-location #location {
+    font-weight: bold;
+}
+
+.-header-workday {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.-header-workday-hours {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+}
+
+.-header-workday-hours p {
+    width: 120px;
+    display: flex;
+    justify-content: space-between;
+}
+
+@media only screen and (max-width: 600px) {
+    .-header {
+        padding-left: 10px;
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    .-header-workday {
+        justify-content: center;
+    }
+}
+
+#btn-workday {
+    width: 100px;
+}
