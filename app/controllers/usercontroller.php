@@ -277,5 +277,42 @@ class userController extends mainModel
 
         return $contenido;
     }
+
+    public function anadirJornadaControlador(array $horaInicio, array $horaFin, string $dni):bool {
+        /*$fecha = explode('/', $horaInicio[0]);
+        $fecha = $fecha[2].str_pad($fecha[1], 2, '0', STR_PAD_LEFT).
+            str_pad($fecha[2], 2, '0', STR_PAD_LEFT);
+
+        $horaInicio = $horaInicio[1];*/
+
+
+        $datosJornada = [
+            [
+                "campo_nombre" => "dni_empleado",
+                "campo_marcador" => ":dni_empleado",
+                "campo_valor" => $dni
+            ],
+            [
+                "campo_nombre" => "fecha_jornada",
+                "campo_marcador" => ":fecha_jornada",
+                "campo_valor" => $horaInicio[0]
+            ],
+            [
+                "campo_nombre" => "hora_entrada",
+                "campo_marcador" => ":hora_entrada",
+                "campo_valor" => $horaInicio[1]
+            ],
+            [
+                "campo_nombre" => "hora_salida",
+                "campo_marcador" => ":hora_salida",
+                "campo_valor" => $horaFin[1]
+            ],
+        ];
+        $anadirJornada = $this->guardarDatos("jornada_empleados", $datosJornada);
+        if ($anadirJornada->rowCount() == 0) {
+            return false;
+        }
+        return true;
+    }
 }
 ?>

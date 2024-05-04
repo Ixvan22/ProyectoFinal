@@ -3,9 +3,9 @@ const btnWorkday = document.getElementById('btn-workday');
 const workdayStart = document.getElementById('workday-start');
 const workdayEnd = document.getElementById('workday-end');
 
-let data = [];
 
 btnWorkday.addEventListener('click', e => {
+    let data = [];
     e.preventDefault();
     let date = new Date();
 
@@ -71,7 +71,7 @@ function botonFinalizar() {
 function enviarDatos(data) {
     
     const headers = new Headers();
-
+    
     const config = {
         method: "post",
         headers: headers,
@@ -79,11 +79,5 @@ function enviarDatos(data) {
         cache: 'no-cache',
         body: data
     }
-
-    // DA FALLO PORQUE ESTA ESPERANDO PASAR A JSON LA RESPUESTA EN PHP, PERO AUN NO ESTA IMPLEMENTADO EL PHP
-    fetch('fichero.php', config)
-        .then(respuesta => respuesta.json())
-        .then(respuesta => {
-            // Implementar que hacer con la respuesta, enviar alerta de success
-        });
+    fetch('./app/ajax/jornadaajax.php', config);
 }
