@@ -71,7 +71,7 @@ function botonFinalizar() {
 function enviarDatos(data) {
     
     const headers = new Headers();
-    
+
     const config = {
         method: "post",
         headers: headers,

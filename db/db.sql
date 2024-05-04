@@ -29,6 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `cuentas_web` (
 <<<<<<< HEAD
+<<<<<<< HEAD
   `dni_empleado` varchar(9) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `password` varchar(255) COLLATE utf8mb4_spanish2_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
@@ -46,6 +47,12 @@ INSERT INTO `cuentas_web` (`dni_empleado`, `password`) VALUES
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 >>>>>>> 59e9d48 (db v2.0)
+=======
+                               `dni_empleado` varchar(9) COLLATE utf8mb4_spanish2_ci NOT NULL,
+                               `password` varchar(255) COLLATE utf8mb4_spanish2_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+
+>>>>>>> 59e9d4878a4a59ca751b4667db87d04ada930103
 -- --------------------------------------------------------
 
 --
@@ -53,6 +60,7 @@ INSERT INTO `cuentas_web` (`dni_empleado`, `password`) VALUES
 --
 
 CREATE TABLE `empleados` (
+<<<<<<< HEAD
 <<<<<<< HEAD
   `dni` varchar(9) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `nombre` varchar(40) COLLATE utf8mb4_spanish2_ci NOT NULL,
@@ -84,6 +92,18 @@ INSERT INTO `empleados` (`dni`, `nombre`, `apellidos`, `telefono`, `correo`, `fe
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 >>>>>>> 59e9d48 (db v2.0)
+=======
+                             `dni` varchar(9) COLLATE utf8mb4_spanish2_ci NOT NULL,
+                             `nombre` varchar(40) COLLATE utf8mb4_spanish2_ci NOT NULL,
+                             `apellidos` varchar(80) COLLATE utf8mb4_spanish2_ci NOT NULL,
+                             `telefono` int NOT NULL,
+                             `correo` varchar(80) COLLATE utf8mb4_spanish2_ci NOT NULL,
+                             `fecha_nacimiento` int NOT NULL,
+                             `fecha_inicio_empresa` int NOT NULL,
+                             `cargo` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+
+>>>>>>> 59e9d4878a4a59ca751b4667db87d04ada930103
 -- --------------------------------------------------------
 
 --
@@ -91,6 +111,7 @@ INSERT INTO `empleados` (`dni`, `nombre`, `apellidos`, `telefono`, `correo`, `fe
 --
 
 CREATE TABLE `jornada_empleados` (
+<<<<<<< HEAD
 <<<<<<< HEAD
   `dni_empleado` varchar(9) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `fecha_jornada` varchar(20) COLLATE utf8mb4_spanish2_ci NOT NULL,
@@ -116,6 +137,14 @@ INSERT INTO `jornada_empleados` (`dni_empleado`, `fecha_jornada`, `hora_entrada`
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 >>>>>>> 59e9d48 (db v2.0)
+=======
+                                     `dni_empleado` varchar(9) COLLATE utf8mb4_spanish2_ci NOT NULL,
+                                     `fecha_jornada` varchar(20) COLLATE utf8mb4_spanish2_ci NOT NULL,
+                                     `hora_entrada` varchar(20) COLLATE utf8mb4_spanish2_ci NOT NULL,
+                                     `hora_salida` varchar(20) COLLATE utf8mb4_spanish2_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+
+>>>>>>> 59e9d4878a4a59ca751b4667db87d04ada930103
 -- --------------------------------------------------------
 
 --
@@ -123,6 +152,7 @@ INSERT INTO `jornada_empleados` (`dni_empleado`, `fecha_jornada`, `hora_entrada`
 --
 
 CREATE TABLE `mercancia` (
+<<<<<<< HEAD
 <<<<<<< HEAD
   `localizador` int NOT NULL,
   `cliente` varchar(9) COLLATE utf8mb4_spanish2_ci NOT NULL,
@@ -132,6 +162,11 @@ CREATE TABLE `mercancia` (
                              `cliente` varchar(9) COLLATE utf8mb4_spanish2_ci NOT NULL,
                              `peso` float(7,2) NOT NULL,
 >>>>>>> 59e9d48 (db v2.0)
+=======
+                             `localizador` int NOT NULL,
+                             `cliente` varchar(9) COLLATE utf8mb4_spanish2_ci NOT NULL,
+                             `peso` float(7,2) NOT NULL,
+>>>>>>> 59e9d4878a4a59ca751b4667db87d04ada930103
   `tipo_estado` int NOT NULL,
   `tipo_peso` int NOT NULL,
   `descripcion` varchar(255) COLLATE utf8mb4_spanish2_ci NOT NULL
@@ -145,6 +180,7 @@ CREATE TABLE `mercancia` (
 
 CREATE TABLE `planificacion_empleados` (
 <<<<<<< HEAD
+<<<<<<< HEAD
   `fecha` int NOT NULL,
   `empleado` varchar(9) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `descripcion` varchar(255) COLLATE utf8mb4_spanish2_ci NOT NULL
@@ -153,6 +189,11 @@ CREATE TABLE `planificacion_empleados` (
                                            `empleado` varchar(9) COLLATE utf8mb4_spanish2_ci NOT NULL,
                                            `descripcion` varchar(255) COLLATE utf8mb4_spanish2_ci NOT NULL
 >>>>>>> 59e9d48 (db v2.0)
+=======
+                                           `fecha` int NOT NULL,
+                                           `empleado` varchar(9) COLLATE utf8mb4_spanish2_ci NOT NULL,
+                                           `descripcion` varchar(255) COLLATE utf8mb4_spanish2_ci NOT NULL
+>>>>>>> 59e9d4878a4a59ca751b4667db87d04ada930103
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 -- --------------------------------------------------------
@@ -162,6 +203,7 @@ CREATE TABLE `planificacion_empleados` (
 --
 
 CREATE TABLE `tipo_cargo` (
+<<<<<<< HEAD
 <<<<<<< HEAD
   `tipo` int NOT NULL,
   `nombre` varchar(40) COLLATE utf8mb4_spanish2_ci NOT NULL
@@ -180,6 +222,12 @@ INSERT INTO `tipo_cargo` (`tipo`, `nombre`) VALUES
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 >>>>>>> 59e9d48 (db v2.0)
+=======
+                              `tipo` int NOT NULL,
+                              `nombre` varchar(40) COLLATE utf8mb4_spanish2_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+
+>>>>>>> 59e9d4878a4a59ca751b4667db87d04ada930103
 -- --------------------------------------------------------
 
 --
@@ -188,12 +236,17 @@ INSERT INTO `tipo_cargo` (`tipo`, `nombre`) VALUES
 
 CREATE TABLE `tipo_estado` (
 <<<<<<< HEAD
+<<<<<<< HEAD
   `tipo` int NOT NULL,
   `nombre` varchar(40) COLLATE utf8mb4_spanish2_ci NOT NULL
 =======
                                `tipo` int NOT NULL,
                                `nombre` varchar(40) COLLATE utf8mb4_spanish2_ci NOT NULL
 >>>>>>> 59e9d48 (db v2.0)
+=======
+                               `tipo` int NOT NULL,
+                               `nombre` varchar(40) COLLATE utf8mb4_spanish2_ci NOT NULL
+>>>>>>> 59e9d4878a4a59ca751b4667db87d04ada930103
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 -- --------------------------------------------------------
@@ -204,12 +257,17 @@ CREATE TABLE `tipo_estado` (
 
 CREATE TABLE `tipo_peso` (
 <<<<<<< HEAD
+<<<<<<< HEAD
   `tipo` int NOT NULL,
   `nombre` varchar(40) COLLATE utf8mb4_spanish2_ci NOT NULL
 =======
                              `tipo` int NOT NULL,
                              `nombre` varchar(40) COLLATE utf8mb4_spanish2_ci NOT NULL
 >>>>>>> 59e9d48 (db v2.0)
+=======
+                             `tipo` int NOT NULL,
+                             `nombre` varchar(40) COLLATE utf8mb4_spanish2_ci NOT NULL
+>>>>>>> 59e9d4878a4a59ca751b4667db87d04ada930103
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 -- --------------------------------------------------------
@@ -220,12 +278,17 @@ CREATE TABLE `tipo_peso` (
 
 CREATE TABLE `transporte_mercancia` (
 <<<<<<< HEAD
+<<<<<<< HEAD
   `localizador` int NOT NULL,
   `matricula` varchar(7) COLLATE utf8mb4_spanish2_ci NOT NULL
 =======
                                         `localizador` int NOT NULL,
                                         `matricula` varchar(7) COLLATE utf8mb4_spanish2_ci NOT NULL
 >>>>>>> 59e9d48 (db v2.0)
+=======
+                                        `localizador` int NOT NULL,
+                                        `matricula` varchar(7) COLLATE utf8mb4_spanish2_ci NOT NULL
+>>>>>>> 59e9d4878a4a59ca751b4667db87d04ada930103
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 -- --------------------------------------------------------
@@ -236,18 +299,24 @@ CREATE TABLE `transporte_mercancia` (
 
 CREATE TABLE `usuarios` (
 <<<<<<< HEAD
+<<<<<<< HEAD
   `dni` varchar(9) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `nombre` varchar(40) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `apellidos` varchar(80) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `telefono` int NOT NULL,
   `correo` varchar(80) COLLATE utf8mb4_spanish2_ci NOT NULL
 =======
+=======
+>>>>>>> 59e9d4878a4a59ca751b4667db87d04ada930103
                             `dni` varchar(9) COLLATE utf8mb4_spanish2_ci NOT NULL,
                             `nombre` varchar(40) COLLATE utf8mb4_spanish2_ci NOT NULL,
                             `apellidos` varchar(80) COLLATE utf8mb4_spanish2_ci NOT NULL,
                             `telefono` int NOT NULL,
                             `correo` varchar(80) COLLATE utf8mb4_spanish2_ci NOT NULL
+<<<<<<< HEAD
 >>>>>>> 59e9d48 (db v2.0)
+=======
+>>>>>>> 59e9d4878a4a59ca751b4667db87d04ada930103
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 -- --------------------------------------------------------
@@ -258,12 +327,17 @@ CREATE TABLE `usuarios` (
 
 CREATE TABLE `vehiculos` (
 <<<<<<< HEAD
+<<<<<<< HEAD
   `matricula` varchar(7) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `carga_util` float(7,2) NOT NULL,
 =======
                              `matricula` varchar(7) COLLATE utf8mb4_spanish2_ci NOT NULL,
                              `carga_util` float(7,2) NOT NULL,
 >>>>>>> 59e9d48 (db v2.0)
+=======
+                             `matricula` varchar(7) COLLATE utf8mb4_spanish2_ci NOT NULL,
+                             `carga_util` float(7,2) NOT NULL,
+>>>>>>> 59e9d4878a4a59ca751b4667db87d04ada930103
   `tipo_peso` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
@@ -275,12 +349,17 @@ CREATE TABLE `vehiculos` (
 
 CREATE TABLE `vehiculos_empleados` (
 <<<<<<< HEAD
+<<<<<<< HEAD
   `empleado` varchar(9) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `vehiculo` varchar(7) COLLATE utf8mb4_spanish2_ci NOT NULL
 =======
                                        `empleado` varchar(9) COLLATE utf8mb4_spanish2_ci NOT NULL,
                                        `vehiculo` varchar(7) COLLATE utf8mb4_spanish2_ci NOT NULL
 >>>>>>> 59e9d48 (db v2.0)
+=======
+                                       `empleado` varchar(9) COLLATE utf8mb4_spanish2_ci NOT NULL,
+                                       `vehiculo` varchar(7) COLLATE utf8mb4_spanish2_ci NOT NULL
+>>>>>>> 59e9d4878a4a59ca751b4667db87d04ada930103
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 --
@@ -292,20 +371,28 @@ CREATE TABLE `vehiculos_empleados` (
 --
 ALTER TABLE `cuentas_web`
 <<<<<<< HEAD
+<<<<<<< HEAD
   ADD KEY `fk-cuentas-empleado` (`dni_empleado`);
 =======
     ADD KEY `fk-cuentas-empleado` (`dni_empleado`);
 >>>>>>> 59e9d48 (db v2.0)
+=======
+    ADD KEY `fk-cuentas-empleado` (`dni_empleado`);
+>>>>>>> 59e9d4878a4a59ca751b4667db87d04ada930103
 
 --
 -- Indices de la tabla `empleados`
 --
 ALTER TABLE `empleados`
 <<<<<<< HEAD
+<<<<<<< HEAD
   ADD PRIMARY KEY (`dni`),
 =======
     ADD PRIMARY KEY (`dni`),
 >>>>>>> 59e9d48 (db v2.0)
+=======
+    ADD PRIMARY KEY (`dni`),
+>>>>>>> 59e9d4878a4a59ca751b4667db87d04ada930103
   ADD KEY `fk-cargo-empleado` (`cargo`);
 
 --
@@ -313,20 +400,28 @@ ALTER TABLE `empleados`
 --
 ALTER TABLE `jornada_empleados`
 <<<<<<< HEAD
+<<<<<<< HEAD
   ADD PRIMARY KEY (`dni_empleado`,`fecha_jornada`,`hora_entrada`,`hora_salida`);
 =======
     ADD PRIMARY KEY (`dni_empleado`,`fecha_jornada`,`hora_entrada`,`hora_salida`);
 >>>>>>> 59e9d48 (db v2.0)
+=======
+    ADD PRIMARY KEY (`dni_empleado`,`fecha_jornada`,`hora_entrada`,`hora_salida`);
+>>>>>>> 59e9d4878a4a59ca751b4667db87d04ada930103
 
 --
 -- Indices de la tabla `mercancia`
 --
 ALTER TABLE `mercancia`
 <<<<<<< HEAD
+<<<<<<< HEAD
   ADD PRIMARY KEY (`localizador`),
 =======
     ADD PRIMARY KEY (`localizador`),
 >>>>>>> 59e9d48 (db v2.0)
+=======
+    ADD PRIMARY KEY (`localizador`),
+>>>>>>> 59e9d4878a4a59ca751b4667db87d04ada930103
   ADD KEY `fk-tipo-peso-mercancia` (`tipo_peso`),
   ADD KEY `fk-tipo-estado-mercancia` (`tipo_estado`),
   ADD KEY `fk-cliente-mercancia` (`cliente`);
@@ -336,10 +431,14 @@ ALTER TABLE `mercancia`
 --
 ALTER TABLE `planificacion_empleados`
 <<<<<<< HEAD
+<<<<<<< HEAD
   ADD PRIMARY KEY (`fecha`,`empleado`),
 =======
     ADD PRIMARY KEY (`fecha`,`empleado`),
 >>>>>>> 59e9d48 (db v2.0)
+=======
+    ADD PRIMARY KEY (`fecha`,`empleado`),
+>>>>>>> 59e9d4878a4a59ca751b4667db87d04ada930103
   ADD KEY `fk-planificacion-empleado` (`empleado`);
 
 --
@@ -347,40 +446,56 @@ ALTER TABLE `planificacion_empleados`
 --
 ALTER TABLE `tipo_cargo`
 <<<<<<< HEAD
+<<<<<<< HEAD
   ADD PRIMARY KEY (`tipo`);
 =======
     ADD PRIMARY KEY (`tipo`);
 >>>>>>> 59e9d48 (db v2.0)
+=======
+    ADD PRIMARY KEY (`tipo`);
+>>>>>>> 59e9d4878a4a59ca751b4667db87d04ada930103
 
 --
 -- Indices de la tabla `tipo_estado`
 --
 ALTER TABLE `tipo_estado`
 <<<<<<< HEAD
+<<<<<<< HEAD
   ADD PRIMARY KEY (`tipo`);
 =======
     ADD PRIMARY KEY (`tipo`);
 >>>>>>> 59e9d48 (db v2.0)
+=======
+    ADD PRIMARY KEY (`tipo`);
+>>>>>>> 59e9d4878a4a59ca751b4667db87d04ada930103
 
 --
 -- Indices de la tabla `tipo_peso`
 --
 ALTER TABLE `tipo_peso`
 <<<<<<< HEAD
+<<<<<<< HEAD
   ADD PRIMARY KEY (`tipo`);
 =======
     ADD PRIMARY KEY (`tipo`);
 >>>>>>> 59e9d48 (db v2.0)
+=======
+    ADD PRIMARY KEY (`tipo`);
+>>>>>>> 59e9d4878a4a59ca751b4667db87d04ada930103
 
 --
 -- Indices de la tabla `transporte_mercancia`
 --
 ALTER TABLE `transporte_mercancia`
 <<<<<<< HEAD
+<<<<<<< HEAD
   ADD PRIMARY KEY (`localizador`,`matricula`),
 =======
     ADD PRIMARY KEY (`localizador`,`matricula`),
 >>>>>>> 59e9d48 (db v2.0)
+=======
+    ADD PRIMARY KEY (`localizador`,`matricula`),
+>>>>>>> 59e9d4878a4a59ca751b4667db87d04ada930103
   ADD KEY `fk-matricula-transporte` (`matricula`);
 
 --
@@ -388,20 +503,28 @@ ALTER TABLE `transporte_mercancia`
 --
 ALTER TABLE `usuarios`
 <<<<<<< HEAD
+<<<<<<< HEAD
   ADD PRIMARY KEY (`dni`);
 =======
     ADD PRIMARY KEY (`dni`);
 >>>>>>> 59e9d48 (db v2.0)
+=======
+    ADD PRIMARY KEY (`dni`);
+>>>>>>> 59e9d4878a4a59ca751b4667db87d04ada930103
 
 --
 -- Indices de la tabla `vehiculos`
 --
 ALTER TABLE `vehiculos`
 <<<<<<< HEAD
+<<<<<<< HEAD
   ADD PRIMARY KEY (`matricula`),
 =======
     ADD PRIMARY KEY (`matricula`),
 >>>>>>> 59e9d48 (db v2.0)
+=======
+    ADD PRIMARY KEY (`matricula`),
+>>>>>>> 59e9d4878a4a59ca751b4667db87d04ada930103
   ADD KEY `fk-tipo-peso-vehiculo` (`tipo_peso`);
 
 --
@@ -409,10 +532,14 @@ ALTER TABLE `vehiculos`
 --
 ALTER TABLE `vehiculos_empleados`
 <<<<<<< HEAD
+<<<<<<< HEAD
   ADD PRIMARY KEY (`empleado`,`vehiculo`),
 =======
     ADD PRIMARY KEY (`empleado`,`vehiculo`),
 >>>>>>> 59e9d48 (db v2.0)
+=======
+    ADD PRIMARY KEY (`empleado`,`vehiculo`),
+>>>>>>> 59e9d4878a4a59ca751b4667db87d04ada930103
   ADD KEY `fk-vehiculo-empleado` (`vehiculo`);
 
 --
@@ -424,40 +551,56 @@ ALTER TABLE `vehiculos_empleados`
 --
 ALTER TABLE `cuentas_web`
 <<<<<<< HEAD
+<<<<<<< HEAD
   ADD CONSTRAINT `fk-cuentas-empleado` FOREIGN KEY (`dni_empleado`) REFERENCES `empleados` (`dni`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 =======
     ADD CONSTRAINT `fk-cuentas-empleado` FOREIGN KEY (`dni_empleado`) REFERENCES `empleados` (`dni`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 >>>>>>> 59e9d48 (db v2.0)
+=======
+    ADD CONSTRAINT `fk-cuentas-empleado` FOREIGN KEY (`dni_empleado`) REFERENCES `empleados` (`dni`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+>>>>>>> 59e9d4878a4a59ca751b4667db87d04ada930103
 
 --
 -- Filtros para la tabla `empleados`
 --
 ALTER TABLE `empleados`
 <<<<<<< HEAD
+<<<<<<< HEAD
   ADD CONSTRAINT `fk-cargo-empleado` FOREIGN KEY (`cargo`) REFERENCES `tipo_cargo` (`tipo`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 =======
     ADD CONSTRAINT `fk-cargo-empleado` FOREIGN KEY (`cargo`) REFERENCES `tipo_cargo` (`tipo`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 >>>>>>> 59e9d48 (db v2.0)
+=======
+    ADD CONSTRAINT `fk-cargo-empleado` FOREIGN KEY (`cargo`) REFERENCES `tipo_cargo` (`tipo`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+>>>>>>> 59e9d4878a4a59ca751b4667db87d04ada930103
 
 --
 -- Filtros para la tabla `jornada_empleados`
 --
 ALTER TABLE `jornada_empleados`
 <<<<<<< HEAD
+<<<<<<< HEAD
   ADD CONSTRAINT `fk-empleado-jornada` FOREIGN KEY (`dni_empleado`) REFERENCES `empleados` (`dni`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 =======
     ADD CONSTRAINT `fk-empleado-jornada` FOREIGN KEY (`dni_empleado`) REFERENCES `empleados` (`dni`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 >>>>>>> 59e9d48 (db v2.0)
+=======
+    ADD CONSTRAINT `fk-empleado-jornada` FOREIGN KEY (`dni_empleado`) REFERENCES `empleados` (`dni`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+>>>>>>> 59e9d4878a4a59ca751b4667db87d04ada930103
 
 --
 -- Filtros para la tabla `mercancia`
 --
 ALTER TABLE `mercancia`
 <<<<<<< HEAD
+<<<<<<< HEAD
   ADD CONSTRAINT `fk-cliente-mercancia` FOREIGN KEY (`cliente`) REFERENCES `usuarios` (`dni`) ON DELETE RESTRICT ON UPDATE RESTRICT,
 =======
     ADD CONSTRAINT `fk-cliente-mercancia` FOREIGN KEY (`cliente`) REFERENCES `usuarios` (`dni`) ON DELETE RESTRICT ON UPDATE RESTRICT,
 >>>>>>> 59e9d48 (db v2.0)
+=======
+    ADD CONSTRAINT `fk-cliente-mercancia` FOREIGN KEY (`cliente`) REFERENCES `usuarios` (`dni`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+>>>>>>> 59e9d4878a4a59ca751b4667db87d04ada930103
   ADD CONSTRAINT `fk-tipo-estado-mercancia` FOREIGN KEY (`tipo_estado`) REFERENCES `tipo_estado` (`tipo`),
   ADD CONSTRAINT `fk-tipo-peso-mercancia` FOREIGN KEY (`tipo_peso`) REFERENCES `tipo_peso` (`tipo`);
 
@@ -466,20 +609,28 @@ ALTER TABLE `mercancia`
 --
 ALTER TABLE `planificacion_empleados`
 <<<<<<< HEAD
+<<<<<<< HEAD
   ADD CONSTRAINT `fk-planificacion-empleado` FOREIGN KEY (`empleado`) REFERENCES `empleados` (`dni`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 =======
     ADD CONSTRAINT `fk-planificacion-empleado` FOREIGN KEY (`empleado`) REFERENCES `empleados` (`dni`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 >>>>>>> 59e9d48 (db v2.0)
+=======
+    ADD CONSTRAINT `fk-planificacion-empleado` FOREIGN KEY (`empleado`) REFERENCES `empleados` (`dni`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+>>>>>>> 59e9d4878a4a59ca751b4667db87d04ada930103
 
 --
 -- Filtros para la tabla `transporte_mercancia`
 --
 ALTER TABLE `transporte_mercancia`
 <<<<<<< HEAD
+<<<<<<< HEAD
   ADD CONSTRAINT `fk-localizador-transporte` FOREIGN KEY (`localizador`) REFERENCES `mercancia` (`localizador`) ON DELETE RESTRICT ON UPDATE RESTRICT,
 =======
     ADD CONSTRAINT `fk-localizador-transporte` FOREIGN KEY (`localizador`) REFERENCES `mercancia` (`localizador`) ON DELETE RESTRICT ON UPDATE RESTRICT,
 >>>>>>> 59e9d48 (db v2.0)
+=======
+    ADD CONSTRAINT `fk-localizador-transporte` FOREIGN KEY (`localizador`) REFERENCES `mercancia` (`localizador`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+>>>>>>> 59e9d4878a4a59ca751b4667db87d04ada930103
   ADD CONSTRAINT `fk-matricula-transporte` FOREIGN KEY (`matricula`) REFERENCES `vehiculos` (`matricula`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
@@ -487,20 +638,28 @@ ALTER TABLE `transporte_mercancia`
 --
 ALTER TABLE `vehiculos`
 <<<<<<< HEAD
+<<<<<<< HEAD
   ADD CONSTRAINT `fk-tipo-peso-vehiculo` FOREIGN KEY (`tipo_peso`) REFERENCES `tipo_peso` (`tipo`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 =======
     ADD CONSTRAINT `fk-tipo-peso-vehiculo` FOREIGN KEY (`tipo_peso`) REFERENCES `tipo_peso` (`tipo`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 >>>>>>> 59e9d48 (db v2.0)
+=======
+    ADD CONSTRAINT `fk-tipo-peso-vehiculo` FOREIGN KEY (`tipo_peso`) REFERENCES `tipo_peso` (`tipo`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+>>>>>>> 59e9d4878a4a59ca751b4667db87d04ada930103
 
 --
 -- Filtros para la tabla `vehiculos_empleados`
 --
 ALTER TABLE `vehiculos_empleados`
 <<<<<<< HEAD
+<<<<<<< HEAD
   ADD CONSTRAINT `fk-empleado-vehiculo` FOREIGN KEY (`empleado`) REFERENCES `empleados` (`dni`) ON DELETE RESTRICT ON UPDATE RESTRICT,
 =======
     ADD CONSTRAINT `fk-empleado-vehiculo` FOREIGN KEY (`empleado`) REFERENCES `empleados` (`dni`) ON DELETE RESTRICT ON UPDATE RESTRICT,
 >>>>>>> 59e9d48 (db v2.0)
+=======
+    ADD CONSTRAINT `fk-empleado-vehiculo` FOREIGN KEY (`empleado`) REFERENCES `empleados` (`dni`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+>>>>>>> 59e9d4878a4a59ca751b4667db87d04ada930103
   ADD CONSTRAINT `fk-vehiculo-empleado` FOREIGN KEY (`vehiculo`) REFERENCES `vehiculos` (`matricula`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 COMMIT;
 
