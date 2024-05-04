@@ -1,7 +1,7 @@
 <div id="navbar" class="-navbar -navbar-responsive-closed">
     <div class="-navbar-top">
         <div class="-navbar-top-logo">
-            <a href=""><img src="https://picsum.photos/id/684/600/400?blur=5" alt=""></a>
+            <a href="<?php echo APP_URL ?>"><img src="<?php APP_URL ?>app/views/img/logo-png.png" alt=""></a>
         </div>
         <div class="-navbar-top-contact">
             <div class="-navbar-contact-phone">
