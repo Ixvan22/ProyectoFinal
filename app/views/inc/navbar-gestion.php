@@ -13,7 +13,7 @@ $insUsuario = new \app\controllers\userController();
         </ul>
         <ul class="p-0 m-0 -navbar-settings">
             <a href=""><li>Configuración</li></a>
-            <a href=""><li>Salir</li></a>
+            <a href="<?php echo APP_URL ?>login"><li>Salir</li></a>
         </ul>
     </div>
 </div>

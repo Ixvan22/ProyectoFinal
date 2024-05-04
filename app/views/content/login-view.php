@@ -59,7 +59,7 @@
 </html>
 
 <?php
-
+    if (isset($_SESSION["empleado"])) unset($_SESSION["empleado"]);
     if (isset($_POST['login'])) {
         echo $insLogin->loginUsuarioControlador();
     }
