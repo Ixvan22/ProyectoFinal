@@ -1,3 +1,9 @@
+<?php
+
+if (!isset($_SESSION["empleado"])) header("Location: ".APP_URL.'login');
+
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -57,7 +63,7 @@
                                 </div>
                                 <div class="row d-flex align-items-center my-2">
                                     <label class="w-25" for="nuevo-trabajador-cargo">Cargo:</label>
-                                    <input type="text" class="w-75 form-control" id="nuevo-trabajador-cargo" name="nuevo-trabajador-cargo" autocomplete="none"/>
+                                    <?php echo $insUsusario->listarCargosControlador() ?>
                                 </div>
                                 <div class="row d-flex align-items-center my-2">
                                     <label class="w-50" for="nuevo-trabajador-fecha-nacimiento">Fecha nacimiento:</label>

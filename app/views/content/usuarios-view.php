@@ -1,3 +1,9 @@
+<?php
+
+if (!isset($_SESSION["empleado"])) header("Location: ".APP_URL.'login');
+
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
