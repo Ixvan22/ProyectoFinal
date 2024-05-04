@@ -61,7 +61,7 @@
 <?php
 
     if (isset($_POST['login'])) {
-        $insLogin->loginUsuarioControlador();
+        echo $insLogin->loginUsuarioControlador();
     }
 
 ?>

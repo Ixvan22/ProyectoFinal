@@ -6,7 +6,7 @@ use app\models\mainModel;
 class loginController extends mainModel {
 
     // Controlador para loguear usuario
-    public function loginUsuarioControlador () {
+    public function loginUsuarioControlador ():string {
         $dni = $this->limpiarCadena($_POST["login-dni"]);
         $clave = $this->limpiarCadena($_POST["login-password"]);
 
@@ -24,35 +24,20 @@ class loginController extends mainModel {
                 // Enviar al dashboard de pedidos si los datos son correctos
                 // TODO CAMBIAR LOCATION
                 if (headers_sent()) {
-                    echo "<script>window.location.href = '".APP_URL."location/';</script>";
+                    return "<script>window.location.href = '".APP_URL."gestionPrincipal';</script>";
                 }
                 else {
-                    header("Location: ".APP_URL."location/");
+                    header("Location: ".APP_URL."gestionPrincipal");
                 }
             }
             else {
-                echo '<script>
-                        Swal.fire({
-                            position: "top-end",
-                            icon: "error",
-                            title: "Contraseña incorrecta",
-                            showConfirmButton: false,
-                            timer: 1500
-                        });
-                    </script>';
+                return $this->alertController->alertaSimple('error', 'Contraseña incorrecta');
             }
         }
         else {
-            echo '<script>
-                    Swal.fire({
-                        position: "top-end",
-                        icon: "error",
-                        title: "Usuario no válido",
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                </script>';
+            return $this->alertController->alertaSimple('error', 'Usuario no válido');
         }
+        return '';
 
     }
 
