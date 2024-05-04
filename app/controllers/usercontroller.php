@@ -175,7 +175,7 @@ class userController extends mainModel
                 $alerta = $this->alertController->alertaRecargar('success', 'Trabajador eliminado', APP_URL.'trabajadores');
             }
             else {
-                $alerta = $this->alertController->alertaSimple('warning', 'No existe el trabajador');
+                $alerta = $this->alertController->alertaSimple('error', 'Fallo al eliminar el trabajador');
             }
         }
         else {
