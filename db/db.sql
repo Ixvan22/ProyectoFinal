@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 30-04-2024 a las 21:11:35
+-- Tiempo de generación: 05-05-2024 a las 00:37:27
 -- Versión del servidor: 8.0.36-0ubuntu0.22.04.1
 -- Versión de PHP: 8.1.2-1ubuntu2.14
 
@@ -32,6 +32,13 @@ CREATE TABLE `cuentas_web` (
   `password` varchar(255) COLLATE utf8mb4_spanish2_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
+--
+-- Volcado de datos para la tabla `cuentas_web`
+--
+
+INSERT INTO `cuentas_web` (`dni_empleado`, `password`) VALUES
+('03491731D', '$2y$10$L5/2ikdqTl4VBlctPiuwp.MRlJwRM088wb0bKqDlRLjh31u2tEp0y');
+
 -- --------------------------------------------------------
 
 --
@@ -49,6 +56,14 @@ CREATE TABLE `empleados` (
   `cargo` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
+--
+-- Volcado de datos para la tabla `empleados`
+--
+
+INSERT INTO `empleados` (`dni`, `nombre`, `apellidos`, `telefono`, `correo`, `fecha_nacimiento`, `fecha_inicio_empresa`, `cargo`) VALUES
+('03491731D', 'Ivan', 'Garcia', 635966792, 'ivan@gmail.com', 20040617, 20240504, 1),
+('12345678A', 'Prueba', 'Prueba', 666666666, 'prueba@gmail.com', 20000101, 20240101, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -57,10 +72,20 @@ CREATE TABLE `empleados` (
 
 CREATE TABLE `jornada_empleados` (
   `dni_empleado` varchar(9) COLLATE utf8mb4_spanish2_ci NOT NULL,
-  `fecha_jornada` int NOT NULL,
-  `hora_entrada` int NOT NULL,
-  `hora_salida` int NOT NULL
+  `fecha_jornada` varchar(20) COLLATE utf8mb4_spanish2_ci NOT NULL,
+  `hora_entrada` varchar(20) COLLATE utf8mb4_spanish2_ci NOT NULL,
+  `hora_salida` varchar(20) COLLATE utf8mb4_spanish2_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `jornada_empleados`
+--
+
+INSERT INTO `jornada_empleados` (`dni_empleado`, `fecha_jornada`, `hora_entrada`, `hora_salida`) VALUES
+('03491731D', '5/5/2024', '0:35:42', '0:35:43'),
+('03491731D', '5/5/2024', '0:35:44', '0:35:45'),
+('03491731D', '5/5/2024', '0:36:33', '0:36:33'),
+('03491731D', '5/5/2024', '0:36:34', '0:36:34');
 
 -- --------------------------------------------------------
 
@@ -99,6 +124,13 @@ CREATE TABLE `tipo_cargo` (
   `tipo` int NOT NULL,
   `nombre` varchar(40) COLLATE utf8mb4_spanish2_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `tipo_cargo`
+--
+
+INSERT INTO `tipo_cargo` (`tipo`, `nombre`) VALUES
+(1, 'ADMINISTRADOR');
 
 -- --------------------------------------------------------
 
@@ -191,7 +223,7 @@ ALTER TABLE `empleados`
 -- Indices de la tabla `jornada_empleados`
 --
 ALTER TABLE `jornada_empleados`
-  ADD KEY `fk-empleado-jornada` (`dni_empleado`);
+  ADD PRIMARY KEY (`dni_empleado`,`fecha_jornada`,`hora_entrada`,`hora_salida`);
 
 --
 -- Indices de la tabla `mercancia`
@@ -274,7 +306,7 @@ ALTER TABLE `empleados`
 -- Filtros para la tabla `jornada_empleados`
 --
 ALTER TABLE `jornada_empleados`
-  ADD CONSTRAINT `fk-empleado-jornada` FOREIGN KEY (`dni_empleado`) REFERENCES `empleados` (`dni`);
+  ADD CONSTRAINT `fk-empleado-jornada` FOREIGN KEY (`dni_empleado`) REFERENCES `empleados` (`dni`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Filtros para la tabla `mercancia`
