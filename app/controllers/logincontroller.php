@@ -19,7 +19,6 @@ class loginController extends mainModel {
             if ($check_usuario["dni_empleado"] == $dni && password_verify($clave, $check_usuario["password"])) {
 
                 $_SESSION["empleado"] = $check_usuario["dni_empleado"];
-                $_SESSION["empleado_cargo"] = $check_usuario["cargo"];
 
                 // Enviar al dashboard de pedidos si los datos son correctos
                 // TODO CAMBIAR LOCATION
