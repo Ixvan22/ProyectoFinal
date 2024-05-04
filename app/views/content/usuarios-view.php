@@ -37,24 +37,26 @@ if (!isset($_SESSION["empleado"])) header("Location: ".APP_URL.'login');
                             <th scope="col">Apellidos</th>
                             <th scope="col">Teléfono</th>
                             <th scope="col">Correo</th>
+                            <th scope="col">Fecha nacimiento</th>
+                            <th scope="col">Fecha inicio</th>
                             <th scope="col">Cargo</th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="align-middle">
-                            <th scope="row">123456789A</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>Mark</td>
-                            <td>Transportista</td>
-                            <td class="d-flex"><a href="" class="btn btn-danger">Eliminar</a><a href="" class="btn btn-success mx-2">Editar</a></td>
-                        </tr>
+                        <?php echo $insUsuario->listarCuentasControlador() ?>
                 </table>
             </div>
         </main>
     </div>
-    <?php require_once 'app/views/inc/scripts.php'?>
+    <?php
+    require_once 'app/views/inc/scripts.php';
+
+    if (isset($url[1]) && $url[1] == 'eliminarCuenta') {
+        echo $insUsusario->eliminarCuentaControlador($url[2], false);
+    }
+
+    ?>
+
 </body>
 </html>

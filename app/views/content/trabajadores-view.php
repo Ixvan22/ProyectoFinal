@@ -106,17 +106,18 @@ if (!isset($_SESSION["empleado"])) header("Location: ".APP_URL.'login');
             </div>
         </main>
     </div>
-    <?php require_once 'app/views/inc/scripts.php'?>
-
     <?php
+
+    require_once 'app/views/inc/scripts.php';
+
     if (isset($_POST["anadir-trabajador"])) {
         echo $insUsusario->anadirUsuarioControlador();
     }
     if (isset($url[1]) && $url[1] == 'anadirCuenta') {
         echo $insUsusario->anadirCuentaControlador($url[2]);
     }
-    if (isset($url[1]) && $url[1] == 'eliminarCuenta') {
-        echo $insUsusario->eliminarCuentaControlador($url[2]);
+    if (isset($url[1]) && $url[1] == 'eliminarEmpleado') {
+        echo $insUsusario->eliminarCuentaControlador($url[2], true);
     }
 
     ?>

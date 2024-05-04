@@ -153,7 +153,7 @@ class userController extends mainModel
         return $alerta;
     }
 
-    public function eliminarCuentaControlador (string $dni) {
+    public function eliminarCuentaControlador (string $dni, bool $empleado) {
         // Verificar cuenta web
         $consultaCuenta = "SELECT dni_empleado FROM cuentas_web WHERE dni_empleado = '$dni'";
         $consultaCuenta = $this->ejecutarConsulta($consultaCuenta);
@@ -167,15 +167,21 @@ class userController extends mainModel
             }
         }
 
-        $deleteUser = "DELETE FROM empleados WHERE dni = '$dni'";
-        $deleteUser = $this->ejecutarConsulta($deleteUser);
+        if ($empleado) {
+            $deleteUser = "DELETE FROM empleados WHERE dni = '$dni'";
+            $deleteUser = $this->ejecutarConsulta($deleteUser);
 
-        if ($deleteUser->rowCount() == 1) {
-            $alerta = $this->alertController->alertaRecargar('success', 'Trabajador eliminado', APP_URL.'trabajadores');
+            if ($deleteUser->rowCount() == 1) {
+                $alerta = $this->alertController->alertaRecargar('success', 'Trabajador eliminado', APP_URL.'trabajadores');
+            }
+            else {
+                $alerta = $this->alertController->alertaSimple('warning', 'No existe el trabajador');
+            }
         }
         else {
-            $alerta = $this->alertController->alertaSimple('warning', 'No existe el trabajador');
+            $alerta = $this->alertController->alertaRecargar('success', 'Cuenta eliminada', APP_URL.'usuarios');
         }
+
         return $alerta;
 
     }
@@ -200,14 +206,43 @@ class userController extends mainModel
                             <td>'.$empleado["cargo"].'</td>';
             if (in_array($empleado['dni'], $consultaCuentas)) {
                 $contenido .= '<td class="d-flex"><a href="'.APP_URL.'trabajadores/eliminarCuenta/'.$empleado["dni"].'" 
-                class="btn btn-danger mx-2">Eliminar trabajador</a></td>';
+                class="btn btn-danger mx-2">Eliminar trabajador</a>
+                <a href="" class="btn btn-success mx-2">Editar</a></td></td>';
             }
             else {
                 $contenido .= '<td class="d-flex"><a href="'.APP_URL.'trabajadores/anadirCuenta/'.$empleado["dni"].'" 
                 class="btn btn-secondary">Crear cuenta</a>
-                <a href="'.APP_URL.'trabajadores/eliminarCuenta/'.$empleado["dni"].'" class="btn btn-danger mx-2">Eliminar trabajador</a></td>';
+                <a href="'.APP_URL.'trabajadores/eliminarEmpleado/'.$empleado["dni"].'" class="btn btn-danger mx-2">Eliminar trabajador</a>
+                <a href="" class="btn btn-success mx-2">Editar</a></td></td>';
             }
             $contenido .= '</tr>';
+        }
+
+        return $contenido;
+    }
+
+    public function listarCuentasControlador():string {
+        $contenido = '';
+
+        $consultaCuentas = "SELECT dni_empleado FROM cuentas_web";
+        $consultaCuentas = $this->consultaToArrayUnico($consultaCuentas);
+
+        foreach ($consultaCuentas as $cuenta) {
+            $empleado = "SELECT * FROM empleados WHERE dni = '$cuenta'";
+            $empleado = $this->ejecutarConsulta($empleado);
+            $empleado = $empleado->fetch(\PDO::FETCH_ASSOC);
+
+            $contenido .= '<tr class="align-middle">
+                            <th scope="row">'.$empleado["dni"].'</th>
+                            <td>'.$empleado["nombre"].'</td>
+                            <td>'.$empleado["apellidos"].'</td>
+                            <td>'.$empleado["telefono"].'</td>
+                            <td>'.$empleado["correo"].'</td>
+                            <td>'.$empleado["fecha_nacimiento"].'</td>
+                            <td>'.$empleado["fecha_inicio_empresa"].'</td>
+                            <td>'.$empleado["cargo"].'</td>
+                            <td class="d-flex"><a href="'.APP_URL.'usuarios/eliminarCuenta/'.$empleado["dni"].'" class="btn btn-danger">Eliminar</a>
+                            <a href="" class="btn btn-success mx-2">Editar</a></td>';
         }
 
         return $contenido;
