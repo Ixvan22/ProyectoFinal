@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trabajadores</title>
-
+    <?php require_once 'app/views/inc/icon-header.php'?>
     <link rel="stylesheet" href="<?php echo APP_URL ?>app/views/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="<?php echo APP_URL ?>app/views/css/gestion-navbar.css"/>
     <link rel="stylesheet" href="<?php echo APP_URL ?>app/views/css/usuarios-style.css"/>
@@ -14,8 +14,8 @@
         <?php require_once 'app/views/inc/navbar-gestion.php'?>
         <header class="-header">
             <div class="-header-location">
-                <a href="<?php APP_URL ?>gestionPrincipal">Gestión Interna</a> &gt;
-                <a href="<?php APP_URL ?>trabajadores">Trabajadores</a> &gt; <span id="location">Cuentas de usuarios</span>
+                <a href="<?php echo APP_URL ?>gestionPrincipal">Gestión Interna</a> &gt;
+                <a href="<?php echo APP_URL ?>trabajadores">Trabajadores</a> &gt; <span id="location">Cuentas de usuarios</span>
             </div>
         </header>
         <main class="-main-cuenta-usuarios">

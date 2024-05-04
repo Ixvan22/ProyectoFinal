@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PRINCIPAL</title>
-
+    <?php require_once 'app/views/inc/icon-header.php'?>
     <link rel="stylesheet" href="<?php echo APP_URL ?>app/views/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="<?php echo APP_URL ?>app/views/css/index-style.css"/>
     <link rel="stylesheet" href="<?php echo APP_URL ?>app/views/css/index-navbar.css"/>
