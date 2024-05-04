@@ -31,6 +31,17 @@ class mainModel {
         return $sql;
     }
 
+    public function consultaToArrayUnico(string $consulta):array {
+        $array = [];
+        $sql = $this->conectar()->prepare($consulta);
+        $sql->execute();
+        while ($result = $sql->fetch(PDO::FETCH_NUM)) {
+            $result = $result[0];
+            $array[] = $result;
+        }
+        return $array;
+    }
+
     public function limpiarCadena($cadena) {
         $palabras = ["<script>","</script>","<script src","<script type=",
         "SELECT * FROM","SELECT "," SELECT ","DELETE FROM","INSERT INTO","DROP TABLE",

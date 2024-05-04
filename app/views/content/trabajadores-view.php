@@ -87,20 +87,14 @@
                             <th scope="col">Apellidos</th>
                             <th scope="col">Teléfono</th>
                             <th scope="col">Correo</th>
+                            <th scope="col">Fecha nacimiento</th>
+                            <th scope="col">Fecha inicio</th>
                             <th scope="col">Cargo</th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="align-middle">
-                            <th scope="row">123456789A</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>Mark</td>
-                            <td>Transportista</td>
-                            <td class="d-flex"><a href="" class="btn btn-secondary">Crear cuenta</a><a href="" class="btn btn-danger mx-2">Eliminar trabajador</a></td>
-                        </tr>
+                        <?php echo $insUsusario->listarUsuariosControlador() ?>
                 </table>
             </div>
         </main>
@@ -108,9 +102,14 @@
     <?php require_once 'app/views/inc/scripts.php'?>
 
     <?php
-
     if (isset($_POST["anadir-trabajador"])) {
         echo $insUsusario->anadirUsuarioControlador();
+    }
+    if (isset($url[1]) && $url[1] == 'anadirCuenta') {
+        echo $insUsusario->anadirCuentaControlador($url[2]);
+    }
+    if (isset($url[1]) && $url[1] == 'eliminarCuenta') {
+        echo $insUsusario->eliminarCuentaControlador($url[2]);
     }
 
     ?>

@@ -37,21 +37,4 @@ class alertController {
         return $alerta;
     }
 
-    public function alertaLimpiar (string $icono, string $titulo):string {
-        $alerta = "
-        <script>
-            Swal.fire({
-                  position: 'top-end',
-                  icon: '$icono',
-                  title: '$titulo',
-                  confirmButtonText: 'Ok'
-              }).then((result) => {
-                  if(result.isConfirmed){
-                      document.querySelector('.FormularioAjax').reset();
-                  }
-              });
-        </script>
-        ";
-        return $alerta;
-    }
 }
