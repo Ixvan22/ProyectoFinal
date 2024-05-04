@@ -11,6 +11,7 @@
 </head>
 <body>
     <div class="container-fluid p-0">
+        <?php require_once 'app/views/inc/navbar-gestion.php'?>
         <header class="-header">
             <div class="-header-location">
                 <a href="">Gestión Interna</a> &gt; <span id="location">Trabajadores</span>
