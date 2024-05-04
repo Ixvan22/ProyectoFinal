@@ -32,7 +32,7 @@
                             <h5 class="modal-title" id="exampleModalLongTitle">Nuevo trabajador</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form class="FormularioAjax" action="<?php echo APP_URL; ?>app/ajax/usuarioajax.php" method="post">
+                        <form action="<?php echo APP_URL; ?>trabajadores" method="post">
                             <div class="modal-body">
                                 <div class="row d-flex align-items-center my-2">
                                     <label class="w-25" for="nuevo-trabajador-dni">DNI:</label>
@@ -106,6 +106,14 @@
         </main>
     </div>
     <?php require_once 'app/views/inc/scripts.php'?>
-    <script src="<?php echo APP_URL ?>app/views/js/ajax.js"></script>
+
+    <?php
+
+    if (isset($_POST["anadir-trabajador"])) {
+        echo $insUsusario->anadirUsuarioControlador();
+    }
+
+    ?>
 </body>
 </html>
+

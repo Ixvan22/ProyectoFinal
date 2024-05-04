@@ -24,24 +24,26 @@ class userController extends mainModel
         $verificarUsuario = $this->ejecutarConsulta($verificarUsuario);
 
         if ($verificarUsuario->rowCount() == 1) {
-            $alerta = [
+            $alerta = $this->alertController->alertaLimpiar('error', 'El trabajador ya existe');
+            /*$alerta = [
                 "tipo" => "limpiar",
                 "icono" => "error",
                 "titulo" => "El trabajador ya existe"
-            ];
+            ];*/
 
-            return json_encode($alerta);
+            return $alerta;
         }
 
         // Verificar dni
         $dni = mb_strtoupper($dni);
         if (!$this->verificarDatos('[0-9]{8}[A-Z]', $dni)) {
-            $alerta = [
+            $alerta = $this->alertController->alertaLimpiar('error', 'El dni no es válido');
+            /*$alerta = [
                 "tipo" => "limpiar",
                 "icono" => "error",
                 "titulo" => "El dni no es válido"
-            ];
-            return json_encode($alerta);
+            ];*/
+            return $alerta;
         }
 
         // Cambiar formato fechas
@@ -53,13 +55,14 @@ class userController extends mainModel
         $verificarCargo = $this->ejecutarConsulta($verificarCargo);
 
         if ($verificarCargo->rowCount() == 0) {
-            $alerta = [
+            $alerta = $this->alertController->alertaLimpiar('error', 'El cargo es incorrecto');
+            /*$alerta = [
                 "tipo" => "limpiar",
                 "icono" => "error",
                 "titulo" => "El cargo es incorrecto"
-            ];
+            ];*/
 
-            return json_encode($alerta);
+            return $alerta;
         }
 
         // Cuenta web
@@ -125,34 +128,37 @@ class userController extends mainModel
         $anadirUser = $this->guardarDatos("empleados", $datosUsuario);
 
         if ($anadirUser->rowCount() == 1) {
-            $alerta = [
+            $alerta = $this->alertController->alertaRecargar('success', 'Usuario añadido', APP_URL.'trabajadores');
+            /*$alerta = [
                 "tipo" => "recargar",
                 "icono" => "success",
                 "titulo" => "Usuario añadido",
                 "url" => APP_URL . "trabajadores"
-            ];
+            ];*/
             if (isset($_POST["nuevo-trabajador-cuenta"])) {
                 $anadirCuenta = $this->guardarDatos("cuentas_web", $datosCuenta);
                 if ($anadirCuenta->rowCount() == 0) {
-                    $alerta = [
+                    $alerta = $this->alertController->alertaRecargar('warning', 'Fallo al crear la cuenta web', APP_URL.'trabajadores');
+                    /*$alerta = [
                         "tipo" => "recargar",
                         "icono" => "warning",
                         "titulo" => "Fallo al crear la cuenta web",
                         "url" => APP_URL . "trabajadores"
-                    ];
+                    ];*/
                 }
 
             }
 
         } else {
-            $alerta = [
+            $alerta = $this->alertController->alertaLimpiar('error', 'Error al añadir el usuario');
+            /*$alerta = [
                 "tipo" => "limpiar",
                 "icono" => "error",
                 "titulo" => "Error al añadir el usuario"
-            ];
+            ];*/
         }
 
-        return json_encode($alerta);
+        return $alerta;
 
     }
 }

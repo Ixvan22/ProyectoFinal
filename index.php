@@ -12,9 +12,12 @@ else {
 
 use app\controllers\viewsController;
 use app\controllers\loginController;
+use app\controllers\userController;
+
 require_once "./app/views/inc/session_start.php";
 
 $insLogin = new loginController();
+$insUsusario = new userController();
 $viewsController = new viewsController();
 $vista = $viewsController->obtenerVistasControlador($url[0]);
 
