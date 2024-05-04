@@ -1,1 +1,1 @@
-<link rel="icon" href="<?php echo APP_URL?>app/views/img/logo-vacio-png.png"/>>
+<link rel="icon" href="<?php echo APP_URL?>app/views/img/logo-vacio-png.png"/>
