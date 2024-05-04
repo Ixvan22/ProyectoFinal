@@ -1,7 +1,7 @@
 <div id="navbar" class="-navbar -navbar-responsive-closed">
     <div class="-navbar-top">
         <div class="-navbar-top-logo">
-            <a href="<?php echo APP_URL ?>"><img src="<?php APP_URL ?>app/views/img/logo-png.png" alt=""></a>
+            <a href="<?php echo APP_URL ?>"><img src="<?php echo APP_URL ?>app/views/img/logo-png.png" alt=""></a>
         </div>
         <div class="-navbar-top-contact">
             <div class="-navbar-contact-phone">

@@ -227,5 +227,20 @@ class userController extends mainModel
 
         return $contenido;
     }
+
+    public function listarUsuarioNavbarControlador(string $dni):string {
+
+        $consultaUsuario = "SELECT nombre, cargo FROM empleados where dni = '$dni'";
+        $consultaUsuario = $this->ejecutarConsulta($consultaUsuario);
+        $consultaUsuario = $consultaUsuario->fetch(\PDO::FETCH_ASSOC);
+
+        $consultaCargo = "SELECT nombre FROM tipo_cargo WHERE tipo = ".$consultaUsuario['cargo'];
+        $consultaCargo = $this->ejecutarConsulta($consultaCargo);
+        $consultaCargo = $consultaCargo->fetch(\PDO::FETCH_ASSOC);
+
+        $contenido = '<h4>'.$consultaUsuario["nombre"].' ('.ucfirst(mb_strtolower($consultaCargo["nombre"])).')</h4>';
+
+        return $contenido;
+    }
 }
 ?>

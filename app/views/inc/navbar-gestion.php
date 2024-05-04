@@ -1,6 +1,12 @@
+<?php
+
+$insUsuario = new \app\controllers\userController();
+
+?>
+
 <div id="navbar" class="-navbar -navbar-responsive-closed">
     <div class="-navbar-links">
-        <h4>Iván (Administrador)</h4>
+        <?php echo $insUsuario->listarUsuarioNavbarControlador($_SESSION["empleado"]); ?>
         <ul class="p-0 my-4">
             <a href=""><li>Inicio</li></a>
             <a href=""><li>Link 2</li></a>
