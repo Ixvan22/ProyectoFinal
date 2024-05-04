@@ -2,6 +2,7 @@
 
 namespace app\models;
 use \PDO;
+use app\controllers\alertController;
 
 if (file_exists(__DIR__."/../config/server.php")) {
     require_once __DIR__."/../config/server.php";
@@ -12,6 +13,11 @@ class mainModel {
     private string $db = DB_NAME;
     private string $user = DB_USER;
     private string $pass = DB_PASS;
+    public alertController $alertController;
+
+    public function __construct() {
+        $this->alertController = new alertController();
+    }
 
     protected function conectar():PDO {
         $conexion = new PDO("mysql:host=".$this->server.";dbname=".$this->db, $this->user, $this->pass);
