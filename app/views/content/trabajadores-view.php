@@ -14,14 +14,14 @@
         <?php require_once 'app/views/inc/navbar-gestion.php'?>
         <header class="-header">
             <div class="-header-location">
-                <a href="">Gestión Interna</a> &gt; <span id="location">Trabajadores</span>
+                <a href="<?php echo APP_URL ?>gestionPrincipal">Gestión Interna</a> &gt; <span id="location">Trabajadores</span>
             </div>
         </header>
         <main class="-main-usuarios">
             <div class="-header-usuarios">
                 <h2>Trabajadores</h2>
                 <div class="-header-buttons">
-                    <a href="" class="btn btn-secondary">Cuentas de usuario</a>
+                    <a href="<?php echo APP_URL?>usuarios" class="btn btn-secondary">Cuentas de usuario</a>
                     <div class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal-addUsers">Añadir trabajador</div>
                 </div>
             </div>
