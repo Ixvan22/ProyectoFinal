@@ -25,12 +25,6 @@ class userController extends mainModel
 
         if ($verificarUsuario->rowCount() == 1) {
             $alerta = $this->alertController->alertaLimpiar('error', 'El trabajador ya existe');
-            /*$alerta = [
-                "tipo" => "limpiar",
-                "icono" => "error",
-                "titulo" => "El trabajador ya existe"
-            ];*/
-
             return $alerta;
         }
 
@@ -38,11 +32,12 @@ class userController extends mainModel
         $dni = mb_strtoupper($dni);
         if (!$this->verificarDatos('[0-9]{8}[A-Z]', $dni)) {
             $alerta = $this->alertController->alertaLimpiar('error', 'El dni no es válido');
-            /*$alerta = [
-                "tipo" => "limpiar",
-                "icono" => "error",
-                "titulo" => "El dni no es válido"
-            ];*/
+            return $alerta;
+        }
+
+        // Verificar telefono
+        if (!$this->verificarDatos('[67]{1}[0-9]{8}', $telefono)) {
+            $alerta = $this->alertController->alertaLimpiar('error', 'El teléfono no es válido');
             return $alerta;
         }
 
@@ -56,12 +51,6 @@ class userController extends mainModel
 
         if ($verificarCargo->rowCount() == 0) {
             $alerta = $this->alertController->alertaLimpiar('error', 'El cargo es incorrecto');
-            /*$alerta = [
-                "tipo" => "limpiar",
-                "icono" => "error",
-                "titulo" => "El cargo es incorrecto"
-            ];*/
-
             return $alerta;
         }
 
@@ -129,37 +118,19 @@ class userController extends mainModel
 
         if ($anadirUser->rowCount() == 1) {
             $alerta = $this->alertController->alertaRecargar('success', 'Usuario añadido', APP_URL.'trabajadores');
-            /*$alerta = [
-                "tipo" => "recargar",
-                "icono" => "success",
-                "titulo" => "Usuario añadido",
-                "url" => APP_URL . "trabajadores"
-            ];*/
             if (isset($_POST["nuevo-trabajador-cuenta"])) {
                 $anadirCuenta = $this->guardarDatos("cuentas_web", $datosCuenta);
                 if ($anadirCuenta->rowCount() == 0) {
                     $alerta = $this->alertController->alertaRecargar('warning', 'Fallo al crear la cuenta web', APP_URL.'trabajadores');
-                    /*$alerta = [
-                        "tipo" => "recargar",
-                        "icono" => "warning",
-                        "titulo" => "Fallo al crear la cuenta web",
-                        "url" => APP_URL . "trabajadores"
-                    ];*/
                 }
 
             }
 
         } else {
             $alerta = $this->alertController->alertaLimpiar('error', 'Error al añadir el usuario');
-            /*$alerta = [
-                "tipo" => "limpiar",
-                "icono" => "error",
-                "titulo" => "Error al añadir el usuario"
-            ];*/
         }
 
         return $alerta;
-
     }
 }
 ?>
