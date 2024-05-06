@@ -25,9 +25,6 @@
     overflow: hidden;
 }
 
-.-main-clientes h2 {
-    margin-bottom: 50px;
-}
 
 .-header-clientes {
     display: flex;
@@ -65,4 +62,17 @@
 .card-clientes-datos span {
     font-weight: normal;
 }
+
+@media only screen and (max-width: 900px) {
+    .-card-clientes {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .card-clientes-datos {
+        flex-direction: column;
+        gap: 0;
+    }
+}
+
 
