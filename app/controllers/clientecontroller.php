@@ -104,6 +104,26 @@ class clienteController extends mainModel {
 
         return $contenido;
     }
+
+    public function eliminarClienteControlador (string $dni) {
+        $consultaCliente = "SELECT dni FROM usuarios WHERE dni = '$dni'";
+        $consultaCliente = $this->ejecutarConsulta($consultaCliente);
+
+        if ($consultaCliente->rowCount() == 1) {
+            $deleteCliente = "DELETE FROM usuarios WHERE dni = '$dni'";
+            $deleteCliente = $this->ejecutarConsulta($deleteCliente);
+            if ($deleteCliente->rowCount() == 0) {
+                $alerta = $this->alertController->alertaSimple('error', 'Fallo al eliminar el usuario');
+                return $alerta;
+            }
+            $alerta = $this->alertController->alertaRecargar('success', 'Cliente eliminado', APP_URL.'clientes');
+        }
+        else {
+            $alerta = $this->alertController->alertaSimple('error', 'No existe el cliente');
+        }
+
+        return $alerta;
+    }
 }
 
 ?>
