@@ -79,6 +79,31 @@ class clienteController extends mainModel {
 
         return $alerta;
     }
+
+    public function listarClientesControlador():string {
+        $contenido = '';
+
+        $consultaClientes = "SELECT * FROM usuarios ORDER BY nombre";
+        $consultaClientes = $this->ejecutarConsulta($consultaClientes);
+
+        while ($cliente = $consultaClientes->fetch(\PDO::FETCH_ASSOC)) {
+            $contenido .= '<div class="col-12">
+                            <div class="-card-clientes py-3 px-1">
+                                <p class="p-0 m-0">DNI: <span id="clientes-datos-dni">'.$cliente["dni"].'</span></p>
+                                <p class="p-0 m-0">Nombre: <span id="clientes-datos-nombre">'.$cliente["nombre"].'</span></p>
+                                <p class="p-0 m-0">Apellidos: <span id="clientes-datos-apellidos">'.$cliente["apellidos"].'</span></p>
+                                <p class="p-0 m-0">Teléfono: <span id="clientes-datos-telefono">'.$cliente["telefono"].'</span></p>
+                                <p class="p-0 m-0">Correo: <span id="clientes-datos-correo">'.$cliente["correo"].'</span></p>
+                                <div class="d-flex gap-1">
+                                    <a href="" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <a href="'.APP_URL.'clientes/eliminarCliente/'.$cliente["dni"].'" class="btn btn-danger"><i class="fa-solid fa-x"></i></a>
+                                </div>
+                            </div>
+                        </div>';
+        }
+
+        return $contenido;
+    }
 }
 
 ?>
