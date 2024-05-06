@@ -24,36 +24,36 @@
                     <div class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal-addVehiculo">Añadir vehículo</div>
                 </div>
             </div>
-                        <!-- Modal -->
-                        <div class="modal fade" id="modal-addVehiculo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLongTitle">Nuevo vehículo</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <form action="." method="post">
-                                        <div class="modal-body">
-                                            <div class="row d-flex align-items-center my-2">
-                                                <label class="w-25" for="nuevo-vehiculo-matricula">Matrícula:</label>
-                                                <input type="text" class="w-75 form-control" id="nuevo-vehiculo-matricula" name="nuevo-vehiculo-matricula" autocomplete="none"/>
-                                            </div>
-                                            <div class="row d-flex align-items-center my-2">
-                                                <label class="w-25" for="nueva-mercancia-carga">Carga útil:</label>
-                                                <input type="number" step="0.01" min="0.01" class="w-50 form-control" id="nueva-mercancia-carga" name="nueva-mercancia-carga" autocomplete="none"/>
-                                                <select class="form-select w-25" name="nueva-mercancia-carga-tipo-peso" id="nueva-mercancia-carga-tipo-peso">
-                                                    <option selected value="1">KG</option>
-                                                    <option value="2">L</option>
-                                                  </select>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="submit" class="btn btn-success" name="anadir-mercancia">Añadir</button>
-                                        </div>
-                                    </form>
+            <!-- Modal -->
+            <div class="modal fade" id="modal-addVehiculo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Nuevo vehículo</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="." method="post">
+                            <div class="modal-body">
+                                <div class="row d-flex align-items-center my-2">
+                                    <label class="w-25" for="nuevo-vehiculo-matricula">Matrícula:</label>
+                                    <input type="text" class="w-75 form-control" id="nuevo-vehiculo-matricula" name="nuevo-vehiculo-matricula" autocomplete="none"/>
+                                </div>
+                                <div class="row d-flex align-items-center my-2">
+                                    <label class="w-25" for="nueva-mercancia-carga">Carga útil:</label>
+                                    <input type="number" step="0.01" min="0.01" class="w-50 form-control" id="nueva-mercancia-carga" name="nueva-mercancia-carga" autocomplete="none"/>
+                                    <select class="form-select w-25" name="nueva-mercancia-carga-tipo-peso" id="nueva-mercancia-carga-tipo-peso">
+                                        <option selected value="1">KG</option>
+                                        <option value="2">L</option>
+                                        </select>
                                 </div>
                             </div>
-                        </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-success" name="anadir-mercancia">Añadir</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
             <div class="row gy-3">
                 <div class="col-lg-3 col-md-4 col-sm-6 col-12" data-bs-toggle="modal" data-bs-target="#modal-1234ABC">
                     <div class="-card-vehicle">
