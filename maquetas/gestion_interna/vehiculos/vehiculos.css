@@ -25,9 +25,21 @@
     overflow: hidden;
 }
 
+.-header-vehicles {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
 @media only screen and (max-width: 600px) {
     .-main-vehicles {
         padding: 0 10px;
+    }
+
+    .-header-vehicles {
+        flex-direction: column;
+        gap: 25px;
     }
 }
 
