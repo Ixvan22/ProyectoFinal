@@ -125,7 +125,7 @@ class clienteController extends mainModel {
         return $alerta;
     }
 
-    public function listarClientesSelectControlador() {
+    public function listarClientesMercanciaControlador():string {
         $contenido = '<select class="form-select w-75" name="mercancia-cliente-existente" id="mercancia-cliente-existente">
                         <option selected></option>';
 
