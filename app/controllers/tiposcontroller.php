@@ -5,7 +5,7 @@ use app\models\mainModel;
 
 class tiposController extends mainModel {
     public function listarCargosControlador():string {
-        $contenido = '<select class="form-select w-75" id="nuevo-trabajador-cargo" name="nuevo-trabajador-cargo" autocomplete="none">
+        $contenido = '<select class="form-select w-75" id="trabajador-cargo" name="trabajador-cargo" autocomplete="none">
         <option selected value="default"></option>';
 
         $consultaCargo = 'SELECT * FROM tipo_cargo ORDER BY tipo';

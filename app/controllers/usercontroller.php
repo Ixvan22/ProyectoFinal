@@ -14,7 +14,7 @@ class userController extends mainModel
         $correo = $this->limpiarCadena($_POST["nuevo-trabajador-correo"]);
         $fecha_nacimiento = $this->limpiarCadena($_POST["nuevo-trabajador-fecha-nacimiento"]);
         $fecha_inicio = $this->limpiarCadena($_POST["nuevo-trabajador-fecha-inicio"]);
-        $cargo = $this->limpiarCadena($_POST["nuevo-trabajador-cargo"]);
+        $cargo = $this->limpiarCadena($_POST["trabajador-cargo"]);
 
 
         // Verificar que no existe el usuario
