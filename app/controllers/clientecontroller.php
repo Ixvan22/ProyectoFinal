@@ -124,6 +124,23 @@ class clienteController extends mainModel {
 
         return $alerta;
     }
+
+    public function listarClientesSelectControlador() {
+        $contenido = '<select class="form-select w-75" name="mercancia-cliente-existente" id="mercancia-cliente-existente">
+                        <option selected></option>';
+
+        $consultaClientes = "SELECT * FROM usuarios ORDER BY nombre";
+        $consultaClientes = $this->ejecutarConsulta($consultaClientes);
+
+        while ($cliente = $consultaClientes->fetch(\PDO::FETCH_ASSOC)) {
+            $contenido .= '<option value="'.$cliente["dni"].'"></option>';
+        }
+
+        $contenido .= '</select>';
+
+        return $contenido;
+    }
+    
 }
 
 ?>
