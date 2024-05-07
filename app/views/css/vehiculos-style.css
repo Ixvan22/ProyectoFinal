@@ -1,0 +1,68 @@
+.-header {
+    padding: 40px;
+    padding-left: 80px;
+    display: flex;
+    justify-content: space-between;
+}
+
+@media only screen and (max-width: 600px) {
+    .-header {
+        padding-left: 10px;
+    }
+}
+
+.-header-location a {
+    color: #000000;
+    text-decoration: none;
+}
+
+.-header-location #location {
+    font-weight: bold;
+}
+
+.-main-vehicles {
+    padding: 0 80px;
+    overflow: hidden;
+}
+
+.-header-vehicles {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+@media only screen and (max-width: 600px) {
+    .-main-vehicles {
+        padding: 0 10px;
+    }
+
+    .-header-vehicles {
+        flex-direction: column;
+        gap: 25px;
+    }
+}
+
+.-main-vehicles h2 {
+    margin-bottom: 50px;
+}
+
+.-card-vehicle {
+    border: 1px solid black;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.-card-vehicle-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 20px;
+}
+
+.-card-vehicle-main {
+    text-align: center;
+    font-weight: bold;
+    font-size: 24px;
+}

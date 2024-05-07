@@ -6,8 +6,8 @@ use app\models\mainModel;
 class vehiculoController extends mainModel {
     public function anadirVehiculoControlador() {
         $matricula = $this->limpiarCadena($_POST["nuevo-vehiculo-matricula"]);
-        $cargaUtil = $this->limpiarCadena($_POST["nueva-mercancia-carga"]);
-        $tipoPeso = $this->limpiarCadena($_POST["nueva-mercancia-carga-tipo-peso"]);
+        $cargaUtil = $this->limpiarCadena($_POST["nueva-vehicuñp-carga"]);
+        $tipoPeso = $this->limpiarCadena($_POST["nueva-vehiculo-tipo-peso"]);
 
         // Verificar que no existe el usuario
         $verificarVehiculo = "SELECT matricula FROM vehiculos WHERE dni = '$matricula'";
