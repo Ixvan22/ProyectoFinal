@@ -1,21 +1,27 @@
+<?php
+
+if (!isset($_SESSION["empleado"])) header("Location: ".APP_URL.'login');
+
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CLIENTES</title>
-
-    <link rel="stylesheet" href="../../bootstrap/bootstrap.min.css"/>
-    <link rel="stylesheet" href="clientes.css"/>
-
-    
+    <title>Clientes</title>
+    <?php require_once 'app/views/inc/icon-header.php'?>
+    <link rel="stylesheet" href="<?php echo APP_URL ?>app/views/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="<?php echo APP_URL ?>app/views/css/gestion-navbar.css"/>
+    <link rel="stylesheet" href="<?php echo APP_URL ?>app/views/css/clientes-style.css"/>    
 </head>
 <body>
 
     <div class="container-fluid p-0">
+    <?php require_once 'app/views/inc/navbar-gestion.php'?>
         <header class="-header">
             <div class="-header-location">
-                <a href="">Gestión Interna </a> &gt; <span id="location">Clientes</span>
+                <a href="<?php echo APP_URL ?>gestionPrincipal">Gestión Interna </a> &gt; <span id="location">Clientes</span>
             </div>
         </header>
         <main class="-main-clientes">
@@ -67,44 +73,25 @@
             </div>
 
             <div class="row gy-3">
-                <div class="col-12">
-                    <div class="-card-clientes py-3 px-1">
-                        <div class="card-clientes-datos mx-2">
-                            <p class="p-0 m-0">DNI: <span id="clientes-datos-dni">123456789A</span></p>
-                            <p class="p-0 m-0">Nombre: <span id="clientes-datos-nombre">Nombre</span></p>
-                            <p class="p-0 m-0">Apellidos: <span id="clientes-datos-apellidos">Apellidos</span></p>
-                            <p class="p-0 m-0">Teléfono: <span id="clientes-datos-telefono">666666666</span></p>
-                            <p class="p-0 m-0">Correo: <span id="clientes-datos-correo">correo@correo.com</span></p>
-                        </div>
-                        <div class="d-flex gap-1">
-                            <a href="" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
-                            <a href="" class="btn btn-danger"><i class="fa-solid fa-x"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="-card-clientes py-3 px-1">
-                        <div class="card-clientes-datos mx-2">
-                            <p class="p-0 m-0">DNI: <span id="clientes-datos-dni">123456789A</span></p>
-                            <p class="p-0 m-0">Nombre: <span id="clientes-datos-nombre">Nombre</span></p>
-                            <p class="p-0 m-0">Apellidos: <span id="clientes-datos-apellidos">Apellidos</span></p>
-                            <p class="p-0 m-0">Teléfono: <span id="clientes-datos-telefono">666666666</span></p>
-                            <p class="p-0 m-0">Correo: <span id="clientes-datos-correo">correo@correo.com</span></p>
-                        </div>
-                        <div class="d-flex gap-1">
-                            <div class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></div>
-                            <div class="btn btn-danger"><i class="fa-solid fa-x"></i></div>
-                        </div>
-                    </div>
-                </div>                
+                <?php echo $insCliente->listarClientesControlador(); ?>               
             </div>
 
         </main>
 
     </div>
     
-    <script src="https://kit.fontawesome.com/2492101989.js" crossorigin="anonymous"></script>
-    <script src="../../bootstrap/bootstrap.min.js"></script>
+<?php
+
+    require_once 'app/views/inc/scripts.php';
+
+    if (isset($_POST["anadirCliente"])) {
+        echo $insCliente->anadirClienteControlador();
+    }
+    if (isset($url[1]) && $url[1] == 'eliminarCliente') {
+        echo $insCliente->eliminarClienteControlador($url[2]);
+    }
+
+?>
 
 </body>
 </html>
