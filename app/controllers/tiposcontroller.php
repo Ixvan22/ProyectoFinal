@@ -18,6 +18,20 @@ class tiposController extends mainModel {
 
         return $contenido;
     }
+
+    public function listarPesosControlador():string {
+        $contenido = '<select class="form-select w-25" name="tipo-peso" id="tipo-peso">';
+
+        $consultaPeso = 'SELECT * FROM tipo_peso ORDER BY tipo';
+        $consultaPeso = $this->ejecutarConsulta($consultaPeso);
+
+        while ($result = $consultaPeso->fetch(\PDO::FETCH_ASSOC)) {
+            $contenido .= '<option value="'.$result["tipo"].'">'.mb_strtoupper($result["nombre"]).'</option>';
+        }
+        $contenido .= '</select>';
+
+        return $contenido;
+    }
 }
 
 

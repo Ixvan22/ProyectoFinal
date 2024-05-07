@@ -49,10 +49,7 @@ if (!isset($_SESSION["empleado"])) header("Location: ".APP_URL.'login');
                                 <div class="row d-flex align-items-center my-2">
                                     <label class="w-25" for="nuevo-vehiculo-carga">Carga útil:</label>
                                     <input type="number" step="0.01" min="0.01" class="w-50 form-control" id="nuevo-vehiculo-carga" name="nuevo-vehiculo-carga" autocomplete="none"/>
-                                    <select class="form-select w-25" name="nuevo-vehiculo-tipo-peso" id="nueva-vehiculo-tipo-peso">
-                                        <option selected value="1">KG</option>
-                                        <option value="2">L</option>
-                                    </select>
+                                    <?php echo $insTipos->listarPesosControlador() ?>
                                 </div>
                             </div>
                             <div class="modal-footer">

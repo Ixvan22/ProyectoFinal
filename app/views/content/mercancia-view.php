@@ -46,10 +46,7 @@ if (!isset($_SESSION["empleado"])) header("Location: ".APP_URL.'login');
                                 <div class="row d-flex align-items-center my-2">
                                     <label class="w-25" for="nueva-mercancia-peso">Peso:</label>
                                     <input type="number" step="0.01" min="0.01" class="w-50 form-control" id="nueva-mercancia-peso" name="nueva-mercancia-peso" autocomplete="none"/>
-                                    <select class="form-select w-25" name="nueva-mercancia-tipo-peso" id="nueva-mercancia-tipo-peso">
-                                        <option selected value="1">KG</option>
-                                        <option value="2">L</option>
-                                      </select>
+                                    <?php echo $insTipos->listarPesosControlador() ?>
                                 </div>
                                 <div class="row d-flex align-items-center my-2">
                                     <label class="w-25" for="nueva-mercancia-tipo-estado">Estado:</label>

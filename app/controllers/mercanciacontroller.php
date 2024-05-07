@@ -9,7 +9,7 @@ class mercanciaController extends mainModel {
     // Controlador para anadir usuarios
     public function anadirMercanciaControlador():string {
         $peso = $this->limpiarCadena($_POST["nueva-mercancia-peso"]);
-        $tipoPeso = $this->limpiarCadena($_POST["nueva-mercancia-tipo-peso"]);
+        $tipoPeso = $this->limpiarCadena($_POST["tipo-peso"]);
         $tipoEstado = $this->limpiarCadena($_POST["nueva-mercancia-tipo-estado"]);
         $descripcion = $this->limpiarCadena($_POST["nueva-mercancia-descripcion"]);
 
