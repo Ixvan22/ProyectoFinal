@@ -133,7 +133,7 @@ class clienteController extends mainModel {
         $consultaClientes = $this->ejecutarConsulta($consultaClientes);
 
         while ($cliente = $consultaClientes->fetch(\PDO::FETCH_ASSOC)) {
-            $contenido .= '<option value="'.$cliente["dni"].'"></option>';
+            $contenido .= '<option value="'.$cliente["dni"].'">'.$cliente["dni"].'</option>';
         }
 
         $contenido .= '</select>';
