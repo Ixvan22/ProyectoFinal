@@ -101,6 +101,29 @@ class mainModel {
         return $sql;
     }
 
+    public function actualizarDatos($tabla, $datos, $condicion) {
+        $consulta = "UPDATE $tabla SET ";
+    
+        $C = 0;
+        foreach ($datos as $dato) {
+            if ($C >= 1) { $consulta .= ","; }
+            $consulta .= $dato["campo_nombre"] . " = " . $dato["campo_marcador"];
+            $C++;
+        }
+    
+        $consulta .= " WHERE " . $condicion;
+    
+        $sql = $this->conectar()->prepare($consulta);
+    
+        foreach ($datos as $dato) {
+            $sql->bindParam($dato["campo_marcador"], $dato["campo_valor"]);
+        }
+    
+        $sql->execute();
+    
+        return $sql;
+    }
+
 
 }
 
