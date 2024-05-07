@@ -63,7 +63,7 @@ if (!isset($_SESSION["empleado"])) header("Location: ".APP_URL.'login');
                                 </div>
                                 <div class="row d-flex align-items-center my-2">
                                     <label class="w-25" for="nuevo-trabajador-cargo">Cargo:</label>
-                                    <?php echo $insUsusario->listarCargosControlador() ?>
+                                    <?php echo $insTipos->listarCargosControlador() ?>
                                 </div>
                                 <div class="row d-flex align-items-center my-2">
                                     <label class="w-50" for="nuevo-trabajador-fecha-nacimiento">Fecha nacimiento:</label>

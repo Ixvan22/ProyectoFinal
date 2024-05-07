@@ -54,7 +54,7 @@ if (!isset($_SESSION["empleado"])) header("Location: ".APP_URL.'login');
                 </div>
                 <div class="row d-flex align-items-center my-2 flex-column flex-md-row">
                     <label class="w-25" for="edit-trabajador-cargo">Cargo:</label>
-                    <?php echo $insUsusario->listarCargosControlador() ?>
+                    <?php echo $insTipos->listarCargosControlador() ?>
                     <input type="text" class="w-75 form-control" id="edit-trabajador-cargo" name="edit-trabajador-cargo" autocomplete="none"/>
                 </div>
                 <div class="row d-flex align-items-center my-2 flex-column flex-md-row">

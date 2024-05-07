@@ -5,10 +5,8 @@ use app\models\mainModel;
 
 class userController extends mainModel
 {
-
     // Controlador para anadir usuarios
-    public function anadirUsuarioControlador():string
-    {
+    public function anadirUsuarioControlador():string {
         $dni = $this->limpiarCadena($_POST["nuevo-trabajador-dni"]);
         $nombre = $this->limpiarCadena($_POST["nuevo-trabajador-nombre"]);
         $apellidos = $this->limpiarCadena($_POST["nuevo-trabajador-apellidos"]);
@@ -244,21 +242,6 @@ class userController extends mainModel
                             <td class="d-flex"><a href="'.APP_URL.'usuarios/eliminarCuenta/'.$empleado["dni"].'" class="btn btn-danger">Eliminar</a>
                             <a href="" class="btn btn-success mx-2">Editar</a></td>';
         }
-
-        return $contenido;
-    }
-
-    public function listarCargosControlador():string {
-        $contenido = '<select class="form-select w-75" id="nuevo-trabajador-cargo" name="nuevo-trabajador-cargo" autocomplete="none">
-        <option selected value="default"></option>';
-
-        $consultaCargo = 'SELECT * FROM tipo_cargo ORDER BY tipo';
-        $consultaCargo = $this->ejecutarConsulta($consultaCargo);
-
-        while ($result = $consultaCargo->fetch(\PDO::FETCH_ASSOC)) {
-            $contenido .= '<option value="'.$result["tipo"].'">'.ucfirst(mb_strtolower($result["nombre"])).'</option>';
-        }
-        $contenido .= '</select>';
 
         return $contenido;
     }
