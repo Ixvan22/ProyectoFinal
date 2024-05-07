@@ -4,7 +4,7 @@ namespace app\controllers;
 use app\models\mainModel;
 
 class configController extends mainModel {
-    public function editarUsuarioControlador(string $usuario) {
+    public function editarUsuarioControlador(string $usuario):string {
         $dni = $this->limpiarCadena($_POST["edit-trabajador-dni"]);
         $nombre = $this->limpiarCadena($_POST["edit-trabajador-nombre"]);
         $apellidos = $this->limpiarCadena($_POST["edit-trabajador-apellidos"]);
@@ -12,7 +12,7 @@ class configController extends mainModel {
         $correo = $this->limpiarCadena($_POST["edit-trabajador-correo"]);
         $fecha_nacimiento = $this->limpiarCadena($_POST["edit-trabajador-fecha-nacimiento"]);
         $fecha_inicio = $this->limpiarCadena($_POST["edit-trabajador-fecha-inicio"]);
-        $cargo = $this->limpiarCadena($_POST["edit-trabajador-cargo"]);
+        $cargo = $this->limpiarCadena($_POST["nuevo-trabajador-cargo"]);
 
 
         // Verificar usuario
