@@ -109,6 +109,7 @@ class configController extends mainModel {
         $actualizarUser = $this->actualizarDatos('empleados', $datosUsuario, 'dni = "'.$usuario.'"');
 
         if ($actualizarUser->rowCount() == 1) {
+            if (isset($dni) && $dni != '') $usuario = $dni;
             $alerta = $this->alertController->alertaRecargar('success', 'Usuario actualizado', APP_URL.'configuracion/'.$usuario);
 
         } else {
