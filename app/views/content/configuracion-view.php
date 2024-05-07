@@ -28,7 +28,7 @@ if (!isset($_SESSION["empleado"])) header("Location: ".APP_URL.'login');
                 <div class="-header-configuracion">
                     <h2>Configuración</h2>
                     <div class="-header-buttons">
-                        <button type="submit" class="btn btn-success" id="editUsuario">Guardar</a>
+                        <button type="submit" class="btn btn-success" id="editUsuario">Guardar</button>
                     </div>
                 </div>
 
@@ -55,7 +55,6 @@ if (!isset($_SESSION["empleado"])) header("Location: ".APP_URL.'login');
                 <div class="row d-flex align-items-center my-2 flex-column flex-md-row">
                     <label class="w-25" for="edit-trabajador-cargo">Cargo:</label>
                     <?php echo $insTipos->listarCargosControlador() ?>
-                    <input type="text" class="w-75 form-control" id="edit-trabajador-cargo" name="edit-trabajador-cargo" autocomplete="none"/>
                 </div>
                 <div class="row d-flex align-items-center my-2 flex-column flex-md-row">
                     <label class="w-25" for="edit-trabajador-fecha-nacimiento">Fecha nacimiento:</label>

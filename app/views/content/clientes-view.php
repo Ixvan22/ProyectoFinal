@@ -39,7 +39,7 @@ if (!isset($_SESSION["empleado"])) header("Location: ".APP_URL.'login');
                             <h5 class="modal-title" id="exampleModalLongTitle">Nuevo cliente</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="." method="post">
+                        <form action="<?php echo APP_URL ?>clientes" method="post">
                             <div class="modal-body">
                                 <div class="-modal-mercancia">
                                     <div class="row d-flex align-items-center my-2">
@@ -65,7 +65,7 @@ if (!isset($_SESSION["empleado"])) header("Location: ".APP_URL.'login');
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-success" name="anadirCliente">Guardar cambios</button>
+                                <button type="submit" class="btn btn-success" name="anadirCliente">Guardar cambios</button>
                             </div>
                         </form>
                     </div>

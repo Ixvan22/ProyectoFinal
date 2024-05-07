@@ -68,7 +68,7 @@ class vehiculoController extends mainModel {
     public function listarVehículosControlador():string {
         $contenido = '';
 
-        $consultaVehiculos = "SELECT * FROM usuarios ORDER BY matricula";
+        $consultaVehiculos = "SELECT * FROM vehiculos ORDER BY matricula";
         $consultaVehiculos = $this->ejecutarConsulta($consultaVehiculos);
 
         while ($vehiculo = $consultaVehiculos->fetch(\PDO::FETCH_ASSOC)) {
