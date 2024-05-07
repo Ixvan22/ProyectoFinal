@@ -111,8 +111,7 @@ if (!isset($_SESSION["empleado"])) header("Location: ".APP_URL.'login');
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <a href="<?php echo APP_URL ?>vehiculos/eliminarVehiculo/matricula" class="w-25 text-end">
-                                    <i class="fa-solid fa-x btn btn-danger"></i></a>
+                                    <a href="<?php echo APP_URL ?>vehiculos/eliminarVehiculo/matricula" class="btn btn-danger">Eliminar</a>
                                     <div class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modal-mercanciaAsignada">Mercancia asignada</div>
                                     <button type="submit" class="btn btn-success" name="guardar-estado-vehículo">Guardar cambios</button>
                                 </div>
