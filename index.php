@@ -15,6 +15,7 @@ use app\controllers\loginController;
 use app\controllers\userController;
 use app\controllers\configController;
 use app\controllers\clienteController;
+use app\controllers\vehiculoController;
 
 require_once "./app/views/inc/session_start.php";
 
@@ -22,6 +23,7 @@ $insLogin = new loginController();
 $insUsusario = new userController();
 $insConfig = new configController();
 $insCliente = new clienteController();
+$insVehiculo = new vehiculoController();
 $viewsController = new viewsController();
 $vista = $viewsController->obtenerVistasControlador($url[0]);
 

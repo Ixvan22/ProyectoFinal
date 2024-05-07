@@ -142,6 +142,8 @@ if (!isset($_SESSION["empleado"])) header("Location: ".APP_URL.'login');
                     </div>
                 </div>
 
+                <?php echo $insVehiculo->listarVehículosControlador() ?>
+
             </div>
         </main>
 

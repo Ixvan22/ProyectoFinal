@@ -72,7 +72,106 @@ class vehiculoController extends mainModel {
         $consultaVehiculos = $this->ejecutarConsulta($consultaVehiculos);
 
         while ($vehiculo = $consultaVehiculos->fetch(\PDO::FETCH_ASSOC)) {
-            // TODO listar vehiculos
+            $consultaTipoPeso = "SELECT nombre FROM tipo_peso WHERE tipo = ".$vehiculo['tipo_peso'];
+            $consultaTipoPeso = $this->consultaToArrayUnico($consultaTipoPeso)[0];
+
+            $consultaPesoActual = "SELECT localizador FROM transporte_mercancia WHERE matricula = '".$vehiculo["matricula"]."'";
+            $consultaPesoActual = $this->ejecutarConsulta($consultaPesoActual);
+
+            $peso = 0;
+            while ($mercancia = $consultaPesoActual->fetch(\PDO::FETCH_ASSOC)) {
+                $consultaPesoMercancia = "SELECT peso FROM mercancia WHERE localizador = '$mercancia'";
+                $consultaPesoMercancia = $this->consultaToArrayUnico($consultaPesoMercancia)[0];
+                $peso += $consultaPesoMercancia;
+            }
+
+            $contenido .= '
+            <div class="col-lg-3 col-md-4 col-sm-6 col-12" data-bs-toggle="modal" data-bs-target="#modal-1234ABC">
+                <div class="-card-vehicle">
+                    <div class="-card-vehicle-header">
+                        <p><span id="-card-vehicle-status-icon"><i class="fa-solid fa-circle" style="color: green;"></i></span> Listo</p>
+                        <p>
+                            <span id="-card-vehicle-status-weight">'.$peso.'</span>
+                            / 
+                            <span id="-card-vehicle-status-weight-max">'.$vehiculo["carga_util"].'</span>
+                            
+                            <span id="-card-vehicle-status-weight-type">'.$consultaTipoPeso.'</span>
+                        </p>
+                    </div>
+                    <div class="-card-vehicle-main">
+                        <p>'.$vehiculo["matricula"].'</p>
+                    </div>
+                </div>
+            </div>
+            ';
+
+            // TODO LISTAR MERCANCIA Y LISTAR ESTADOS
+            $contenido .= '
+            <!-- Modal -->
+            <div class="modal fade" id="modal-1234ABC" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Vehículo: <span id="vehiculo-modal-matricula">'.$vehiculo["matricula"].'</span></h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="." method="post">
+                            <div class="modal-body">
+                                <div class="-modal-mercancia">
+                                    <div class="row d-flex align-items-center">
+                                        <label class="w-50" for="vehiculo-asignar-mercancia">Añadir mercancia:</label>
+                                        <select class="form-select w-50" id="vehiculo-asignar-mercancia" name="vehiculo-mercancia-asignada">
+                                            <option value="default"></option>
+                                            <option value="123456789123456">123456789123456</option>
+                                        </select>
+                                    </div>
+                                    <div class="row d-flex align-items-center my-2">
+                                        <label class="w-25" for="vehiculo-estado-asignado">Estado:</label>
+                                        <select class="form-select w-75" id="vehiculo-estado-asignado" name="vehiculo-estado-asignado">
+                                            <option value="0">Sin mercancia</option>
+                                            <option value="1">Esperando asignación</option>
+                                            <option value="2">Cargando mercancía</option>
+                                            <option value="3">Listo</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="'.APP_URL.'vehiculos/eliminarVehiculo/'.$vehiculo["matricula"].'" class="btn btn-danger">Eliminar</a>
+                                <div class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modal-mercanciaAsignada">Mercancia asignada</div>
+                                <button type="submit" class="btn btn-success" name="guardar-estado-vehículo">Guardar cambios</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            ';
+
+            // TODO LISTAR MERCANCIAS EN EL VEHICULO
+            $contenido .= '
+            <!-- Modal -->
+            <div class="modal fade" id="modal-mercanciaAsignada" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Vehículo: <span id="vehiculo-modal-matricula">'.$vehiculo["matricula"].'</span></h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="-modal-mercancia">
+                                <div class="row d-flex align-items-center">
+                                    <h6 class="w-50">123456789123</h6>
+                                    <h6 class="w-25 text-end">80 KG</h6>
+                                    <a href="'.APP_URL.'vehiculos/eliminarMercancia/'.$vehiculo["matricula"].'/mercancia" class="w-25 text-end">
+                                    <i class="fa-solid fa-x btn btn-danger"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            ';
         }
 
         return $contenido;
