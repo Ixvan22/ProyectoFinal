@@ -20,8 +20,6 @@ class loginController extends mainModel {
 
                 $_SESSION["empleado"] = $check_usuario["dni_empleado"];
 
-                // Enviar al dashboard de pedidos si los datos son correctos
-                // TODO CAMBIAR LOCATION
                 if (headers_sent()) {
                     return "<script>window.location.href = '".APP_URL."gestionPrincipal';</script>";
                 }
