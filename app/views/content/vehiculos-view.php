@@ -40,11 +40,15 @@ if (!isset($_SESSION["empleado"])) header("Location: ".APP_URL.'login');
                             <h5 class="modal-title" id="exampleModalLongTitle">Nuevo vehículo</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="." method="post">
+                        <form action="<?php echo APP_URL ?>vehiculos" method="post">
                             <div class="modal-body">
                                 <div class="row d-flex align-items-center my-2">
                                     <label class="w-25" for="nuevo-vehiculo-matricula">Matrícula:</label>
                                     <input type="text" class="w-75 form-control" id="nuevo-vehiculo-matricula" name="nuevo-vehiculo-matricula" autocomplete="none"/>
+                                </div>
+                                <div class="row d-flex align-items-center my-2">
+                                    <label class="w-25" for="vehiculo-tipo-estado">Estado:</label>
+                                    <?php echo $insTipos->listarVehiculosControlador()?>
                                 </div>
                                 <div class="row d-flex align-items-center my-2">
                                     <label class="w-25" for="nuevo-vehiculo-carga">Carga útil:</label>
@@ -134,7 +138,7 @@ if (!isset($_SESSION["empleado"])) header("Location: ".APP_URL.'login');
                     </div>
                 </div>
 
-                <?php echo $insVehiculo->listarVehículosControlador() ?>
+                <?php echo $insVehiculo->listarVehiculosControlador() ?>
 
             </div>
         </main>

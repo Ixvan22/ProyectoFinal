@@ -6,11 +6,12 @@ use app\models\mainModel;
 class vehiculoController extends mainModel {
     public function anadirVehiculoControlador() {
         $matricula = $this->limpiarCadena($_POST["nuevo-vehiculo-matricula"]);
-        $cargaUtil = $this->limpiarCadena($_POST["nuevo-vehicuñp-carga"]);
+        $cargaUtil = $this->limpiarCadena($_POST["nuevo-vehiculo-carga"]);
         $tipoPeso = $this->limpiarCadena($_POST["tipo-peso"]);
+        $tipoEstado = $this->limpiarCadena($_POST["vehiculo-tipo-estado"]);
 
-        // Verificar que no existe el usuario
-        $verificarVehiculo = "SELECT matricula FROM vehiculos WHERE dni = '$matricula'";
+        // Verificar que no existe el vehiculo
+        $verificarVehiculo = "SELECT matricula FROM vehiculos WHERE matricula = '$matricula'";
         $verificarVehiculo = $this->ejecutarConsulta($verificarVehiculo);
 
         if ($verificarVehiculo->rowCount() == 1) {
@@ -20,8 +21,23 @@ class vehiculoController extends mainModel {
 
         // Verificar matricula
         $matricula = mb_strtoupper($matricula);
-        if (mb_strlen($matricula) > 7 || !$this->verificarDatos('([0-9]{4}[A-Z]{3}|[A-Z]{1,2}[0-9]{4}{1,2})', $matricula)) {
+        if (mb_strlen($matricula) > 7 || !$this->verificarDatos('([0-9]{4}[A-Z]{3}|[A-Z]{1,2}[0-9]{4}[A-Z]{1,2})', $matricula)) {
             $alerta = $this->alertController->alertaSimple('error', 'La matrícula no es válida');
+            return $alerta;
+        }
+
+        // Verificar estado
+        $verificarEstado = "SELECT tipo FROM tipo_estado_vehiculo where tipo = '$tipoEstado'";
+        $verificarEstado = $this->ejecutarConsulta($verificarEstado);
+
+        if ($verificarEstado->rowCount() == 0) {
+            $alerta = $this->alertController->alertaSimple('error', 'El tipo de estado es incorrecto');
+            return $alerta;
+        }
+
+        // Verificar carga util
+        if ($cargaUtil <= 0) {
+            $alerta = $this->alertController->alertaSimple('error', 'La carga útil es incorrecta');
             return $alerta;
         }
 
@@ -49,6 +65,11 @@ class vehiculoController extends mainModel {
                 "campo_nombre" => "tipo_peso",
                 "campo_marcador" => ":tipo_peso",
                 "campo_valor" => $tipoPeso
+            ],
+            [
+                "campo_nombre" => "tipo_estado",
+                "campo_marcador" => ":tipo_estado",
+                "campo_valor" => $tipoEstado
             ]
         ];
 
@@ -65,11 +86,13 @@ class vehiculoController extends mainModel {
         return $alerta;
     }
 
-    public function listarVehículosControlador():string {
+    public function listarVehiculosControlador():string {
         $contenido = '';
 
         $consultaVehiculos = "SELECT * FROM vehiculos ORDER BY matricula";
         $consultaVehiculos = $this->ejecutarConsulta($consultaVehiculos);
+
+        $insTipos = new tiposController();
 
         while ($vehiculo = $consultaVehiculos->fetch(\PDO::FETCH_ASSOC)) {
             $consultaTipoPeso = "SELECT nombre FROM tipo_peso WHERE tipo = '".$vehiculo['tipo_peso']."'";
@@ -105,7 +128,7 @@ class vehiculoController extends mainModel {
             </div>
             ';
 
-            // TODO LISTAR MERCANCIA Y LISTAR ESTADOS
+            // TODO LISTAR MERCANCIA
             $contenido .= '
             <!-- Modal -->
             <div class="modal fade" id="modal-1234ABC" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -126,13 +149,8 @@ class vehiculoController extends mainModel {
                                         </select>
                                     </div>
                                     <div class="row d-flex align-items-center my-2">
-                                        <label class="w-25" for="vehiculo-estado-asignado">Estado:</label>
-                                        <select class="form-select w-75" id="vehiculo-estado-asignado" name="vehiculo-estado-asignado">
-                                            <option value="0">Sin mercancia</option>
-                                            <option value="1">Esperando asignación</option>
-                                            <option value="2">Cargando mercancía</option>
-                                            <option value="3">Listo</option>
-                                        </select>
+                                        <label class="w-25" for="vehiculo-tipo-estado">Estado:</label>
+                                        '.$insTipos->listarVehiculosControlador().'
                                     </div>
 
                                 </div>
