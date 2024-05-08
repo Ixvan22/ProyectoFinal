@@ -13,6 +13,12 @@ class mercanciaController extends mainModel {
         $tipoEstado = $this->limpiarCadena($_POST["mercancia-tipo-estado"]);
         $descripcion = $this->limpiarCadena($_POST["nueva-mercancia-descripcion"]);
 
+        // Verificar peso
+        if ($peso <= 0) {
+            $alerta = $this->alertController->alertaSimple('error', 'El peso es incorrecto');
+            return $alerta;
+        }
+
         if (isset($_POST["mercancia-cliente-existente"]) && $_POST["mercancia-cliente-existente"] != '') {
             $cliente = $_POST["mercancia-cliente-existente"];
         }
@@ -33,7 +39,7 @@ class mercanciaController extends mainModel {
         
         
         // Verificar tipo peso
-        $verificarTipoPeso = "SELECT tipo FROM tipo_peso WHERE tipo = $tipoPeso";
+        $verificarTipoPeso = "SELECT tipo FROM tipo_peso WHERE tipo = '$tipoPeso'";
         $verificarTipoPeso = $this->ejecutarConsulta($verificarTipoPeso);
 
         if ($verificarTipoPeso->rowCount() == 0) {
@@ -42,7 +48,7 @@ class mercanciaController extends mainModel {
         }
 
         // Verificar tipo estado
-        $verificarTipoEstado = "SELECT tipo FROM tipo_estado_mercancia WHERE tipo = $tipoEstado";
+        $verificarTipoEstado = "SELECT tipo FROM tipo_estado_mercancia WHERE tipo = '$tipoEstado'";
         $verificarTipoEstado = $this->ejecutarConsulta($verificarTipoEstado);
 
         if ($verificarTipoEstado->rowCount() == 0) {
