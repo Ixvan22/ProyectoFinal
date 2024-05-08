@@ -103,13 +103,13 @@ class vehiculoController extends mainModel {
 
             $peso = 0;
             while ($mercancia = $consultaPesoActual->fetch(\PDO::FETCH_ASSOC)) {
-                $consultaPesoMercancia = "SELECT peso FROM mercancia WHERE localizador = '$mercancia'";
+                $consultaPesoMercancia = "SELECT peso FROM mercancia WHERE localizador = '".$mercancia["localizador"]."'";
                 $consultaPesoMercancia = $this->consultaToArrayUnico($consultaPesoMercancia)[0];
                 $peso += $consultaPesoMercancia;
             }
 
             $contenido .= '
-            <div class="col-lg-3 col-md-4 col-sm-6 col-12" data-bs-toggle="modal" data-bs-target="#modal-1234ABC">
+            <div class="col-lg-3 col-md-4 col-sm-6 col-12" data-bs-toggle="modal" data-bs-target="#modal-'.$vehiculo["matricula"].'">
                 <div class="-card-vehicle">
                     <div class="-card-vehicle-header">
                         <p><span id="-card-vehicle-status-icon"><i class="fa-solid fa-circle" style="color: green;"></i></span> Listo</p>
@@ -131,7 +131,7 @@ class vehiculoController extends mainModel {
             // TODO LISTAR MERCANCIA
             $contenido .= '
             <!-- Modal -->
-            <div class="modal fade" id="modal-1234ABC" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal fade" id="modal-'.$vehiculo["matricula"].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -157,7 +157,7 @@ class vehiculoController extends mainModel {
                             </div>
                             <div class="modal-footer">
                                 <a href="'.APP_URL.'vehiculos/eliminarVehiculo/'.$vehiculo["matricula"].'" class="btn btn-danger">Eliminar</a>
-                                <div class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modal-mercanciaAsignada">Mercancia asignada</div>
+                                <div class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modal-mercanciaAsignada-'.$vehiculo["matricula"].'">Mercancia asignada</div>
                                 <button type="submit" class="btn btn-success" name="guardar-estado-vehículo">Guardar cambios</button>
                             </div>
                         </form>
@@ -166,30 +166,43 @@ class vehiculoController extends mainModel {
             </div>
             ';
 
-            // TODO LISTAR MERCANCIAS EN EL VEHICULO
             $contenido .= '
-            <!-- Modal -->
-            <div class="modal fade" id="modal-mercanciaAsignada" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">Vehículo: <span id="vehiculo-modal-matricula">'.$vehiculo["matricula"].'</span></h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="-modal-mercancia">
-                                <div class="row d-flex align-items-center">
-                                    <h6 class="w-50">123456789123</h6>
-                                    <h6 class="w-25 text-end">80 KG</h6>
-                                    <a href="'.APP_URL.'vehiculos/eliminarMercancia/'.$vehiculo["matricula"].'/mercancia" class="w-25 text-end">
-                                    <i class="fa-solid fa-x btn btn-danger"></i></a>
-                                </div>
+                <!-- Modal -->
+                <div class="modal fade" id="modal-mercanciaAsignada-'.$vehiculo["matricula"].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Vehículo: <span id="vehiculo-modal-matricula">'.$vehiculo["matricula"].'</span></h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                            <div class="modal-body">
+                                <div class="-modal-mercancia">
             ';
+            // TODO LISTAR MERCANCIAS EN EL VEHICULO
+            $consultaMercanciaVehiculo = "SELECT localizador FROM transporte_mercancia WHERE matricula = '".$vehiculo["matricula"]."'";
+            $consultaMercanciaVehiculo = $this->ejecutarConsulta($consultaMercanciaVehiculo);
+            while ($mercanciaVehiculo = $consultaMercanciaVehiculo->fetch(\PDO::FETCH_ASSOC)) {
+                $consultaMercancia = "SELECT * FROM mercancia WHERE localizador = '".$mercanciaVehiculo["localizador"]."'";
+                $consultaMercancia = $this->ejecutarConsulta($consultaMercancia);
+                $consultaMercancia = $consultaMercancia->fetch(\PDO::FETCH_ASSOC);
+
+                $consultaPesoMercancia = "SELECT nombre FROM tipo_peso WHERE tipo = '".$consultaMercancia["tipo_peso"]."'";
+                $consultaPesoMercancia = $this->ejecutarConsulta($consultaPesoMercancia);
+                $consultaPesoMercancia = $consultaPesoMercancia->fetch(\PDO::FETCH_ASSOC);
+
+                $contenido .= '
+
+                                    <div class="row d-flex align-items-center">
+                                        <h6 class="w-50">'.$consultaMercancia["localizador"].'</h6>
+                                        <h6 class="w-25 text-end">'.$consultaMercancia["peso"].' '.$consultaPesoMercancia["nombre"].'</h6>
+                                        <a href="'.APP_URL.'vehiculos/eliminarMercancia/'.$vehiculo["matricula"].'/mercancia" class="w-25 text-end">
+                                        <i class="fa-solid fa-x btn btn-danger"></i></a>
+                                    </div>
+                ';
+
+            }
+            $contenido .= '</div></div></div></div></div>';
+
         }
 
         return $contenido;
