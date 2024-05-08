@@ -47,6 +47,21 @@ class tiposController extends mainModel {
 
         return $contenido;
     }
+
+    public function listarVehiculosControlador():string {
+        $contenido = '<select class="form-select w-75" id="vehiculo-tipo-estado" name="vehiculo-tipo-estado">>
+                        <option selected></option>';
+
+        $consultaVehiculos = 'SELECT * FROM tipo_estado_mercancia ORDER BY tipo';
+        $consultaVehiculos = $this->ejecutarConsulta($consultaVehiculos);
+
+        while ($result = $consultaVehiculos->fetch(\PDO::FETCH_ASSOC)) {
+            $contenido .= '<option value="'.$result["tipo"].'">'.ucfirst(mb_strtolower($result["nombre"])).'</option>';
+        }
+        $contenido .= '</select>';
+
+        return $contenido;
+    }
 }
 
 ?>

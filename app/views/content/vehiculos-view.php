@@ -96,13 +96,8 @@ if (!isset($_SESSION["empleado"])) header("Location: ".APP_URL.'login');
                                             </select>
                                         </div>
                                         <div class="row d-flex align-items-center my-2">
-                                            <label class="w-25" for="vehiculo-estado-asignado">Estado:</label>
-                                            <select class="form-select w-75" id="vehiculo-estado-asignado" name="vehiculo-estado-asignado">
-                                                <option value="0">Sin mercancia</option>
-                                                <option value="1">Esperando asignación</option>
-                                                <option value="2">Cargando mercancía</option>
-                                                <option value="3">Listo</option>
-                                            </select>
+                                            <label class="w-25" for="vehiculo-tipo-estado">Estado:</label>
+                                            <?php echo $insTipos->listarVehiculosControlador()?>
                                         </div>
 
                                     </div>
