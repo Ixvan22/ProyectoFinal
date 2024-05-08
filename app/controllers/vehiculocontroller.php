@@ -72,7 +72,7 @@ class vehiculoController extends mainModel {
         $consultaVehiculos = $this->ejecutarConsulta($consultaVehiculos);
 
         while ($vehiculo = $consultaVehiculos->fetch(\PDO::FETCH_ASSOC)) {
-            $consultaTipoPeso = "SELECT nombre FROM tipo_peso WHERE tipo = ".$vehiculo['tipo_peso'];
+            $consultaTipoPeso = "SELECT nombre FROM tipo_peso WHERE tipo = '".$vehiculo['tipo_peso']."'";
             $consultaTipoPeso = $this->consultaToArrayUnico($consultaTipoPeso)[0];
 
             $consultaPesoActual = "SELECT localizador FROM transporte_mercancia WHERE matricula = '".$vehiculo["matricula"]."'";
