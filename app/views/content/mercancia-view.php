@@ -40,7 +40,7 @@ if (!isset($_SESSION["empleado"])) header("Location: ".APP_URL.'login');
                             <h5 class="modal-title" id="exampleModalLongTitle">Nueva mercancia</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="." method="post">
+                        <form action="<?php echo APP_URL ?>mercancia" method="post">
                             <div class="modal-body">
                                 <h6 class="text-center">Mercancia</h6>
                                 <div class="row d-flex align-items-center my-2">
@@ -49,12 +49,8 @@ if (!isset($_SESSION["empleado"])) header("Location: ".APP_URL.'login');
                                     <?php echo $insTipos->listarPesosControlador() ?>
                                 </div>
                                 <div class="row d-flex align-items-center my-2">
-                                    <label class="w-25" for="nueva-mercancia-tipo-estado">Estado:</label>
-                                    <select class="form-select w-75" name="nueva-mercancia-tipo-estado" id="nueva-mercancia-tipo-estado">
-                                        <option selected></option>
-                                        <option value="1"></option>
-                                        <option value="2"></option>
-                                      </select>
+                                    <label class="w-25" for="mercancia-tipo-estado">Estado:</label>
+                                    <?php echo $insTipos->listarMercanciaControlador() ?>
                                 </div>
                                 <div class="row d-flex align-items-center my-2">
                                     <label class="w-25" for="nueva-mercancia-descripcion">Descripción:</label>

@@ -32,7 +32,21 @@ class tiposController extends mainModel {
 
         return $contenido;
     }
-}
 
+    public function listarMercanciaControlador():string{
+        $contenido = '<select class="form-select w-75" name="mercancia-tipo-estado" id="mercancia-tipo-estado">
+                        <option selected></option>';
+
+        $consultaMercancia = 'SELECT * FROM tipo_estado_mercancia ORDER BY tipo';
+        $consultaMercancia = $this->ejecutarConsulta($consultaMercancia);
+
+        while ($result = $consultaMercancia->fetch(\PDO::FETCH_ASSOC)) {
+            $contenido .= '<option value="'.$result["tipo"].'">'.ucfirst(mb_strtolower($result["nombre"])).'</option>';
+        }
+        $contenido .= '</select>';
+
+        return $contenido;
+    }
+}
 
 ?>

@@ -10,7 +10,7 @@ class mercanciaController extends mainModel {
     public function anadirMercanciaControlador():string {
         $peso = $this->limpiarCadena($_POST["nueva-mercancia-peso"]);
         $tipoPeso = $this->limpiarCadena($_POST["tipo-peso"]);
-        $tipoEstado = $this->limpiarCadena($_POST["nueva-mercancia-tipo-estado"]);
+        $tipoEstado = $this->limpiarCadena($_POST["mercancia-tipo-estado"]);
         $descripcion = $this->limpiarCadena($_POST["nueva-mercancia-descripcion"]);
 
         if (isset($_POST["mercancia-cliente-existente"]) && $_POST["mercancia-cliente-existente"] != '') {
@@ -42,7 +42,7 @@ class mercanciaController extends mainModel {
         }
 
         // Verificar tipo estado
-        $verificarTipoEstado = "SELECT tipo FROM tipo_estado WHERE tipo = $tipoEstado";
+        $verificarTipoEstado = "SELECT tipo FROM tipo_estado_mercancia WHERE tipo = $tipoEstado";
         $verificarTipoEstado = $this->ejecutarConsulta($verificarTipoEstado);
 
         if ($verificarTipoEstado->rowCount() == 0) {
