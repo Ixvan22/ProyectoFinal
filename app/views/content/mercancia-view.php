@@ -94,66 +94,7 @@ if (!isset($_SESSION["empleado"])) header("Location: ".APP_URL.'login');
             </div>
 
             <div class="row gy-3">
-                <div class="col-lg-3 col-md-4 col-sm-6 col-12">
-                    <div class="-card-mercancia" data-bs-toggle="modal" data-bs-target="#modal-123456789123456789">
-                        <div class="-card-mercancia-header">
-                            <p><span id="-card-mercancia-status-icon"><i class="fa-solid fa-circle" style="color: green;"></i></span> Listo</p>
-                            <p>
-                                <span id="-card-mercancia-status-weight">300</span>
-                                <span id="-card-mercancia-status-weight-type">KG</span>
-                            </p>
-                        </div>
-                        <div class="-card-mercancia-main">
-                            <p>123456789123456</p>
-                        </div>
-                    </div>
-                    <!-- Modal -->
-                    <div class="modal fade" id="modal-123456789123456789" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLongTitle">Localizador: <span id="mercancia-modal-localizador">123456789123456789</span></h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <form action="." method="post">
-                                    <div class="modal-body">
-                                        <div class="-modal-mercancia">
-                                            <div class="row d-flex align-items-center">
-                                                <label class="w-25" for="mercancia-vehiculo-asignado">Vehículo</label>
-                                                <select class="form-select w-75" id="mercancia-vehiculo-asignado" name="mercancia-vehiculo-asignado">
-                                                    <option value="default"></option>
-                                                    <option value="1234ABC">1234ABC</option>
-                                                </select>
-                                            </div>
-                                            <div class="row d-flex align-items-center my-2">
-                                                <label class="w-25" for="mercancia-cliente-asignado">Cliente</label>
-                                                <select class="form-select w-75" id="mercancia-cliente-asignado" name="mercancia-cliente-asignado">
-                                                    <option value="default"></option>
-                                                    <option value="1234ABC">123456789A</option>
-                                                </select>
-                                            </div>
-                                            <div class="row d-flex align-items-center my-2">
-                                                <label class="w-25" for="mercancia-estado-asignado">Estado</label>
-                                                <select class="form-select w-75" id="mercancia-estado-asignado" name="mercancia-estado-asignado">
-                                                    <option value="0">En proceso</option>
-                                                    <option value="1">En almacen</option>
-                                                    <option value="2">En centro logístico</option>
-                                                    <option value="3">En reparto</option>
-                                                    <option value="4">Entregado</option>
-                                                </select>
-                                            </div>
-                                            
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="submit" class="btn btn-success" name="guardar-estado-mercancia">Guardar cambios</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+                <?php echo $insMercancia->listarMercanciaControlador() ?>
             </div>
         </main>
     </div>

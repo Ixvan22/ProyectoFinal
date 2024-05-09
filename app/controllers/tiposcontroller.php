@@ -33,15 +33,23 @@ class tiposController extends mainModel {
         return $contenido;
     }
 
-    public function listarMercanciaControlador():string{
-        $contenido = '<select class="form-select w-75" name="mercancia-tipo-estado" id="mercancia-tipo-estado">
-                        <option selected></option>';
+    public function listarMercanciaControlador(int $tipo = null):string{
+        $contenido = '<select class="form-select w-75" name="mercancia-tipo-estado" id="mercancia-tipo-estado">';
+
+        if (is_null($tipo)) {
+            $contenido .= '<option selected></option>';
+        }
 
         $consultaMercancia = 'SELECT * FROM tipo_estado_mercancia ORDER BY tipo';
         $consultaMercancia = $this->ejecutarConsulta($consultaMercancia);
 
         while ($result = $consultaMercancia->fetch(\PDO::FETCH_ASSOC)) {
-            $contenido .= '<option value="'.$result["tipo"].'">'.ucfirst(mb_strtolower($result["nombre"])).'</option>';
+            if (!is_null($tipo) && $result["tipo"] == $tipo) {
+                $contenido .= '<option selected value="'.$result["tipo"].'">'.ucfirst(mb_strtolower($result["nombre"])).'</option>';
+            }
+            else {
+                $contenido .= '<option value="'.$result["tipo"].'">'.ucfirst(mb_strtolower($result["nombre"])).'</option>';
+            }
         }
         $contenido .= '</select>';
 
@@ -62,6 +70,54 @@ class tiposController extends mainModel {
 
         return $contenido;
     }
+
+
+    public function listarMatriculasVehiculosControlador(string $vehiculo = null):string{
+        $contenido = '<select class="form-select w-75" name="matricula-vehiculo" id="matricula-vehiculo">';
+
+        if (is_null($vehiculo)) {
+            $contenido .= '<option selected></option>';
+        }
+
+        $consultaVheiculo = 'SELECT matricula FROM vehiculos ORDER BY matricula';
+        $consultaVheiculo = $this->ejecutarConsulta($consultaVheiculo);
+
+        while ($result = $consultaVheiculo->fetch(\PDO::FETCH_ASSOC)) {
+            if (!is_null($vehiculo) && $result["matricula"] == $vehiculo) {
+                $contenido .= '<option selected value="'.$result["matricula"].'">'.mb_strtoupper($result["matricula"]).'</option>';
+            }
+            else {
+                $contenido .= '<option value="'.$result["matricula"].'">'.mb_strtoupper($result["matricula"]).'</option>';
+            }
+        }
+        $contenido .= '</select>';
+
+        return $contenido;
+    }
+
+        public function listarDniClientesControlador(string $dni = null):string {
+            $contenido = '<select class="form-select w-75" name="dni-cliente" id="dni-cliente">';
+
+            if (is_null($dni)) {
+                $contenido .= '<option selected></option>';
+            }
+
+            $consultaCliente = 'SELECT dni FROM usuarios ORDER BY nombre';
+            $consultaCliente = $this->ejecutarConsulta($consultaCliente);
+
+            while ($result = $consultaCliente->fetch(\PDO::FETCH_ASSOC)) {
+                if (!is_null($dni) && $result["dni"] == $dni) {
+                    $contenido .= '<option selected value="' . $result["dni"] . '">' . mb_strtoupper($result["dni"]) . '</option>';
+                } else {
+                    $contenido .= '<option value="' . $result["dni"] . '">' . mb_strtoupper($result["dni"]) . '</option>';
+                }
+            }
+            $contenido .= '</select>';
+
+            return $contenido;
+        }
+
+
 }
 
 ?>

@@ -95,6 +95,96 @@ class mercanciaController extends mainModel {
 
         return $alerta;
     }
+
+    public function listarMercanciaControlador():string {
+        $contenido = '';
+
+        $consultaMercancia = "SELECT * FROM mercancia ORDER BY localizador";
+        $consultaMercancia = $this->ejecutarConsulta($consultaMercancia);
+
+        $insTipos = new tiposController();
+
+        while ($mercancia = $consultaMercancia->fetch(\PDO::FETCH_ASSOC)) {
+            $consultaTipoPeso = "SELECT nombre FROM tipo_peso WHERE tipo = '".$mercancia['tipo_peso']."'";
+            $consultaTipoPeso = $this->consultaToArrayUnico($consultaTipoPeso)[0];
+
+            $consultaTipoEstado = "SELECT * FROM tipo_estado_mercancia WHERE tipo = '".$mercancia["tipo_estado"]."'";
+            $consultaTipoEstado = $this->ejecutarConsulta($consultaTipoEstado);
+            $consultaTipoEstado = $consultaTipoEstado->fetch(\PDO::FETCH_ASSOC);
+
+            $vehiculoMercancia = "SELECT matricula FROM transporte_mercancia WHERE localizador = '".$mercancia["localizador"]."'";
+            $vehiculoMercancia = $this->consultaToArrayUnico($vehiculoMercancia);
+
+            $contenido .= '
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                    <div class="-card-mercancia" data-bs-toggle="modal" data-bs-target="#modal-'.$mercancia["localizador"].'">
+                        <div class="-card-mercancia-header">
+                            <p> <span id="-card-mercancia-status-icon">
+            ';
+            if ($consultaTipoEstado["tipo"] == 1) {
+                $contenido .= '<i class="fa-solid fa-circle" style="color: orange;">';
+            }
+            else {
+                $contenido .= '<i class="fa-solid fa-circle" style="color: green;">';
+            }
+            $contenido .= '</i>
+                            </span> '.$consultaTipoEstado["nombre"].'</p>
+                            <p>
+                                <span id="-card-mercancia-status-weight">'.$mercancia["peso"].'</span>
+                                <span id="-card-mercancia-status-weight-type">'.$consultaTipoPeso.'</span>
+                            </p>
+                        </div>
+                        <div class="-card-mercancia-main">
+                            <p>'.$mercancia["localizador"].'</p>
+                        </div>
+                    </div>
+            ';
+
+            $contenido .= '
+                    <!-- Modal -->
+                    <div class="modal fade" id="modal-'.$mercancia["localizador"].'" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Localizador: <span id="mercancia-modal-localizador">'.$mercancia["localizador"].'</span></h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <form action="'.APP_URL.'mercancia" method="post">
+                                    <div class="modal-body">
+                                        <div class="-modal-mercancia">
+                                            <div class="row d-flex align-items-center">
+                                                <label class="w-25" for="matricula-vehiculo">Vehículo</label>';
+            if (count($vehiculoMercancia) == 0) {
+                $contenido .= $insTipos->listarMatriculasVehiculosControlador();
+            }
+            else {
+                $vehiculoMercancia = $vehiculoMercancia[0];
+                $contenido .= $insTipos->listarMatriculasVehiculosControlador($vehiculoMercancia);
+            }
+
+            $contenido .= '                </div>
+                                            <div class="row d-flex align-items-center my-2">
+                                                <label class="w-25" for="dni-cliente">Cliente</label>
+                                                '.$insTipos->listarDniClientesControlador($mercancia["cliente"]).'
+                                            </div>
+                                            <div class="row d-flex align-items-center my-2">
+                                                <label class="w-25" for="mercancia-estado-asignado">Estado</label>
+                                                '.$insTipos ->listarMercanciaControlador($mercancia['tipo_estado']).'
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-success" name="guardar-estado-mercancia">Guardar cambios</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            ';
+        }
+        return $contenido;
+    }
 }
 
 ?>
