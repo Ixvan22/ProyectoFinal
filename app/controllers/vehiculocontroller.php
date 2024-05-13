@@ -176,7 +176,7 @@ class vehiculoController extends mainModel {
                             <div class="modal-body">
                                 <div class="-modal-mercancia">
             ';
-            // TODO LISTAR MERCANCIAS EN EL VEHICULO
+
             $consultaMercanciaVehiculo = "SELECT localizador FROM transporte_mercancia WHERE matricula = '".$vehiculo["matricula"]."'";
             $consultaMercanciaVehiculo = $this->ejecutarConsulta($consultaMercanciaVehiculo);
             while ($mercanciaVehiculo = $consultaMercanciaVehiculo->fetch(\PDO::FETCH_ASSOC)) {
@@ -189,11 +189,10 @@ class vehiculoController extends mainModel {
                 $consultaPesoMercancia = $consultaPesoMercancia->fetch(\PDO::FETCH_ASSOC);
 
                 $contenido .= '
-
                                     <div class="row d-flex align-items-center">
                                         <h6 class="w-50">'.$consultaMercancia["localizador"].'</h6>
                                         <h6 class="w-25 text-end">'.$consultaMercancia["peso"].' '.$consultaPesoMercancia["nombre"].'</h6>
-                                        <a href="'.APP_URL.'vehiculos/eliminarMercancia/'.$vehiculo["matricula"].'/mercancia" class="w-25 text-end">
+                                        <a href="'.APP_URL.'vehiculos/eliminarMercanciaVehiculo/'.$vehiculo["matricula"].'/'.$mercanciaVehiculo["localizador"].'" class="w-25 text-end">
                                         <i class="fa-solid fa-x btn btn-danger"></i></a>
                                     </div>
                 ';
@@ -221,6 +220,26 @@ class vehiculoController extends mainModel {
         }
         else {
             $alerta = $this->alertController->alertaSimple('error', 'No existe el vehículo');
+        }
+
+        return $alerta;
+    }
+
+    public function eliminarMercanciaVehiculo(string $vehiculo, string $localizador) {
+        $consultaMercancia = "SELECT localizador FROM transporte_mercancia WHERE localizador = '$localizador' AND matricula = '$vehiculo'";
+        $consultaMercancia = $this->ejecutarConsulta($consultaMercancia);
+
+        if ($consultaMercancia->rowCount() == 1) {
+            $deleteMercancia = "DELETE FROM transporte_mercancia WHERE localizador = '$localizador' AND matricula = '$vehiculo'";
+            $deleteMercancia = $this->ejecutarConsulta($deleteMercancia);
+            if ($deleteMercancia->rowCount() == 0) {
+                $alerta = $this->alertController->alertaSimple('error', 'Fallo al eliminar la mercancía');
+                return $alerta;
+            }
+            $alerta = $this->alertController->alertaRecargar('success', 'Mercancía eliminada', APP_URL.'vehiculos');
+        }
+        else {
+            $alerta = $this->alertController->alertaSimple('error', 'La mercancía no está en el vehículo');
         }
 
         return $alerta;

@@ -155,7 +155,7 @@ if (!isset($_SESSION["empleado"])) header("Location: ".APP_URL.'login');
         echo $insVehiculo->anadirVehiculoControlador();
     }
     if (isset($url[1]) && $url[1] == 'eliminarMercancia') {
-        // TODO Implementar metodo
+        echo $insVehiculo->eliminarMercanciaVehiculo($url[2], $url[3]);
     }
     if (isset($url[1]) && $url[1] == 'eliminarVehiculo') {
         echo $insVehiculo->eliminarVehiculoControlador($url[2]);
