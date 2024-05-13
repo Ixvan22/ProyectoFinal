@@ -278,9 +278,27 @@ class mercanciaController extends mainModel {
 
         $alerta = $this->alertController->alertaSimple('warning', 'No se selecciono nada para actualizar');
         return $alerta;
-
-
     } 
+
+    public function eliminarMercanciaControlador (string $localizador) {
+        $consultaMercancia = "SELECT localizador FROM mercancia WHERE localizador = '$localizador'";
+        $consultaMercancia = $this->ejecutarConsulta($consultaMercancia);
+
+        if ($consultaMercancia->rowCount() == 1) {
+            $deleteMercancia = "DELETE FROM mercancia WHERE localizador = '$localizador'";
+            $deleteMercancia = $this->ejecutarConsulta($deleteMercancia);
+            if ($deleteMercancia->rowCount() == 0) {
+                $alerta = $this->alertController->alertaSimple('error', 'Fallo al eliminar la mercancía');
+                return $alerta;
+            }
+            $alerta = $this->alertController->alertaRecargar('success', 'Mercancía eliminada', APP_URL.'vehiculos');
+        }
+        else {
+            $alerta = $this->alertController->alertaSimple('error', 'No existe la mercancía');
+        }
+
+        return $alerta;
+    }
 }
 
 ?>
