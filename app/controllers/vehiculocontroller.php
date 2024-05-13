@@ -137,7 +137,7 @@ class vehiculoController extends mainModel {
                             <h5 class="modal-title" id="exampleModalLongTitle">Vehículo: <span id="vehiculo-modal-matricula">'.$vehiculo["matricula"].'</span></h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="." method="post">
+                        <form action="'.APP_URL.'vehiculos" method="post">
                             <div class="modal-body">
                                 <div class="-modal-mercancia">
                                     <div class="row d-flex align-items-center">

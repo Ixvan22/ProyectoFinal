@@ -152,9 +152,10 @@ if (!isset($_SESSION["empleado"])) header("Location: ".APP_URL.'login');
         echo $insVehiculo->anadirVehiculoControlador();
     }
     if (isset($_POST["guardar-estado-vehículo"])) {
-        echo $insVehiculo->anadirVehiculoControlador();
+        // TODO IMPLEMENTAR METODO
+        echo "a";
     }
-    if (isset($url[1]) && $url[1] == 'eliminarMercancia') {
+    if (isset($url[1]) && $url[1] == 'eliminarMercanciaVehiculo') {
         echo $insVehiculo->eliminarMercanciaVehiculo($url[2], $url[3]);
     }
     if (isset($url[1]) && $url[1] == 'eliminarVehiculo') {

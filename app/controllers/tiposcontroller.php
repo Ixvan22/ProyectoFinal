@@ -122,11 +122,12 @@ class tiposController extends mainModel {
                             <option selected></option>';
 
             $consultaMercancia = "SELECT localizador FROM mercancia WHERE localizador NOT IN 
-                                    (SELECT DISTINCT localizador FROM transporte_mercancia WHERE matricula != '".$matricula."')";
+                                    (SELECT DISTINCT localizador FROM transporte_mercancia WHERE matricula = '".$matricula."')";
             $consultaMercancia = $this->ejecutarConsulta($consultaMercancia);
             while ($result = $consultaMercancia->fetch(\PDO::FETCH_ASSOC)) {
                 $contenido .= '<option value="'.$result["localizador"].'">'.$result["localizador"].'</option>';
             }
+            $contenido .= '</select>';
 
             return $contenido;
         }
