@@ -117,6 +117,20 @@ class tiposController extends mainModel {
             return $contenido;
         }
 
+        public function listarVehiculoMercancias(string $matricula):string {
+            $contenido = '<select class="form-select w-50" id="asignar-mercancia" name="asignar-mercancia">
+                            <option selected></option>';
+
+            $consultaMercancia = "SELECT localizador FROM mercancia WHERE localizador NOT IN 
+                                    (SELECT DISTINCT localizador FROM transporte_mercancia WHERE matricula != '".$matricula."')";
+            $consultaMercancia = $this->ejecutarConsulta($consultaMercancia);
+            while ($result = $consultaMercancia->fetch(\PDO::FETCH_ASSOC)) {
+                $contenido .= '<option value="'.$result["localizador"].'">'.$result["localizador"].'</option>';
+            }
+
+            return $contenido;
+        }
+
 
 }
 

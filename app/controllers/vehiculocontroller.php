@@ -128,7 +128,6 @@ class vehiculoController extends mainModel {
             </div>
             ';
 
-            // TODO LISTAR MERCANCIA
             $contenido .= '
             <!-- Modal -->
             <div class="modal fade" id="modal-'.$vehiculo["matricula"].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -142,12 +141,11 @@ class vehiculoController extends mainModel {
                             <div class="modal-body">
                                 <div class="-modal-mercancia">
                                     <div class="row d-flex align-items-center">
-                                        <label class="w-50" for="vehiculo-asignar-mercancia">Añadir mercancia:</label>
-                                        <select class="form-select w-50" id="vehiculo-asignar-mercancia" name="vehiculo-mercancia-asignada">
-                                            <option value="default"></option>
-                                            <option value="123456789123456">123456789123456</option>
-                                        </select>
-                                    </div>
+                                        <label class="w-50" for="asignar-mercancia">Añadir mercancia:</label>';
+            
+            $contenido .= $insTipos->listarVehiculoMercancias($vehiculo["matricula"]);
+
+            $contenido .= '     </div>
                                     <div class="row d-flex align-items-center my-2">
                                         <label class="w-25" for="vehiculo-tipo-estado">Estado:</label>
                                         '.$insTipos->listarVehiculosControlador().'
