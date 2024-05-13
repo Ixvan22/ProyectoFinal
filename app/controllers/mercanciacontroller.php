@@ -174,6 +174,7 @@ class mercanciaController extends mainModel {
                                         </div>
                                     </div>
                                     <div class="modal-footer">
+                                        <input type="hidden" value="'.$mercancia["localizador"].'" name="mercanciaLocalizador"/>
                                         <button type="submit" class="btn btn-success" name="guardar-estado-mercancia">Guardar cambios</button>
                                     </div>
                                 </form>
@@ -185,6 +186,101 @@ class mercanciaController extends mainModel {
         }
         return $contenido;
     }
+
+    public function actualizarMercanciaControlador():string {
+        $localizador = $this->limpiarCadena($_POST["mercanciaLocalizador"]);
+
+        $actualizarMercancia = [];
+        $actualizarTransporteMercancia = [];
+        
+        if (isset($_POST["matricula-vehiculo"]) && $_POST["matricula-vehiculo"] != "") {
+            $vehiculo = $this->limpiarCadena($_POST["matricula-vehiculo"]);
+
+            $consultaVehiculo = "SELECT matricula FROM vehiculos WHERE matricula = '".$vehiculo."'";
+            $consultaVehiculo = $this->ejecutarConsulta($consultaVehiculo);
+
+            if ($consultaVehiculo->rowCount() == 0) {
+                $alerta = $this->alertController->alertaSimple('error', 'El vehículo no existe');
+                return $alerta;
+            }
+
+            $actualizarTransporteMercancia[] = [
+                [
+                    "campo_nombre" => "matricula",
+                    "campo_marcador" => ":matricula",
+                    "campo_valor" => $vehiculo
+                ]
+            ];
+        }
+
+        if (isset($_POST["dni-cliente"]) && $_POST["dni-cliente"] != "") {
+            $dni = $this->limpiarCadena($_POST["dni-cliente"]);
+
+            $consultaCliente = "SELECT dni FROM usuarios WHERE dni = '".$dni."'";
+            $consultaCliente = $this->ejecutarConsulta($consultaCliente);
+
+            if ($consultaCliente->rowCount() == 0) {
+                $alerta = $this->alertController->alertaSimple('error', 'El cliente no existe');
+                return $alerta;
+            }
+
+            $actualizarMercancia[] = [
+                [
+                    "campo_nombre" => "cliente",
+                    "campo_marcador" => ":cliente",
+                    "campo_valor" => $dni
+                ]
+            ];
+        }
+
+        if (isset($_POST["mercancia-estado-asignado"]) && $_POST["mercancia-estado-asignado"] != "") {
+            $estado = $this->limpiarCadena($_POST["mercancia-estado-asignado"]);
+
+            $consultaEstado = "SELECT tipo FROM tipo_estado_mercancia WHERE tipo = '".$estado."'";
+            $consultaEstado = $this->ejecutarConsulta($consultaEstado);
+
+            if ($consultaEstado->rowCount() == 0) {
+                $alerta = $this->alertController->alertaSimple('error', 'El estado es incorrecto');
+                return $alerta;
+            }
+
+            $actualizarMercancia[] = [
+                [
+                    "campo_nombre" => "tipo_estado",
+                    "campo_marcador" => ":tipo_estado",
+                    "campo_valor" => $estado
+                ]
+            ];
+        }
+
+        if (count($actualizarMercancia) > 0) {
+            $mercanciaActualizada = $this->actualizarDatos("mercancia", $actualizarMercancia, "localizador = '".$localizador."'");
+
+            if ($mercanciaActualizada->rowCount() == 0) {
+                $alerta = $this->alertController->alertaSimple('error', 'Fallo al actualizar los datos');
+                return $alerta;
+            }
+
+            if (count($actualizarTransporteMercancia) > 0) {
+                $transporteActualizado = $this->actualizarDatos("transporte_mercancia", $actualizarTransporteMercancia, "localizador = '".$localizador."'");
+
+                if ($transporteActualizado->rowCount() == 0) {
+                    $alerta = $this->alertController->alertaRecargar('warning', 'No se pudo actualizar el vehículo', APP_URL.'mercancia');
+                    return $alerta;
+                }
+                $alerta = $this->alertController->alertaRecargar('success', 'Mercancía actualizada', APP_URL.'mercancia');
+            }
+            else {
+                $alerta = $this->alertController->alertaRecargar('success', 'Mercancía actualizada', APP_URL.'mercancia');
+            }
+            return $alerta;
+        }
+
+        $alerta = $this->alertController->alertaSimple('warning', 'No se selecciono nada para actualizar');
+        return $alerta;
+
+
+    } 
 }
 
 ?>

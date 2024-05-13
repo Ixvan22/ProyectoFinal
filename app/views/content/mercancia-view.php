@@ -106,6 +106,9 @@ if (!isset($_SESSION["empleado"])) header("Location: ".APP_URL.'login');
     if (isset($_POST["anadirMercancia"])) {
         echo $insMercancia->anadirMercanciaControlador();
     }
+    if (isset($_POST["guardar-estado-mercancia"])) {
+        echo $insMercancia->actualizarMercanciaControlador();
+    }
 
     ?>
 </body>
