@@ -4,7 +4,8 @@
     width: 30%;
     height: 100%;
 
-    background-color: aliceblue;
+    background-color: #cccccc;
+    border-right: 2px solid #292c37;
 }
 
 .-navbar .-navbar-links {
@@ -35,10 +36,22 @@
 
 .-navbar-links ul a {
     padding: 10px 20px;
-    border: 1px solid black;
+    border: 1px solid #292c37;
+    border-right: 0px;
+    border-collapse: collapse;
     color: #000000;
     text-transform: uppercase;
     text-decoration: none;
+}
+
+.-navbar-config {
+    background-color: #292c37;
+    color: #ffffff !important;
+}
+
+.-navbar-exit {
+    background-color: #9f111b;
+    color: #ffffff !important;
 }
 
 .-navbar-responsive-closed {
@@ -47,9 +60,9 @@
 
 .-navbar-icon i {
     font-size: 20px;
-    cursor: pointer;
     color: #ffffff;
-    background-color: red;
+    cursor: pointer;
+    background-color: #292c37;
     border-bottom-right-radius: 8px;
 }
 
@@ -68,7 +81,7 @@
 }
 
 .-navbar-hidden {
-    opacity: 0;
+    display: none !important;
 }
 
 @media only screen and (max-width: 800px) {
