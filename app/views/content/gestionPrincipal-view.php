@@ -31,8 +31,26 @@ if (!isset($_SESSION["empleado"])) header("Location: ".APP_URL.'login');
                 <button type="submit" id="btn-workday"  value="start" class="btn btn-success px-3">Iniciar</button>
             </div>
         </header>
-        <main class="-main-jornada">
-            <div class="-header-jornada">
+        <main class="-main-principal">
+            <div class="-header-estructura m-0">
+                <h2>Planificación diaria</h2>
+            </div>
+
+            <div class="table-responsive mb-5">
+                <table class="table">
+                    <thead class="table-dark">
+                    <tr>
+                        <th scope="col">Fecha</th>
+                        <th scope="col" class="col-10">Descripción</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <?php echo $insUsuario->listarPlanificacionUsuarioControlador(); ?>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="-header-estructura m-0">
                 <h2>Jornadas recientes</h2>
                 <div class="-header-buttons">
                     <a href="" class="btn btn-secondary">Filtros?</a>
@@ -49,8 +67,7 @@ if (!isset($_SESSION["empleado"])) header("Location: ".APP_URL.'login');
                     </tr>
                     </thead>
                     <tbody>
-                    <?php echo $insUsuario->listarJornadaUsuarioControlador(); ?>
-
+                        <?php echo $insUsuario->listarJornadaUsuarioControlador(); ?>
                     </tbody>
                 </table>
             </div>

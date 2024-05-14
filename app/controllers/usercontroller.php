@@ -309,5 +309,26 @@ class userController extends mainModel
         return $contenido;
 
     }
+
+    public function listarPlanificacionUsuarioControlador():string {
+        $contenido = '';
+
+        $fecha = getdate();
+        $fechaActual = $fecha["year"].str_pad($fecha["mon"], 2, STR_PAD_RIGHT).str_pad($fecha["mday"], 2, STR_PAD_RIGHT);
+
+        $consultaPlanifiacion = "SELECT * FROM planificacion_diaria WHERE empleado = '".$_SESSION["empleado"]."' AND fecha = '$fechaActual'";
+        $consultaPlanifiacion = $this->ejecutarConsulta($consultaPlanifiacion);
+
+        while ($planificacion = $consultaPlanifiacion->fetch(\PDO::FETCH_ASSOC)) {
+            $contenido .= '
+            <tr>
+                <td>'.$planificacion["fecha"].'</td>
+                <td>'.$planificacion["descripcion"].'</td>
+            </tr>
+            ';
+        }
+
+        return $contenido;
+    }
 }
 ?>

@@ -55,12 +55,12 @@
     width: 100px;
 }
 
-.-main-jornada {
+.-main-principal {
     padding: 0 80px;
     overflow: hidden;
 }
 
-.-header-jornada {
+.-header-estructura {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -68,16 +68,16 @@
 }
 
 @media only screen and (max-width: 600px) {
-    .-main-jornada {
+    .-main-principal {
         padding: 0 10px;
     }
 
-    .-header-jornada {
+    .-header-estructura {
         flex-direction: column;
         gap: 25px;
     }
 }
 
-.-main-jornada h2 {
+.-main-principal h2 {
     margin-bottom: 50px;
 }
