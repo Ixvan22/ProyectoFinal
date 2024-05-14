@@ -30,7 +30,7 @@
 
     <div class="-box-package">
         <h5>Localiza tu paquete</h5>
-        <form action="." method="get" class="-box-package-form">
+        <form action="<?php echo APP_URL ?>localizarPaquete" method="post" class="-box-package-form">
             <input type="text" name="localizador" placeholder="Número de seguimiento"/>
             <button type="submit" class="btn btn-dark">Buscar</button>
         </form>

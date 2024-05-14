@@ -330,6 +330,63 @@ class mercanciaController extends mainModel {
 
         return $alerta;
     }
+
+    public function listarMercanciaClienteControlador():string {
+        $contenido = '';
+        $localizador = $this->limpiarCadena($_POST["localizador"]);
+
+        $mercancia = "SELECT * FROM mercancia WHERE localizador = '$localizador'";
+        $mercancia = $this->ejecutarConsulta($mercancia);
+
+        $consultaCliente = "SELECT nombre, apellidos FROM usuarios WHERE dni = '".$mercancia["cliente"]."'";
+        $consultaCliente = $this->ejecutarConsulta($consultaCliente);
+        $consultaCliente = $consultaCliente->fetch(\PDO::FETCH_ASSOC);
+
+        $consultaEstado = "SELECT nombre FROM tipo_estado_mercancia WHERE tipo = '".$mercancia["tipo_estado"]."'";
+        $consultaEstado = $this->ejecutarConsulta($consultaEstado);
+        $consultaEstado = $consultaEstado->fetch(\PDO::FETCH_ASSOC);
+
+        $consultaPeso = "SELECT nombre FROM tipo_peso WHERE tipo = '".$mercancia["tipo_peso"]."'";
+        $consultaPeso = $this->ejecutarConsulta($consultaPeso);
+        $consultaPeso = $consultaPeso->fetch(\PDO::FETCH_ASSOC);
+
+        if ($mercancia->rowCount() == 1) {
+            $mercancia = $mercancia->fetch(\PDO::FETCH_ASSOC);
+            
+            $contenido .= '
+            <div class="-localizar-paquete-card-group">
+                <p class="p-0 m-0 fw-bold">Número de seguimiento: </p>
+                <p class="p-0 m-0">'.$mercancia["localizador"].'</p>
+            </div>
+            <div class="-localizar-paquete-card-group">
+                <p class="p-0 m-0 fw-bold">DNI: </p>
+                <p class="p-0 m-0">'.mb_strtoupper($mercancia["cliente"]).'</p>
+            </div>
+            <div class="-localizar-paquete-card-group">
+                <p class="p-0 m-0 fw-bold">Nombre: </p>
+                <p class="p-0 m-0">'.ucfirst(mb_strtolower($consultaCliente["nombre"])).'</p>
+            </div>
+            <div class="-localizar-paquete-card-group">
+                <p class="p-0 m-0 fw-bold">Apellidos: </p>
+                <p class="p-0 m-0">'.ucfirst(mb_strtolower($consultaCliente["apellidos"])).'</p>
+            </div>
+            <div class="-localizar-paquete-card-group">
+                <p class="p-0 m-0 fw-bold">Estado: </p>
+                <p class="p-0 m-0">'.ucfirst(mb_strtolower($consultaEstado["nombre"])).'</p>
+            </div>
+            <div class="-localizar-paquete-card-group">
+                <p class="p-0 m-0 fw-bold">Peso: </p>
+                <p class="p-0 m-0">'.$mercancia["peso"].' '.mb_strtoupper($consultaPeso["nombre"]).'</p>
+            </div>
+            ';
+        }   
+        else {
+            $contenido = $this->alertController->alertaSimple('error', 'No existe la mercancía');
+        }
+
+        return $contenido;
+
+    }
 }
 
 ?>
