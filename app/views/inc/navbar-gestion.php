@@ -8,11 +8,16 @@ $insUsuario = new \app\controllers\userController();
     <div class="-navbar-links">
         <?php echo $insUsuario->listarUsuarioNavbarControlador($_SESSION["empleado"]); ?>
         <ul class="p-0 my-4">
-            <a href=""><li>Inicio</li></a>
-            <a href=""><li>Link 2</li></a>
+            <a href="<?php echo APP_URL ?>gestionPrincipal"><li>Inicio</li></a>
+            <a href="<?php echo APP_URL ?>vehiculos"><li>Vehículos</li></a>
+            <a href="<?php echo APP_URL ?>mercancia"><li>Mercancía</li></a>
+            <a href="<?php echo APP_URL ?>mercanciaEntregada"><li>Mercancía entregada</li></a>
+            <a href="<?php echo APP_URL ?>trabajadores"><li>Trabajadores</li></a>
+            <a href="<?php echo APP_URL ?>usuarios"><li>Cuentas de usuario</li></a>
+            <a href="<?php echo APP_URL ?>clientes"><li>Clientes</li></a>
         </ul>
         <ul class="p-0 m-0 -navbar-settings">
-            <a href=""><li>Configuración</li></a>
+            <a href="<?php echo APP_URL ?>configuracion"><li>Configuración</li></a>
             <a href="<?php echo APP_URL ?>login"><li>Salir</li></a>
         </ul>
     </div>
