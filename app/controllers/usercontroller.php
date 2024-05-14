@@ -314,7 +314,8 @@ class userController extends mainModel
         $contenido = '';
 
         $fecha = getdate();
-        $fechaActual = $fecha["year"].str_pad($fecha["mon"], 2, STR_PAD_RIGHT).str_pad($fecha["mday"], 2, STR_PAD_RIGHT);
+
+        $fechaActual = $fecha["year"].str_pad($fecha["mon"], 2, 0, STR_PAD_LEFT).str_pad($fecha["mday"], 0, 2, STR_PAD_LEFT);
 
         $consultaPlanifiacion = "SELECT * FROM planificacion_empleados WHERE empleado = '".$_SESSION["empleado"]."' AND fecha = '$fechaActual'";
         $consultaPlanifiacion = $this->ejecutarConsulta($consultaPlanifiacion);

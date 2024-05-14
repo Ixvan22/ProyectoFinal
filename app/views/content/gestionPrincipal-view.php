@@ -54,7 +54,7 @@ if (!isset($_SESSION["empleado"])) header("Location: ".APP_URL.'login');
                                 </div>
                                 <div class="row d-flex align-items-center my-2">
                                     <label class="w-25" for="dni-cliente">DNI:</label>
-                                    <?php echo $insTipos->listarDniClientesControlador() ?>
+                                    <?php echo $insTipos->listarDniEmpleadosControlador() ?>
                                 </div>
                                 <div class="row d-flex align-items-center my-2">
                                     <label class="w-25" for="nueva-planificacion-descripcion">Descripción:</label>

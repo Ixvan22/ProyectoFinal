@@ -117,6 +117,22 @@ class tiposController extends mainModel {
             return $contenido;
         }
 
+    public function listarDniEmpleadosControlador():string {
+        $contenido = '<select class="form-select w-75" name="dni-cliente" id="dni-cliente">
+                        <option selected></option>';
+
+
+        $consultaEmpleado = 'SELECT dni_empleado FROM cuentas_web';
+        $consultaEmpleado = $this->ejecutarConsulta($consultaEmpleado);
+
+        while ($result = $consultaEmpleado->fetch(\PDO::FETCH_ASSOC)) {
+            $contenido .= '<option value="' . $result["dni_empleado"] . '">' . mb_strtoupper($result["dni_empleado"]) . '</option>';
+        }
+        $contenido .= '</select>';
+
+        return $contenido;
+    }
+
         public function listarVehiculoMercancias(string $matricula):string {
             $contenido = '<select class="form-select w-50" id="asignar-mercancia" name="asignar-mercancia">
                             <option selected></option>';
