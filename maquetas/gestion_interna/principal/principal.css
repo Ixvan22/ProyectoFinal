@@ -5,6 +5,12 @@
     justify-content: space-between;
 }
 
+@media only screen and (max-width: 600px) {
+    .-header {
+        padding-left: 10px;
+    }
+}
+
 .-header-location a {
     color: #000000;
     text-decoration: none;
@@ -47,4 +53,31 @@
 
 #btn-workday {
     width: 100px;
+}
+
+.-main-jornada {
+    padding: 0 80px;
+    overflow: hidden;
+}
+
+.-header-jornada {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+@media only screen and (max-width: 600px) {
+    .-main-jornada {
+        padding: 0 10px;
+    }
+
+    .-header-jornada {
+        flex-direction: column;
+        gap: 25px;
+    }
+}
+
+.-main-jornada h2 {
+    margin-bottom: 50px;
 }
