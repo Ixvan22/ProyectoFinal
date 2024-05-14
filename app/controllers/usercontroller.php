@@ -290,5 +290,24 @@ class userController extends mainModel
         }
         return true;
     }
+
+    public function listarJornadaUsuarioControlador():string {
+        $contenido = '';
+
+        $consultaJornada = "SELECT * FROM fecha_jornada WHERE dni = '".$_SESSION["empleado"]."' LIMIT 10";
+        $consultaJornada = $this->ejecutarConsulta($consultaJornada);
+
+        while ($jornada = $consultaJornada->fetch(\PDO::FETCH_ASSOC)) {
+            $contenido .= '
+            <tr>
+                <td>'.$jornada["fecha_jornada"].'</td>
+                <td>'.$jornada["hora_entrada"].'</td>
+                <td>'.$jornada["hora_salida"].'</td>
+            </tr>
+            ';
+        }
+        return $contenido;
+
+    }
 }
 ?>
