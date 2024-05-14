@@ -27,6 +27,39 @@
         <main class="-main-principal">
             <div class="-header-estructura m-0">
                 <h2>Planificación diaria</h2>
+                <div class="-header-buttons">
+                    <div class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal-addPlanificacion">Añadir planificación</div>
+                </div>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="modal-addPlanificacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Nueva planificación</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="." method="post">
+                            <div class="modal-body">
+                                <div class="row d-flex align-items-center my-2">
+                                    <label class="w-25" for="nueva-planificacion-fecha">Fecha:</label>
+                                    <input type="date" class="w-75 form-control" id="nueva-planificacion-fecha" name="nueva-planificacion-fecha" autocomplete="none"/>
+                                </div>
+                                <div class="row d-flex align-items-center my-2">
+                                    <label class="w-25" for="dni-cliente">DNI:</label>
+                                    <input type="text" class="w-75 form-control" id="dni-cliente" name="dni-cliente" autocomplete="none"/>
+                                </div>
+                                <div class="row d-flex align-items-center my-2">
+                                    <label class="w-25" for="nueva-planificacion-descripcion">Descripción:</label>
+                                    <textarea type="text" class="w-75 form-control" id="nueva-planificacion-descripcion" name="nueva-planificacion-descripcion" autocomplete="none"></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-success" name="anadir-mercancia">Añadir</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
 
             <div class="table-responsive mb-5">

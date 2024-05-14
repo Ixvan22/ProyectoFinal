@@ -330,5 +330,60 @@ class userController extends mainModel
 
         return $contenido;
     }
+
+    public function anadirPlanificacionUsuarioControlador():string {
+        $fecha = $this->limpiarCadena($_POST["nueva-planificacion-fecha"]);
+        $dni = $this->limpiarCadena($_POST["dni-cliente"]);
+        $descripcion = $this->limpiarCadena($_POST["nueva-planificacion-descripcion"]);
+
+        // Formato fecha
+        $fecha = str_replace("-", "", $fecha);
+
+        $verificarEmpleado = "SELECT dni_empleado FROM cuentas_web WHERE dni_empleado = '$dni'";
+        $verificarEmpleado = $this->ejecutarConsulta($verificarEmpleado);
+
+        if ($verificarEmpleado->rowCount() == 0) {
+            $alerta = $this->alertController->alertaSimple('error', 'El trabajador no existe / no tiene cuenta');
+            return $alerta;
+        }
+
+        if ($fecha == '') {
+            $alerta = $this->alertController->alertaSimple('error', 'La fecha es obligatoria');
+            return $alerta;
+        }
+
+        if ($descripcion == '') {
+            $alerta = $this->alertController->alertaSimple('error', 'La descripción es obligatoria');
+            return $alerta;
+        }
+
+        $datosPlanificacion = [
+            [
+                "campo_nombre" => "fecha",
+                "campo_marcador" => ":fecha",
+                "campo_valor" => $fecha
+            ],
+            [
+                "campo_nombre" => "empleado",
+                "campo_marcador" => ":empleado",
+                "campo_valor" => $dni
+            ],
+            [
+                "campo_nombre" => "descripcion",
+                "campo_marcador" => ":descripcion",
+                "campo_valor" => $descripcion
+            ]
+        ];
+
+        $anadirPlanificacion = $this->guardarDatos("planificacion_empleados", $datosPlanificacion);
+
+        if ($anadirPlanificacion->rowCount() == 1) {
+            $alerta = $this->alertController->alertaRecargar('success', 'Planificación añadida', APP_URL.'gestionPrincipal');
+        }
+        else {
+            $alerta = $this->alertController->alertaSimple('error', 'Fallo al añadir la planificación');
+        }
+        return $alerta;
+    }
 }
 ?>
