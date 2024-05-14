@@ -51,6 +51,7 @@ img {
     color: #ffffff;
     text-transform: uppercase;
     text-decoration: none;
+    letter-spacing: 2px;
 }
 
 /* Navbar responsive < 800px */

@@ -14,8 +14,7 @@
     </div>
     <div class="-navbar-links">
         <ul class="p-0 m-0">
-            <li><a href="">Inicio</a></li>
-            <li><a href="">Link 2</a></li>
+            <li><a href="<?php echo APP_URL ?>">Inicio</a></li>
         </ul>
     </div>
 </div>
