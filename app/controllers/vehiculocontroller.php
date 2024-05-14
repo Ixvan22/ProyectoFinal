@@ -190,7 +190,7 @@ class vehiculoController extends mainModel {
                 $consultaPesoMercancia = $consultaPesoMercancia->fetch(\PDO::FETCH_ASSOC);
 
                 $contenido .= '
-                                    <div class="row d-flex align-items-center">
+                                    <div class="row d-flex align-items-center my-1">
                                         <h6 class="w-50">'.$consultaMercancia["localizador"].'</h6>
                                         <h6 class="w-25 text-end">'.$consultaMercancia["peso"].' '.$consultaPesoMercancia["nombre"].'</h6>
                                         <a href="'.APP_URL.'vehiculos/eliminarMercanciaVehiculo/'.$vehiculo["matricula"].'/'.$mercanciaVehiculo["localizador"].'" class="w-25 text-end">
