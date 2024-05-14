@@ -60,6 +60,7 @@
 
 <?php
     if (isset($_SESSION["empleado"])) unset($_SESSION["empleado"]);
+    if (isset($_SESSION["cargo_empleado"])) unset($_SESSION["cargo_empleado"]);
     if (isset($_POST['login'])) {
         echo $insLogin->loginUsuarioControlador();
     }

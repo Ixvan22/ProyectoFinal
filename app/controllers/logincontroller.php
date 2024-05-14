@@ -20,6 +20,12 @@ class loginController extends mainModel {
 
                 $_SESSION["empleado"] = $check_usuario["dni_empleado"];
 
+                $consultaTipoEmpleado = "SELECT cargo FROM empleados WHERE dni = '".$check_usuario["dni_empleado"]."'";
+                $consultaTipoEmpleado = $this->ejecutarConsulta($consultaTipoEmpleado);
+                $consultaTipoEmpleado = $consultaTipoEmpleado->fetch(\PDO::FETCH_ASSOC);
+
+                $_SESSION["cargo_empleado"] = $consultaTipoEmpleado["cargo"];
+
                 if (headers_sent()) {
                     return "<script>window.location.href = '".APP_URL."gestionPrincipal';</script>";
                 }
