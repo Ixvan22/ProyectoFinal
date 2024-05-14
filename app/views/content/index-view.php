@@ -17,13 +17,13 @@
     <div id="carouselAutoplaying" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="2000" data-bs-pause="false">
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="https://picsum.photos/id/684/600/400" class="d-block w-100" alt="...">
+                <img src="<?php echo APP_URL ?>app/views/img/carousel1.jpg" class="d-block w-100" alt="Tesseract Solutions">
             </div>
             <div class="carousel-item">
-                <img src="https://picsum.photos/id/237/600/400" class="d-block w-100" alt="...">
+                <img src="<?php echo APP_URL ?>app/views/img/carousel2.jpg" class="d-block w-100" alt="Tesseract Solutions">
             </div>
             <div class="carousel-item">
-                <img src="https://picsum.photos/id/684/600/400" class="d-block w-100" alt="...">
+                <img src="<?php echo APP_URL ?>app/views/img/carousel3.jpg" class="d-block w-100" alt="Tesseract Solutions">
             </div>
         </div>
     </div>
