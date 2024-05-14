@@ -156,6 +156,7 @@ class vehiculoController extends mainModel {
                             <div class="modal-footer">
                                 <a href="'.APP_URL.'vehiculos/eliminarVehiculo/'.$vehiculo["matricula"].'" class="btn btn-danger">Eliminar</a>
                                 <div class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modal-mercanciaAsignada-'.$vehiculo["matricula"].'">Mercancia asignada</div>
+                                <input type="hidden" value="'.$vehiculo["matricula"].'" name="vehiculoMatricula"/>
                                 <button type="submit" class="btn btn-success" name="guardar-estado-vehículo">Guardar cambios</button>
                             </div>
                         </form>
@@ -240,6 +241,106 @@ class vehiculoController extends mainModel {
         }
         else {
             $alerta = $this->alertController->alertaSimple('error', 'La mercancía no está en el vehículo');
+        }
+
+        return $alerta;
+    }
+
+    public function actualizarVehiculoControlador():string {
+        $matricula = $this->limpiarCadena($_POST["vehiculoMatricula"]);
+
+        $verificarVehiculo = "SELECT matricula FROM vehiculos WHERE matricula = '$matricula'";
+        $verificarVehiculo = $this->ejecutarConsulta($verificarVehiculo);
+
+        $actualizarVehiculo = [];
+        $actualizarTransporte = [];
+        $updateTransporte = false;
+        
+        if ($verificarVehiculo->rowCount() == 1) {
+            if (isset($_POST["asignar-mercancia"]) && $_POST["asignar-mercancia"] != '') {
+                $mercancia = $this->limpiarCadena($_POST["asignar-mercancia"]);
+
+                $verificarMercancia = "SELECT localizador FROM mercancia WHERE localizador = '$mercancia'";
+                $verificarMercancia = $this->ejecutarConsulta($verificarMercancia);
+
+                if ($verificarMercancia->rowCount() == 1) {
+
+                    $actualizarTransporte[] = [
+                        "campo_nombre" => "localizador",
+                        "campo_marcador" => ":localizador",
+                        "campo_valor" => $mercancia
+                    ];
+
+                    $consultaTransporteMercancia = "SELECT matricula FROM transporte_mercancia WHERE localizador = '$mercancia'";
+                    $consultaTransporteMercancia = $this->ejecutarConsulta($consultaTransporteMercancia);
+
+                    if ($consultaTransporteMercancia->rowCount() == 0) {
+                        $insertarTransporte = $this->guardarDatos("transporte_mercancia", $actualizarTransporte);
+
+                        if ($insertarTransporte->rowCount() == 0) {
+                            $alerta = $this->alertController->alertaSimple('error', 'No se pudo asignar la mercancía');
+                            return $alerta;
+                        }
+                    }
+                    
+                    $transporteActualizado = $this->actualizarDatos("transporte_mercancia", $actualizarTransporte, "localizador = '".$mercancia."'");
+
+                    $updateTransporte = true;
+
+                    if ($transporteActualizado->rowCount() == 0) {
+                        $alerta = $this->alertController->alertaSimple('error', 'No se pudo asignar la mercancía');
+                        return $alerta;
+                    }
+                }
+                else {
+                    $alerta = $this->alertController->alertaSimple('error', 'No existe la mercancía');
+                    return $alerta;
+                }
+            }
+
+            if (isset($_POST["vehiculo-tipo-estado"]) && $_POST["vehiculo-tipo-estado"] != "") {
+                $tipo = $this->limpiarCadena($_POST["vehiculo-tipo-estado"]);
+
+                $verificarTipo = "SELECT tipo FROM tipo_estado_vehiculo WHERE tipo = '$tipo'";
+                $verificarTipo = $this->ejecutarConsulta($tipo);
+
+                if ($verificarTipo->rowCount() == 1) {
+                    $verificarTipoDistinto = "SELECT tipo_peso FROM vehiculos WHERE matricula = '$matricula'";
+                    $verificarTipoDistinto = $this->ejecutarConsulta($verificarTipoDistinto);
+                    $verificarTipoDistinto = $verificarTipoDistinto->fetch(\PDO::FETCH_ASSOC);
+
+                    if ($verificarTipoDistinto != $tipo) {
+                        $actualizarVehiculo[] = [
+                            "campo_nombre" => "tipo_peso",
+                            "campo_marcador" => ":tipo_peso",
+                            "campo_valor" => $tipo
+                        ];
+
+                        $actualizarVehiculo = $this->actualizarDatos("vehiculos", $actualizarVehiculo, "matricula = '$matricula'");
+
+                        if ($actualizarVehiculo->rowCount() == 1) {
+                            $alerta = $this->alertController->alertaRecargar('success', 'Vehículo actualizado', APP_URL.'vehiculos');
+                            return $alerta;
+                        }
+                        else {
+                            if ($updateTransporte) {
+                                $alerta = $this->alertController->alertaRecargar('warning', 'No se pudo actualizar el vehículo. La mercancía se actualizó', APP_URL.'vehiculos');
+                                return $alerta;
+                            }
+                            $alerta = $this->alertController->alertaSimple('error', 'Fallo al actualizar el vehículo');
+                            return $alerta;
+                        }
+                    }
+                }
+                else {
+                    $alerta = $this->alertController->alertaSimple('error', 'El estado es incorrecto');
+                    return $alerta;
+                }
+            }
+
+        }
+        else {
+            $alerta = $this->alertController->alertaSimple('error', 'No existe el vehículo');
         }
 
         return $alerta;
