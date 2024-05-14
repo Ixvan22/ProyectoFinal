@@ -282,15 +282,14 @@ class vehiculoController extends mainModel {
                             return $alerta;
                         }
                     }
-                    
-                    $transporteActualizado = $this->actualizarDatos("transporte_mercancia", $actualizarTransporte, "localizador = '".$mercancia."'");
-
-                    $updateTransporte = true;
-
-                    if ($transporteActualizado->rowCount() == 0) {
-                        $alerta = $this->alertController->alertaSimple('error', 'No se pudo asignar la mercancía');
-                        return $alerta;
+                    else {
+                        $transporteActualizado = $this->actualizarDatos("transporte_mercancia", $actualizarTransporte, "localizador = '".$mercancia."'");
+                        if ($transporteActualizado->rowCount() == 0) {
+                            $alerta = $this->alertController->alertaSimple('error', 'No se pudo asignar la mercancía');
+                            return $alerta;
+                        }
                     }
+                    $updateTransporte = true;
                 }
                 else {
                     $alerta = $this->alertController->alertaSimple('error', 'No existe la mercancía');
