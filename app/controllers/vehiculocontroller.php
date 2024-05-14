@@ -266,17 +266,23 @@ class vehiculoController extends mainModel {
                 if ($verificarMercancia->rowCount() == 1) {
 
                     $actualizarTransporte[] = [
-                        "campo_nombre" => "localizador",
-                        "campo_marcador" => ":localizador",
-                        "campo_valor" => $mercancia
+                        "campo_nombre" => "matricula",
+                        "campo_marcador" => ":matricula",
+                        "campo_valor" => $matricula
                     ];
 
                     $consultaTransporteMercancia = "SELECT matricula FROM transporte_mercancia WHERE localizador = '$mercancia'";
                     $consultaTransporteMercancia = $this->ejecutarConsulta($consultaTransporteMercancia);
 
                     if ($consultaTransporteMercancia->rowCount() == 0) {
-                        $insertarTransporte = $this->guardarDatos("transporte_mercancia", $actualizarTransporte);
 
+                        $actualizarTransporte[] = [
+                            "campo_nombre" => "localizador",
+                            "campo_marcador" => ":localizador",
+                            "campo_valor" => $mercancia
+                        ];
+
+                        $insertarTransporte = $this->guardarDatos("transporte_mercancia", $actualizarTransporte);
                         if ($insertarTransporte->rowCount() == 0) {
                             $alerta = $this->alertController->alertaSimple('error', 'No se pudo asignar la mercancía');
                             return $alerta;
@@ -301,7 +307,7 @@ class vehiculoController extends mainModel {
                 $tipo = $this->limpiarCadena($_POST["vehiculo-tipo-estado"]);
 
                 $verificarTipo = "SELECT tipo FROM tipo_estado_vehiculo WHERE tipo = '$tipo'";
-                $verificarTipo = $this->ejecutarConsulta($tipo);
+                $verificarTipo = $this->ejecutarConsulta($verificarTipo);
 
                 if ($verificarTipo->rowCount() == 1) {
                     $verificarTipoDistinto = "SELECT tipo_peso FROM vehiculos WHERE matricula = '$matricula'";
@@ -314,27 +320,31 @@ class vehiculoController extends mainModel {
                             "campo_marcador" => ":tipo_peso",
                             "campo_valor" => $tipo
                         ];
-
-                        $actualizarVehiculo = $this->actualizarDatos("vehiculos", $actualizarVehiculo, "matricula = '$matricula'");
-
-                        if ($actualizarVehiculo->rowCount() == 1) {
-                            $alerta = $this->alertController->alertaRecargar('success', 'Vehículo actualizado', APP_URL.'vehiculos');
-                            return $alerta;
-                        }
-                        else {
-                            if ($updateTransporte) {
-                                $alerta = $this->alertController->alertaRecargar('warning', 'No se pudo actualizar el vehículo. La mercancía se actualizó', APP_URL.'vehiculos');
-                                return $alerta;
-                            }
-                            $alerta = $this->alertController->alertaSimple('error', 'Fallo al actualizar el vehículo');
-                            return $alerta;
-                        }
                     }
                 }
                 else {
                     $alerta = $this->alertController->alertaSimple('error', 'El estado es incorrecto');
                     return $alerta;
                 }
+            }
+            if (count($actualizarVehiculo) > 0) {
+                $actualizarVehiculo = $this->actualizarDatos("vehiculos", $actualizarVehiculo, "matricula = '$matricula'");
+
+                if ($actualizarVehiculo->rowCount() == 1) {
+                    $alerta = $this->alertController->alertaRecargar('success', 'Vehículo actualizado', APP_URL . 'vehiculos');
+                    return $alerta;
+                } else {
+                    if ($updateTransporte) {
+                        $alerta = $this->alertController->alertaRecargar('warning', 'No se pudo actualizar el vehículo. La mercancía se actualizó', APP_URL . 'vehiculos');
+                        return $alerta;
+                    }
+                    $alerta = $this->alertController->alertaSimple('error', 'Fallo al actualizar el vehículo');
+                    return $alerta;
+                }
+            }
+            if ($updateTransporte) {
+                $alerta = $this->alertController->alertaRecargar('success', 'Mercancía añadida', APP_URL . 'vehiculos');
+                return $alerta;
             }
 
         }
