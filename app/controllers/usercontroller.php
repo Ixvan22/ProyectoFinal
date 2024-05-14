@@ -294,7 +294,7 @@ class userController extends mainModel
     public function listarJornadaUsuarioControlador():string {
         $contenido = '';
 
-        $consultaJornada = "SELECT * FROM fecha_jornada WHERE dni = '".$_SESSION["empleado"]."' LIMIT 10";
+        $consultaJornada = "SELECT * FROM jornada_empleados WHERE dni_empleado = '".$_SESSION["empleado"]."' LIMIT 10";
         $consultaJornada = $this->ejecutarConsulta($consultaJornada);
 
         while ($jornada = $consultaJornada->fetch(\PDO::FETCH_ASSOC)) {
@@ -316,7 +316,7 @@ class userController extends mainModel
         $fecha = getdate();
         $fechaActual = $fecha["year"].str_pad($fecha["mon"], 2, STR_PAD_RIGHT).str_pad($fecha["mday"], 2, STR_PAD_RIGHT);
 
-        $consultaPlanifiacion = "SELECT * FROM planificacion_diaria WHERE empleado = '".$_SESSION["empleado"]."' AND fecha = '$fechaActual'";
+        $consultaPlanifiacion = "SELECT * FROM planificacion_empleados WHERE empleado = '".$_SESSION["empleado"]."' AND fecha = '$fechaActual'";
         $consultaPlanifiacion = $this->ejecutarConsulta($consultaPlanifiacion);
 
         while ($planificacion = $consultaPlanifiacion->fetch(\PDO::FETCH_ASSOC)) {
