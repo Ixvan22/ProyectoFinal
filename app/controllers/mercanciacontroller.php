@@ -338,21 +338,22 @@ class mercanciaController extends mainModel {
         $mercancia = "SELECT * FROM mercancia WHERE localizador = '$localizador'";
         $mercancia = $this->ejecutarConsulta($mercancia);
 
-        $consultaCliente = "SELECT nombre, apellidos FROM usuarios WHERE dni = '".$mercancia["cliente"]."'";
-        $consultaCliente = $this->ejecutarConsulta($consultaCliente);
-        $consultaCliente = $consultaCliente->fetch(\PDO::FETCH_ASSOC);
-
-        $consultaEstado = "SELECT nombre FROM tipo_estado_mercancia WHERE tipo = '".$mercancia["tipo_estado"]."'";
-        $consultaEstado = $this->ejecutarConsulta($consultaEstado);
-        $consultaEstado = $consultaEstado->fetch(\PDO::FETCH_ASSOC);
-
-        $consultaPeso = "SELECT nombre FROM tipo_peso WHERE tipo = '".$mercancia["tipo_peso"]."'";
-        $consultaPeso = $this->ejecutarConsulta($consultaPeso);
-        $consultaPeso = $consultaPeso->fetch(\PDO::FETCH_ASSOC);
-
         if ($mercancia->rowCount() == 1) {
             $mercancia = $mercancia->fetch(\PDO::FETCH_ASSOC);
-            
+
+            $consultaCliente = "SELECT nombre, apellidos FROM usuarios WHERE dni = '".$mercancia["cliente"]."'";
+            $consultaCliente = $this->ejecutarConsulta($consultaCliente);
+            $consultaCliente = $consultaCliente->fetch(\PDO::FETCH_ASSOC);
+
+            $consultaEstado = "SELECT nombre FROM tipo_estado_mercancia WHERE tipo = '".$mercancia["tipo_estado"]."'";
+            $consultaEstado = $this->ejecutarConsulta($consultaEstado);
+            $consultaEstado = $consultaEstado->fetch(\PDO::FETCH_ASSOC);
+
+            $consultaPeso = "SELECT nombre FROM tipo_peso WHERE tipo = '".$mercancia["tipo_peso"]."'";
+            $consultaPeso = $this->ejecutarConsulta($consultaPeso);
+            $consultaPeso = $consultaPeso->fetch(\PDO::FETCH_ASSOC);
+
+
             $contenido .= '
             <div class="-localizar-paquete-card-group">
                 <p class="p-0 m-0 fw-bold">Número de seguimiento: </p>
@@ -381,7 +382,7 @@ class mercanciaController extends mainModel {
             ';
         }   
         else {
-            $contenido = $this->alertController->alertaSimple('error', 'No existe la mercancía');
+            $contenido = "<h4 class='text-center'>No existe mercancía con el localizador: $localizador</h4>";
         }
 
         return $contenido;
