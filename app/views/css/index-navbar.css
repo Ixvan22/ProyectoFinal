@@ -60,11 +60,15 @@ img {
         display: none;
     }
 
+    .-navbar-top-logo img {
+        display: none;
+    }
+
     .-navbar-icon i {
         font-size: 20px;
         cursor: pointer;
         color: #ffffff;
-        background-color: red;
+        background-color: #292c37;
         border-bottom-right-radius: 8px;
     }
 
@@ -79,7 +83,7 @@ img {
         padding: 20px;
         position: fixed;
         top: 0;
-        left: 30%;
+        left: 60%;
     }
 
     .-navbar-hidden {
@@ -89,10 +93,10 @@ img {
     .-navbar {
         position: fixed;
         top: 0;
-        width: 30%;
+        width: 60%;
         height: 100%;
 
-        background-color: red;
+        background-color: #cccccc;
         clip-path: none;
     }
 
@@ -108,5 +112,14 @@ img {
         flex-direction: column;
         justify-content: center;
         gap: 20px;
+    }
+
+    .-navbar-top {
+        margin-top: 50px;
+        height: auto;
+    }
+
+    .-navbar-top-contact {
+        flex-direction: column;
     }
 }
