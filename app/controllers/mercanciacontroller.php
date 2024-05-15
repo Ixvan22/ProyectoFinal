@@ -388,6 +388,40 @@ class mercanciaController extends mainModel {
         return $contenido;
 
     }
+
+    public function listarMercanciaEntregadaControlador():string {
+        $contenido = '';
+
+        $consultaMercancia = "SELECT * FROM mercancia WHERE tipo_estado = '5'";
+        $consultaMercancia = $this->ejecutarConsulta($consultaMercancia);
+
+        while ($mercancia = $consultaMercancia->fetch(\PDO::FETCH_ASSOC)) {
+            $vehiculo = "SELECT matricula FROM transporte_mercancia WHERE localizador = '".$mercancia["localizador"]."'";
+            $vehiculo = $this->ejecutarConsulta($vehiculo);
+            $vehiculo = $vehiculo->fetch(\PDO::FETCH_ASSOC);
+
+            $tipoPeso = "SELECT nombre FROM tipo_peso WHERE tipo = '".$mercancia["tipo_peso"]."'";
+            $tipoPeso = $this->ejecutarConsulta($tipoPeso);
+            $tipoPeso = $tipoPeso->fetch(\PDO::FETCH_ASSOC);
+
+            $contenido .= '
+                <div class="col-12">
+                    <div class="-card-mercancia-entregada py-3 px-1">
+                        <h5 class="p-0 m-0" id="card-mercancia-entregada-localizador">Localizador: '.$mercancia["localizador"].'</h5>
+                        <div class="card-mercancia-entregada-datos">
+                            <p class="p-0 m-0">Vehículo: <span id="mercancia-entregada-datos-vehiculo">'.$vehiculo["matricula"].'</span></p>
+                            <p class="p-0 m-0">Cliente: <span id="mercancia-entregada-datos-cliente">'.$mercancia["cliente"].'</span></p>
+                            <p class="p-0 m-0">Peso: <span id="mercancia-entregada-datos-peso">'.$mercancia["peso"].'</span> 
+                            <span id="mercancia-entregada-datos-peso-tipo">'.mb_strtoupper($tipoPeso["nombre"]).'</span></p>
+                        </div>
+                    </div>
+                </div>
+            ';
+        }
+
+
+        return $contenido;
+    }
 }
 
 ?>
