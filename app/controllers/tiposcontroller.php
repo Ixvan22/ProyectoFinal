@@ -60,7 +60,7 @@ class tiposController extends mainModel {
         $contenido = '<select class="form-select w-75" id="vehiculo-tipo-estado" name="vehiculo-tipo-estado">>
                         <option selected></option>';
 
-        $consultaVehiculos = 'SELECT * FROM tipo_estado_mercancia ORDER BY tipo';
+        $consultaVehiculos = 'SELECT * FROM tipo_estado_vehiculo ORDER BY tipo';
         $consultaVehiculos = $this->ejecutarConsulta($consultaVehiculos);
 
         while ($result = $consultaVehiculos->fetch(\PDO::FETCH_ASSOC)) {
