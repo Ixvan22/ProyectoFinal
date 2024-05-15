@@ -205,13 +205,13 @@ class userController extends mainModel
             if (in_array($empleado['dni'], $consultaCuentas)) {
                 $contenido .= '<td class="d-flex"><a href="'.APP_URL.'trabajadores/eliminarCuenta/'.$empleado["dni"].'" 
                 class="btn btn-danger mx-2">Eliminar trabajador</a>
-                <a href="" class="btn btn-success mx-2">Editar</a></td></td>';
+                <a href="'.APP_URL.'configuracion/'.$empleado["dni"].'" class="btn btn-success mx-2">Editar</a></td></td>';
             }
             else {
                 $contenido .= '<td class="d-flex"><a href="'.APP_URL.'trabajadores/anadirCuenta/'.$empleado["dni"].'" 
                 class="btn btn-secondary">Crear cuenta</a>
                 <a href="'.APP_URL.'trabajadores/eliminarEmpleado/'.$empleado["dni"].'" class="btn btn-danger mx-2">Eliminar trabajador</a>
-                <a href="" class="btn btn-success mx-2">Editar</a></td></td>';
+                <a href="'.APP_URL.'configuracion/'.$empleado["dni"].'" class="btn btn-success mx-2">Editar</a></td></td>';
             }
             $contenido .= '</tr>';
         }
