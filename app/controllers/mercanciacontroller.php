@@ -204,11 +204,29 @@ class mercanciaController extends mainModel {
                 return $alerta;
             }
 
-            $actualizarTransporteMercancia[] = [
+            $comprobarVehiculo = "SELECT matricula FROM transporte_mercancia WHERE localizador = '$localizador'";
+            $comprobarVehiculo = $this->ejecutarConsulta($comprobarVehiculo);
+
+            if ($comprobarVehiculo->rowCount() == 1) {
+                $comprobarVehiculo = $comprobarVehiculo->fetch(\PDO::FETCH_ASSOC);
+                if ($comprobarVehiculo["matricula"] != $vehiculo) {
+                    $actualizarTransporteMercancia[] = [
+                        "campo_nombre" => "matricula",
+                        "campo_marcador" => ":matricula",
+                        "campo_valor" => $vehiculo
+                    ];
+                }
+            }
+            else {
+                $actualizarTransporteMercancia[] = [
                     "campo_nombre" => "matricula",
                     "campo_marcador" => ":matricula",
                     "campo_valor" => $vehiculo
                 ];
+            }
+
+
+  
         }
 
         if (isset($_POST["dni-cliente"]) && $_POST["dni-cliente"] != "") {
