@@ -56,15 +56,22 @@ class tiposController extends mainModel {
         return $contenido;
     }
 
-    public function listarVehiculosControlador():string {
-        $contenido = '<select class="form-select w-75" id="vehiculo-tipo-estado" name="vehiculo-tipo-estado">>
-                        <option selected></option>';
+    public function listarVehiculosControlador(string $estado = null):string {
+        $contenido = '<select class="form-select w-75" id="vehiculo-tipo-estado" name="vehiculo-tipo-estado">';
+         if (is_null($estado)) {
+             $contenido .= '<option selected></option>';
+         }
 
         $consultaVehiculos = 'SELECT * FROM tipo_estado_vehiculo ORDER BY tipo';
         $consultaVehiculos = $this->ejecutarConsulta($consultaVehiculos);
 
         while ($result = $consultaVehiculos->fetch(\PDO::FETCH_ASSOC)) {
-            $contenido .= '<option value="'.$result["tipo"].'">'.ucfirst(mb_strtolower($result["nombre"])).'</option>';
+            if (!is_null($estado) && $result["tipo"] == $estado) {
+                $contenido .= '<option selected value="'.$result["tipo"].'">'.ucfirst(mb_strtolower($result["nombre"])).'</option>';
+            }
+            else {
+                $contenido .= '<option value="'.$result["tipo"].'">'.ucfirst(mb_strtolower($result["nombre"])).'</option>';
+            }
         }
         $contenido .= '</select>';
 
@@ -133,12 +140,13 @@ class tiposController extends mainModel {
         return $contenido;
     }
 
-        public function listarVehiculoMercancias(string $matricula):string {
+        public function listarVehiculoMercancias(string $matricula, string $tipo_peso):string {
             $contenido = '<select class="form-select w-50" id="asignar-mercancia" name="asignar-mercancia">
                             <option selected></option>';
 
             $consultaMercancia = "SELECT localizador FROM mercancia WHERE localizador NOT IN 
-                                    (SELECT DISTINCT localizador FROM transporte_mercancia WHERE matricula = '".$matricula."')";
+                                    (SELECT DISTINCT localizador FROM transporte_mercancia WHERE matricula = '".$matricula."')
+                                    AND tipo_peso = '".$tipo_peso."'";
             $consultaMercancia = $this->ejecutarConsulta($consultaMercancia);
             while ($result = $consultaMercancia->fetch(\PDO::FETCH_ASSOC)) {
                 $contenido .= '<option value="'.$result["localizador"].'">'.$result["localizador"].'</option>';

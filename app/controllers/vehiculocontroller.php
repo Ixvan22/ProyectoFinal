@@ -143,12 +143,12 @@ class vehiculoController extends mainModel {
                                     <div class="row d-flex align-items-center">
                                         <label class="w-50" for="asignar-mercancia">Añadir mercancia:</label>';
             
-            $contenido .= $insTipos->listarVehiculoMercancias($vehiculo["matricula"]);
+            $contenido .= $insTipos->listarVehiculoMercancias($vehiculo["matricula"], $vehiculo["tipo_peso"]);
 
             $contenido .= '     </div>
                                     <div class="row d-flex align-items-center my-2">
                                         <label class="w-25" for="vehiculo-tipo-estado">Estado:</label>
-                                        '.$insTipos->listarVehiculosControlador().'
+                                        '.$insTipos->listarVehiculosControlador($vehiculo["tipo_estado"]).'
                                     </div>
 
                                 </div>
@@ -247,9 +247,13 @@ class vehiculoController extends mainModel {
     }
 
     public function actualizarVehiculoControlador():string {
+        clearstatcache();
         $matricula = $this->limpiarCadena($_POST["vehiculoMatricula"]);
 
-        $verificarVehiculo = "SELECT matricula FROM vehiculos WHERE matricula = '$matricula'";
+        // Alerta por defecto en caso de que no se actualice nada
+        $alerta = $this->alertController->alertaSimple('error', 'No hay nada nuevo que actualizar');
+
+        $verificarVehiculo = "SELECT matricula, carga_util, tipo_peso FROM vehiculos WHERE matricula = '$matricula'";
         $verificarVehiculo = $this->ejecutarConsulta($verificarVehiculo);
 
         $actualizarVehiculo = [];
@@ -260,10 +264,27 @@ class vehiculoController extends mainModel {
             if (isset($_POST["asignar-mercancia"]) && $_POST["asignar-mercancia"] != '') {
                 $mercancia = $this->limpiarCadena($_POST["asignar-mercancia"]);
 
-                $verificarMercancia = "SELECT localizador FROM mercancia WHERE localizador = '$mercancia'";
+                $verificarMercancia = "SELECT localizador, peso, tipo_peso FROM mercancia WHERE localizador = '$mercancia'";
                 $verificarMercancia = $this->ejecutarConsulta($verificarMercancia);
 
                 if ($verificarMercancia->rowCount() == 1) {
+
+                    $verificarMercancia = $verificarMercancia->fetch(\PDO::FETCH_ASSOC);
+                    $verificarVehiculo = $verificarVehiculo->fetch(\PDO::FETCH_ASSOC);
+                    if ($verificarMercancia["tipo_peso"] != $verificarVehiculo["tipo_peso"]) {
+                        $alerta = $this->alertController->alertaSimple('error', 'El tipo de la mercancia no correspone con el vehículo');
+                        return $alerta;
+                    }
+
+                    $sumaPeso = "SELECT SUM(peso) FROM mercancia WHERE localizador IN 
+                                      (SELECT localizador FROM transporte_mercancia WHERE matricula = '$matricula')";
+                    $sumaPeso = $this->ejecutarConsulta($sumaPeso);
+                    $sumaPeso = $sumaPeso->fetch(\PDO::FETCH_NUM);
+
+                    if ($verificarMercancia["peso"] + $sumaPeso[0] > $verificarVehiculo["carga_util"]) {
+                        $alerta = $this->alertController->alertaSimple('error', 'La mercancía excede de la carga útil del vehículo');
+                        return $alerta;
+                    }
 
                     $actualizarTransporte[] = [
                         "campo_nombre" => "matricula",
@@ -310,14 +331,14 @@ class vehiculoController extends mainModel {
                 $verificarTipo = $this->ejecutarConsulta($verificarTipo);
 
                 if ($verificarTipo->rowCount() == 1) {
-                    $verificarTipoDistinto = "SELECT tipo_peso FROM vehiculos WHERE matricula = '$matricula'";
+                    $verificarTipoDistinto = "SELECT tipo_estado FROM vehiculos WHERE matricula = '$matricula'";
                     $verificarTipoDistinto = $this->ejecutarConsulta($verificarTipoDistinto);
                     $verificarTipoDistinto = $verificarTipoDistinto->fetch(\PDO::FETCH_ASSOC);
 
-                    if ($verificarTipoDistinto != $tipo) {
+                    if ($verificarTipoDistinto["tipo_estado"] != $tipo) {
                         $actualizarVehiculo[] = [
-                            "campo_nombre" => "tipo_peso",
-                            "campo_marcador" => ":tipo_peso",
+                            "campo_nombre" => "tipo_estado",
+                            "campo_marcador" => ":tipo_estado",
                             "campo_valor" => $tipo
                         ];
                     }
