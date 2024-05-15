@@ -14,7 +14,8 @@ btnWorkday.addEventListener('click', e => {
         workdayEnd.innerHTML = '--:--:--';
         botonIniciar();
 
-        data.push([date.toLocaleDateString(), date.toLocaleTimeString()]);
+        data.push(["" + date.getFullYear() +  (date.getMonth() + 1).toString().padStart(2, '0') + date.getDate().toString().padStart(2, '0'),
+            date.toLocaleTimeString()]);
         localStorage.setItem('workday', JSON.stringify(data));
     }
     else if (btnWorkday.value == 'stop') {
@@ -23,7 +24,8 @@ btnWorkday.addEventListener('click', e => {
 
         // Enviar datos a php
         data = JSON.parse(localStorage.getItem('workday'));
-        data.push([date.toLocaleDateString(), date.toLocaleTimeString()]);
+        data.push(["" + date.getFullYear() +  (date.getMonth() + 1).toString().padStart(2, '0') + date.getDate().toString().padStart(2, '0'),
+            date.toLocaleTimeString()]);
         data = JSON.stringify(data);
         enviarDatos(data);
         localStorage.removeItem('workday');
@@ -69,7 +71,6 @@ function botonFinalizar() {
 
 
 function enviarDatos(data) {
-    
     const headers = new Headers();
 
     const config = {

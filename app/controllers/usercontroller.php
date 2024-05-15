@@ -294,13 +294,17 @@ class userController extends mainModel
     public function listarJornadaUsuarioControlador():string {
         $contenido = '';
 
-        $consultaJornada = "SELECT * FROM jornada_empleados WHERE dni_empleado = '".$_SESSION["empleado"]."' LIMIT 10";
+        $consultaJornada = "SELECT * FROM jornada_empleados WHERE dni_empleado = '".$_SESSION["empleado"]."' ORDER BY fecha_jornada DESC LIMIT 10";
         $consultaJornada = $this->ejecutarConsulta($consultaJornada);
 
         while ($jornada = $consultaJornada->fetch(\PDO::FETCH_ASSOC)) {
+            $fecha = substr($jornada["fecha_jornada"], 6, 2)."/".
+                substr($jornada["fecha_jornada"], 4, 2)."/".
+                substr($jornada["fecha_jornada"], 0, 4);
+
             $contenido .= '
             <tr>
-                <td>'.$jornada["fecha_jornada"].'</td>
+                <td>'.$fecha.'</td>
                 <td>'.$jornada["hora_entrada"].'</td>
                 <td>'.$jornada["hora_salida"].'</td>
             </tr>
