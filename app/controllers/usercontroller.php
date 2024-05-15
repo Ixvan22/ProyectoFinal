@@ -321,9 +321,12 @@ class userController extends mainModel
         $consultaPlanifiacion = $this->ejecutarConsulta($consultaPlanifiacion);
 
         while ($planificacion = $consultaPlanifiacion->fetch(\PDO::FETCH_ASSOC)) {
+            $fecha = substr($planificacion["fecha"], 6, 2)."/".
+                substr($planificacion["fecha"], 4, 2)."/".
+                substr($planificacion["fecha"], 0, 4);
             $contenido .= '
             <tr>
-                <td>'.$planificacion["fecha"].'</td>
+                <td>'.$fecha.'</td>
                 <td>'.$planificacion["descripcion"].'</td>
             </tr>
             ';
