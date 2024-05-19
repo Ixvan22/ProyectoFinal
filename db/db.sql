@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 07-05-2024 a las 23:50:20
+-- Tiempo de generación: 19-05-2024 a las 16:23:17
 -- Versión del servidor: 8.0.36-0ubuntu0.22.04.1
 -- Versión de PHP: 8.1.2-1ubuntu2.14
 
@@ -31,6 +31,7 @@ CREATE TABLE `cuentas_web` (
   `dni_empleado` varchar(9) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `password` varchar(255) COLLATE utf8mb4_spanish2_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+
 
 -- --------------------------------------------------------
 
@@ -100,6 +101,14 @@ CREATE TABLE `tipo_cargo` (
   `nombre` varchar(40) COLLATE utf8mb4_spanish2_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
+--
+-- Volcado de datos para la tabla `tipo_cargo`
+--
+
+INSERT INTO `tipo_cargo` (`tipo`, `nombre`) VALUES
+(1, 'ADMINISTRADOR'),
+(2, 'TRANSPORTISTA');
+
 -- --------------------------------------------------------
 
 --
@@ -110,6 +119,17 @@ CREATE TABLE `tipo_estado_mercancia` (
   `tipo` int NOT NULL,
   `nombre` varchar(40) COLLATE utf8mb4_spanish2_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `tipo_estado_mercancia`
+--
+
+INSERT INTO `tipo_estado_mercancia` (`tipo`, `nombre`) VALUES
+(1, 'En almacén'),
+(2, 'Pendiente de recogida'),
+(3, 'En tránsito'),
+(4, 'En reparto'),
+(5, 'Entregado');
 
 -- --------------------------------------------------------
 
@@ -122,6 +142,16 @@ CREATE TABLE `tipo_estado_vehiculo` (
   `nombre` varchar(40) COLLATE utf8mb4_spanish2_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
+--
+-- Volcado de datos para la tabla `tipo_estado_vehiculo`
+--
+
+INSERT INTO `tipo_estado_vehiculo` (`tipo`, `nombre`) VALUES
+(1, 'En almacén'),
+(2, 'Cargando mercancía'),
+(3, 'En punto de recogida'),
+(4, 'Listo');
+
 -- --------------------------------------------------------
 
 --
@@ -132,6 +162,14 @@ CREATE TABLE `tipo_peso` (
   `tipo` int NOT NULL,
   `nombre` varchar(40) COLLATE utf8mb4_spanish2_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `tipo_peso`
+--
+
+INSERT INTO `tipo_peso` (`tipo`, `nombre`) VALUES
+(1, 'KG'),
+(2, 'L');
 
 -- --------------------------------------------------------
 
@@ -158,6 +196,7 @@ CREATE TABLE `usuarios` (
   `correo` varchar(80) COLLATE utf8mb4_spanish2_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
+
 -- --------------------------------------------------------
 
 --
@@ -170,6 +209,7 @@ CREATE TABLE `vehiculos` (
   `tipo_peso` int NOT NULL,
   `tipo_estado` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+
 
 -- --------------------------------------------------------
 
@@ -218,7 +258,7 @@ ALTER TABLE `mercancia`
 -- Indices de la tabla `planificacion_empleados`
 --
 ALTER TABLE `planificacion_empleados`
-  ADD PRIMARY KEY (`fecha`,`empleado`),
+  ADD PRIMARY KEY (`fecha`,`empleado`,`descripcion`),
   ADD KEY `fk-planificacion-empleado` (`empleado`);
 
 --
@@ -274,6 +314,22 @@ ALTER TABLE `vehiculos_empleados`
   ADD KEY `fk-vehiculo-empleado` (`vehiculo`);
 
 --
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `mercancia`
+--
+ALTER TABLE `mercancia`
+  MODIFY `localizador` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `transporte_mercancia`
+--
+ALTER TABLE `transporte_mercancia`
+  MODIFY `localizador` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
 -- Restricciones para tablas volcadas
 --
 
@@ -300,7 +356,7 @@ ALTER TABLE `jornada_empleados`
 --
 ALTER TABLE `mercancia`
   ADD CONSTRAINT `fk-cliente-mercancia` FOREIGN KEY (`cliente`) REFERENCES `usuarios` (`dni`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  ADD CONSTRAINT `fk-tipo-estado-mercancia` FOREIGN KEY (`tipo_estado`) REFERENCES `tipo_estado_mercancia` (`tipo`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `fk-tipo-estado-mercancia` FOREIGN KEY (`tipo_estado`) REFERENCES `tipo_estado_mercancia` (`tipo`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk-tipo-peso-mercancia` FOREIGN KEY (`tipo_peso`) REFERENCES `tipo_peso` (`tipo`);
 
 --
