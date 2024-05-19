@@ -38,7 +38,7 @@ if (!isset($_SESSION["empleado"])) header("Location: ".APP_URL.'login');
 
                 <?php
 
-                    if (isset($url[1]) && $url[1] != '') {
+                    if (isset($url[1]) && $url[1] != '' && $_SESSION["cargo_empleado"] == 1) {
                         echo $insConfig->listarFormConfigControlador($url[1]);
                     }
                     else {
@@ -55,7 +55,7 @@ if (!isset($_SESSION["empleado"])) header("Location: ".APP_URL.'login');
 
     
     if (isset($_POST["editUsuario"])) {
-        if (isset($url[1])) {
+        if (isset($url[1]) && $_SESSION["cargo_empleado"] == 1) {
             echo $insConfig->editarUsuarioControlador($url[1]);
         }
         else {
