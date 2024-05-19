@@ -28,7 +28,9 @@ if (!isset($_SESSION["empleado"])) header("Location: ".APP_URL.'login');
                 <h2>Trabajadores</h2>
                 <div class="-header-buttons">
                     <a href="<?php echo APP_URL?>usuarios" class="btn btn-secondary">Cuentas de usuario</a>
+                    <?php if ($_SESSION["cargo_empleado"] == 1) { ?>
                     <div class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal-addUsers">Añadir trabajador</div>
+                    <?php } ?>
                 </div>
             </div>
             <!-- Modal -->

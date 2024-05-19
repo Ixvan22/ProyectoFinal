@@ -28,7 +28,9 @@ if (!isset($_SESSION["empleado"])) header("Location: ".APP_URL.'login');
             <div class="-header-clientes">
                 <h2>Clientes</h2>
                 <div class="-header-buttons">
+                    <?php if ($_SESSION["cargo_empleado"] == 1) { ?>
                     <div class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal-addClientes">Añadir cliente</div>
+                    <?php } ?>
                 </div>
             </div>
             <!-- Modal -->

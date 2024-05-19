@@ -35,7 +35,9 @@ if (!isset($_SESSION["empleado"])) header("Location: ".APP_URL.'login');
             <div class="-header-estructura m-0">
                 <h2>Planificación diaria</h2>
                 <div class="-header-buttons">
+                    <?php if ($_SESSION["cargo_empleado"] == 1) { ?>
                     <div class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal-addPlanificacion">Añadir planificación</div>
+                    <?php } ?>
                 </div>
             </div>
             <!-- Modal -->

@@ -29,7 +29,9 @@ if (!isset($_SESSION["empleado"])) header("Location: ".APP_URL.'login');
                 <h2>Mis vehículos</h2>
                 <div class="-header-buttons">
                     <a href="" class="btn btn-secondary">Filtros?</a>
+                    <?php if ($_SESSION["cargo_empleado"] == 1) { ?>
                     <div class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal-addVehiculo">Añadir vehículo</div>
+                    <?php } ?>
                 </div>
             </div>
             <!-- Modal -->
