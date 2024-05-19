@@ -32,38 +32,16 @@ if (!isset($_SESSION["empleado"])) header("Location: ".APP_URL.'login');
                     </div>
                 </div>
 
-                <div class="row d-flex align-items-center my-2 flex-column flex-md-row">
-                    <label class="w-25" for="edit-trabajador-dni">DNI:</label>
-                    <input type="text" class="w-75 form-control" id="edit-trabajador-dni" name="edit-trabajador-dni" autocomplete="none"/>
-                </div>
-                <div class="row d-flex align-items-center my-2 flex-column flex-md-row">
-                    <label class="w-25" for="edit-trabajador-nombre">Nombre:</label>
-                    <input type="text" class="w-75 form-control" id="edit-trabajador-nombre" name="edit-trabajador-nombre" autocomplete="none"/>
-                </div>
-                <div class="row d-flex align-items-center my-2 flex-column flex-md-row">
-                    <label class="w-25" for="edit-trabajador-apellidos">Apellidos:</label>
-                    <input type="text" class="w-75 form-control" id="edit-trabajador-apellidos" name="edit-trabajador-apellidos" autocomplete="none"/>
-                </div>
-                <div class="row d-flex align-items-center my-2 flex-column flex-md-row">
-                    <label class="w-25" for="edit-trabajador-telefono">Teléfono:</label>
-                    <input type="number" class="w-75 form-control" id="edit-trabajador-telefono" name="edit-trabajador-telefono" autocomplete="none"/>
-                </div>
-                <div class="row d-flex align-items-center my-2 flex-column flex-md-row">
-                    <label class="w-25" for="edit-trabajador-correo">Correo:</label>
-                    <input type="email" class="w-75 form-control" id="edit-trabajador-correo" name="edit-trabajador-correo" autocomplete="none"/>
-                </div>
-                <div class="row d-flex align-items-center my-2 flex-column flex-md-row">
-                    <label class="w-25" for="edit-trabajador-cargo">Cargo:</label>
-                    <?php echo $insTipos->listarCargosControlador() ?>
-                </div>
-                <div class="row d-flex align-items-center my-2 flex-column flex-md-row">
-                    <label class="w-25" for="edit-trabajador-fecha-nacimiento">Fecha nacimiento:</label>
-                    <input type="date" class="w-75 form-control" id="edit-trabajador-fecha-nacimiento" name="edit-trabajador-fecha-nacimiento" autocomplete="none"/>
-                </div>
-                <div class="row d-flex align-items-center my-2 flex-column flex-md-row">
-                    <label class="w-25" for="edit-trabajador-fecha-inicio">Fecha inicio empresa:</label>
-                    <input type="date" class="w-75 form-control" id="edit-trabajador-fecha-inicio" name="edit-trabajador-fecha-inicio" autocomplete="none"/>
-                </div>
+                <?php
+
+                    if (isset($url[1]) && $url[1] != '') {
+                        echo $insConfig->listarFormConfigControlador($url[1]);
+                    }
+                    else {
+                        echo $insConfig->listarFormConfigControlador($_SESSION["empleado"]);
+                    }
+                ?>
+
             </form>
         </main>
     </div>
