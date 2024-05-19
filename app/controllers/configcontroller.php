@@ -6,7 +6,6 @@ use app\controllers\tiposController;
 
 class configController extends mainModel {
     public function editarUsuarioControlador(string $usuario):string {
-        $dni = $this->limpiarCadena($_POST["edit-trabajador-dni"]);
         $nombre = $this->limpiarCadena($_POST["edit-trabajador-nombre"]);
         $apellidos = $this->limpiarCadena($_POST["edit-trabajador-apellidos"]);
         $telefono = $this->limpiarCadena($_POST["edit-trabajador-telefono"]);
@@ -14,10 +13,11 @@ class configController extends mainModel {
         $fecha_nacimiento = $this->limpiarCadena($_POST["edit-trabajador-fecha-nacimiento"]);
         $fecha_inicio = $this->limpiarCadena($_POST["edit-trabajador-fecha-inicio"]);
         $cargo = $this->limpiarCadena($_POST["trabajador-cargo"]);
+        $password = $this->limpiarCadena($_POST["edit-trabajador-password"]);
 
 
         // Verificar usuario
-        $verificarUsuario = "SELECT dni FROM empleados WHERE dni = '$usuario'";
+        $verificarUsuario = "SELECT * FROM empleados WHERE dni = '$usuario'";
         $verificarUsuario = $this->ejecutarConsulta($verificarUsuario);
 
         if ($verificarUsuario->rowCount() == 0) {
@@ -25,9 +25,11 @@ class configController extends mainModel {
             return $alerta;
         }
 
+        $verificarUsuario = $verificarUsuario->fetch(\PDO::FETCH_ASSOC);
+
         $datosUsuario = [];
 
-        if ($nombre != '') {
+        if ($nombre != $verificarUsuario["nombre"]) {
             $datosUsuario[] = [
                 "campo_nombre" => "nombre",
                 "campo_marcador" => ":nombre",
@@ -35,7 +37,7 @@ class configController extends mainModel {
             ];
         }
 
-        if ($apellidos != '') {
+        if ($apellidos != $verificarUsuario["apellidos"]) {
             $datosUsuario[] = [
                 "campo_nombre" => "apellidos",
                 "campo_marcador" => ":apellidos",
@@ -43,7 +45,7 @@ class configController extends mainModel {
             ];
         }
 
-        if ($telefono != '') {
+        if ($telefono != $verificarUsuario["telefono"]) {
             if (!$this->verificarDatos('[67]{1}[0-9]{8}', $telefono)) {
                 $alerta = $this->alertController->alertaSimple('error', 'El teléfono no es válido');
                 return $alerta;
@@ -55,7 +57,7 @@ class configController extends mainModel {
             ];
         }
 
-        if ($correo != '') {
+        if ($correo != $verificarUsuario["correo"]) {
             $datosUsuario[] = [
                 "campo_nombre" => "correo",
                 "campo_marcador" => ":correo",
@@ -64,8 +66,8 @@ class configController extends mainModel {
 
         }
 
-        if ($fecha_nacimiento != '') {
-            $fecha_nacimiento = str_replace("-", "", $fecha_nacimiento);
+        $fecha_nacimiento = str_replace("-", "", $fecha_nacimiento);
+        if ($fecha_nacimiento != $verificarUsuario["fecha_nacimiento"]) {
             $datosUsuario[] = [
                 "campo_nombre" => "fecha_nacimiento",
                 "campo_marcador" => ":fecha_nacimiento",
@@ -73,8 +75,8 @@ class configController extends mainModel {
             ];
         }
 
-        if ($fecha_inicio != '') {
-            $fecha_inicio = str_replace("-", "", $fecha_inicio);
+        $fecha_inicio = str_replace("-", "", $fecha_inicio);
+        if ($fecha_inicio != $verificarUsuario["fecha_inicio_empresa"]) {
             $datosUsuario[] = [
                 "campo_nombre" => "fecha_inicio_empresa",
                 "campo_marcador" => ":fecha_inicio_empresa",
@@ -82,7 +84,7 @@ class configController extends mainModel {
             ];
         }
 
-        if ($cargo != '') {
+        if ($cargo != $verificarUsuario["cargo"]) {
             $verificarCargo = "SELECT tipo FROM tipo_cargo where tipo = '$cargo'";
             $verificarCargo = $this->ejecutarConsulta($verificarCargo);
     
@@ -98,15 +100,39 @@ class configController extends mainModel {
             ];
         }
 
-        $actualizarUser = $this->actualizarDatos('empleados', $datosUsuario, 'dni = "'.$usuario.'"');
+        $datosCuentaUsuario = [];
+        if ($password != '') {
+            $password = password_hash($password, PASSWORD_BCRYPT, ["cost" => 10]);
+            $datosCuentaUsuario[] = [
+                    "campo_nombre" => "password",
+                    "campo_marcador" => ":password",
+                    "campo_valor" => $password
+                ];
 
-        if ($actualizarUser->rowCount() == 1) {
-            if (isset($dni) && $dni != '') $usuario = $dni;
-            $alerta = $this->alertController->alertaRecargar('success', 'Usuario actualizado', APP_URL.'configuracion/'.$usuario);
-
-        } else {
-            $alerta = $this->alertController->alertaSimple('error', 'Error al actualizar el usuario');
+            $actualizarPassword = $this->actualizarDatos("cuentas_web", $datosCuentaUsuario, 'dni_empleado = "'.$usuario.'"');
         }
+
+        if (count($datosUsuario) <= 0 && count($datosCuentaUsuario) <= 0) {
+            $alerta = $this->alertController->alertaSimple('error', 'No se ha seleccionado nada para actualizar');
+            return $alerta;
+        }
+
+        if (count($datosCuentaUsuario) > 0) {
+            if ($actualizarPassword->rowCount() == 1) {
+                $alerta = $this->alertController->alertaRecargar('success', 'Contraseña actualizada', APP_URL.'configuracion/'.$usuario);
+            }
+        }
+
+        if (count($datosUsuario) > 0) {
+            $actualizarUser = $this->actualizarDatos('empleados', $datosUsuario, 'dni = "'.$usuario.'"');
+            if ($actualizarUser->rowCount() == 1) {
+                $alerta = $this->alertController->alertaRecargar('success', 'Usuario actualizado', APP_URL.'configuracion/'.$usuario);
+
+            } else {
+                $alerta = $this->alertController->alertaSimple('error', 'Error al actualizar el usuario');
+            }
+        }
+
 
         return $alerta;
     }
@@ -170,6 +196,18 @@ class configController extends mainModel {
                     name="edit-trabajador-fecha-inicio" autocomplete="none" value="'.$fecha_inicio_empresa.'"/>
                 </div>
         ';
+
+        $verificarCuenta = "SELECT * FROM cuentas_web WHERE dni_empleado = '".$usuario["dni"]."'";
+        $verificarCuenta = $this->ejecutarConsulta($verificarCuenta);
+        if ($verificarCuenta->rowCount() == 1) {
+            $contenido .= '
+                <div class="row d-flex align-items-center my-2 flex-column flex-md-row">
+                    <label class="w-25" for="edit-trabajador-password">Contraseña:</label>
+                    <input type="password" class="w-75 form-control" id="edit-trabajador-password" 
+                    name="edit-trabajador-password" autocomplete="none"/>
+                </div>
+            ';
+        }
 
         return $contenido;
     }

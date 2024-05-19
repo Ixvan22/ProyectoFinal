@@ -24,7 +24,11 @@ if (!isset($_SESSION["empleado"])) header("Location: ".APP_URL.'login');
             </div>
         </header>
         <main class="-main-configuracion">
+            <?php if (isset($url[1]) && $url[1] != '') { ?>
+            <form action="<?php echo APP_URL ?>configuracion/<?php echo $url[1] ?>" method="post">
+            <?php } else { ?>
             <form action="<?php echo APP_URL ?>configuracion" method="post">
+            <?php } ?>
                 <div class="-header-configuracion">
                     <h2>Configuración</h2>
                     <div class="-header-buttons">
