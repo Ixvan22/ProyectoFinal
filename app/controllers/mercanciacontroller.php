@@ -245,7 +245,7 @@ class mercanciaController extends mainModel {
         return $alerta;
     } 
 
-    public function eliminarMercanciaControlador (string $localizador) {
+    public function eliminarMercanciaControlador(string $localizador):string {
         $consultaMercancia = "SELECT localizador FROM mercancia WHERE localizador = '$localizador'";
         $consultaMercancia = $this->ejecutarConsulta($consultaMercancia);
 

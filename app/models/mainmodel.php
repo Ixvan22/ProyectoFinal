@@ -42,7 +42,7 @@ class mainModel {
         return $array;
     }
 
-    public function limpiarCadena($cadena) {
+    public function limpiarCadena(string $cadena):string {
         $palabras = ["<script>","</script>","<script src","<script type=",
         "SELECT * FROM","SELECT "," SELECT ","DELETE FROM","INSERT INTO","DROP TABLE",
         "DROP DATABASE","TRUNCATE TABLE","SHOW TABLES","SHOW DATABASES","<?php","?>",
@@ -61,7 +61,7 @@ class mainModel {
         return $cadena;
     }
 
-    protected function verificarDatos($filtro, $cadena) {
+    protected function verificarDatos(string $filtro, string $cadena):bool {
         if (preg_match("/^".$filtro."$/", $cadena)) {
             return true;
         }
@@ -70,7 +70,7 @@ class mainModel {
         }
     }
 
-    public function guardarDatos($tabla, $datos) {
+    public function guardarDatos(string $tabla, array $datos) {
         $consulta = "INSERT INTO $tabla (";
 
         $C = 0;
@@ -101,7 +101,7 @@ class mainModel {
         return $sql;
     }
 
-    public function actualizarDatos($tabla, $datos, $condicion) {
+    public function actualizarDatos(string $tabla, array $datos, string $condicion) {
         $consulta = "UPDATE $tabla SET ";
     
         $C = 0;

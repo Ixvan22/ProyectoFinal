@@ -4,7 +4,7 @@ namespace app\controllers;
 use app\models\mainModel;
 
 class clienteController extends mainModel {
-    public function anadirClienteControlador() {
+    public function anadirClienteControlador():string {
         $dni = $this->limpiarCadena($_POST["nuevo-cliente-dni"]);
         $nombre = $this->limpiarCadena($_POST["nuevo-cliente-nombre"]);
         $apellidos = $this->limpiarCadena($_POST["nuevo-cliente-apellidos"]);
@@ -104,7 +104,7 @@ class clienteController extends mainModel {
         return $contenido;
     }
 
-    public function eliminarClienteControlador (string $dni) {
+    public function eliminarClienteControlador (string $dni):string {
         $consultaCliente = "SELECT dni FROM usuarios WHERE dni = '$dni'";
         $consultaCliente = $this->ejecutarConsulta($consultaCliente);
 

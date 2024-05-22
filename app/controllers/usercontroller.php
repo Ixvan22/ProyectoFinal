@@ -151,7 +151,7 @@ class userController extends mainModel
         return $alerta;
     }
 
-    public function eliminarCuentaControlador (string $dni, bool $empleado) {
+    public function eliminarCuentaControlador (string $dni, bool $empleado):string {
         // Verificar cuenta web
         $consultaCuenta = "SELECT dni_empleado FROM cuentas_web WHERE dni_empleado = '$dni'";
         $consultaCuenta = $this->ejecutarConsulta($consultaCuenta);

@@ -4,7 +4,7 @@ namespace app\controllers;
 use app\models\mainModel;
 
 class vehiculoController extends mainModel {
-    public function anadirVehiculoControlador() {
+    public function anadirVehiculoControlador():string {
         $matricula = $this->limpiarCadena($_POST["nuevo-vehiculo-matricula"]);
         $cargaUtil = $this->limpiarCadena($_POST["nuevo-vehiculo-carga"]);
         $tipoPeso = $this->limpiarCadena($_POST["tipo-peso"]);
@@ -206,7 +206,7 @@ class vehiculoController extends mainModel {
         return $contenido;
     }
 
-    public function eliminarVehiculoControlador (string $matricula) {
+    public function eliminarVehiculoControlador (string $matricula):string {
         $consultaVehiculos = "SELECT matricula FROM vehiculos WHERE matricula = '$matricula'";
         $consultaVehiculos = $this->ejecutarConsulta($consultaVehiculos);
 
@@ -226,7 +226,7 @@ class vehiculoController extends mainModel {
         return $alerta;
     }
 
-    public function eliminarMercanciaVehiculo(string $vehiculo, string $localizador) {
+    public function eliminarMercanciaVehiculo(string $vehiculo, string $localizador):string {
         $consultaMercancia = "SELECT localizador FROM transporte_mercancia WHERE localizador = '$localizador' AND matricula = '$vehiculo'";
         $consultaMercancia = $this->ejecutarConsulta($consultaMercancia);
 
