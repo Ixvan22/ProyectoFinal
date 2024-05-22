@@ -1,1 +1,5 @@
 Paleta: https://paletadecolores.com.mx/paleta/000000/9f111b/b11623/292c37/cccccc/
+
+Restante:
+Interfaz principal
+Asignar vehículo a transportista
