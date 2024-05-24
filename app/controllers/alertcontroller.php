@@ -3,8 +3,9 @@
 namespace app\controllers;
 
 class alertController {
-    public function alertaRecargar (string $icono, string $titulo, string $url):string {
-        $alerta = "
+  // Mosstrar alerta y recargar hacia una url
+  public function alertaRecargar(string $icono, string $titulo, string $url): string {
+    $alerta = "
         <script>
             Swal.fire({
                 position: 'center',
@@ -19,11 +20,12 @@ class alertController {
               });
         </script>
         ";
-        return $alerta;
-    }
+    return $alerta;
+  }
 
-    public function alertaSimple (string $icono, string $titulo):string {
-        $alerta = "
+  // Mostrar alerta simple
+  public function alertaSimple(string $icono, string $titulo): string {
+    $alerta = "
         <script>
         Swal.fire({
             position: 'top-end',
@@ -34,7 +36,6 @@ class alertController {
           });
         </script>
         ";
-        return $alerta;
-    }
-
+    return $alerta;
+  }
 }

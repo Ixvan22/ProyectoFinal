@@ -56,6 +56,7 @@ class mercanciaController extends mainModel {
             return $alerta;
         }
 
+        // Datos para insertar mercancía
         $datosMercancia = [
             [
                 "campo_nombre" => "cliente",
@@ -96,6 +97,7 @@ class mercanciaController extends mainModel {
         return $alerta;
     }
 
+    // Método para listar mercancia
     public function listarMercanciaControlador():string {
         $contenido = '';
 
@@ -176,6 +178,7 @@ class mercanciaController extends mainModel {
         return $contenido;
     }
 
+    // Método para actualizar datos de la mercancía
     public function actualizarMercanciaControlador():string {
         $localizador = $this->limpiarCadena($_POST["mercanciaLocalizador"]);
 
@@ -245,6 +248,7 @@ class mercanciaController extends mainModel {
         return $alerta;
     } 
 
+    // Método para eliminar una mercancía
     public function eliminarMercanciaControlador(string $localizador):string {
         $consultaMercancia = "SELECT localizador FROM mercancia WHERE localizador = '$localizador'";
         $consultaMercancia = $this->ejecutarConsulta($consultaMercancia);
@@ -265,6 +269,7 @@ class mercanciaController extends mainModel {
         return $alerta;
     }
 
+    // Método que utilizan los clientes para listar una mercancia según el localizador
     public function listarMercanciaClienteControlador():string {
         $contenido = '';
         $localizador = $this->limpiarCadena($_POST["localizador"]);
@@ -323,6 +328,7 @@ class mercanciaController extends mainModel {
 
     }
 
+    // Método para listar mercancía ya entregada
     public function listarMercanciaEntregadaControlador():string {
         $contenido = '';
 

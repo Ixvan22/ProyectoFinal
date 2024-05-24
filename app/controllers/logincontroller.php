@@ -18,12 +18,14 @@ class loginController extends mainModel {
 
             if ($check_usuario["dni_empleado"] == $dni && password_verify($clave, $check_usuario["password"])) {
 
+                // Variable de sesión para mantener la sesión iniciada
                 $_SESSION["empleado"] = $check_usuario["dni_empleado"];
 
                 $consultaTipoEmpleado = "SELECT cargo FROM empleados WHERE dni = '".$check_usuario["dni_empleado"]."'";
                 $consultaTipoEmpleado = $this->ejecutarConsulta($consultaTipoEmpleado);
                 $consultaTipoEmpleado = $consultaTipoEmpleado->fetch(\PDO::FETCH_ASSOC);
-
+                
+                // Variable de sesión para conocer el cargo del empleado
                 $_SESSION["cargo_empleado"] = $consultaTipoEmpleado["cargo"];
 
                 if (headers_sent()) {

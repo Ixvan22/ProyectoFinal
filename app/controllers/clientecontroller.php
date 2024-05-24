@@ -4,7 +4,9 @@ namespace app\controllers;
 use app\models\mainModel;
 
 class clienteController extends mainModel {
+    // Método para añadir clientes
     public function anadirClienteControlador():string {
+        // Recoger datos
         $dni = $this->limpiarCadena($_POST["nuevo-cliente-dni"]);
         $nombre = $this->limpiarCadena($_POST["nuevo-cliente-nombre"]);
         $apellidos = $this->limpiarCadena($_POST["nuevo-cliente-apellidos"]);
@@ -33,6 +35,7 @@ class clienteController extends mainModel {
             return $alerta;
         }
 
+        // Datos a insertar
         $datosCliente = [
             [
                 "campo_nombre" => "dni",
@@ -64,22 +67,16 @@ class clienteController extends mainModel {
         $anadirCliente = $this->guardarDatos("usuarios", $datosCliente);
 
         if ($anadirCliente->rowCount() == 1) {
-            if (isset($_POST["anadir-mercancia"])) {
-                return true;
-            }
             $alerta = $this->alertController->alertaRecargar('success', 'Cliente añadido', APP_URL.'clientes');
             
-
         } else {
-            if (isset($_POST["anadir-mercancia"])) {
-                return false;
-            }
             $alerta = $this->alertController->alertaSimple('error', 'Error al añadir el cliente');
         }
 
         return $alerta;
     }
 
+    // Método para listar clientes
     public function listarClientesControlador():string {
         $contenido = '';
 
@@ -104,6 +101,7 @@ class clienteController extends mainModel {
         return $contenido;
     }
 
+    // Método para eliminar clientes
     public function eliminarClienteControlador (string $dni):string {
         $consultaCliente = "SELECT dni FROM usuarios WHERE dni = '$dni'";
         $consultaCliente = $this->ejecutarConsulta($consultaCliente);
@@ -124,6 +122,7 @@ class clienteController extends mainModel {
         return $alerta;
     }
 
+    // Método para listar clientes en vista mercancia
     public function listarClientesMercanciaControlador():string {
         $contenido = '<select class="form-select w-75" name="mercancia-cliente-existente" id="mercancia-cliente-existente">
                         <option selected></option>';

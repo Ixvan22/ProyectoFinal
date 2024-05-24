@@ -19,18 +19,21 @@ class mainModel {
         $this->alertController = new alertController();
     }
 
+    // Método para conectarse a la base de datos
     protected function conectar():PDO {
         $conexion = new PDO("mysql:host=".$this->server.";dbname=".$this->db, $this->user, $this->pass);
         $conexion->exec("SET CHARACTER SET utf8");
         return $conexion;
     }
 
+    // Método para ejecutar consulta
     public function ejecutarConsulta(string $consulta) {
         $sql = $this->conectar()->prepare($consulta);
         $sql->execute();
         return $sql;
     }
 
+    // Método para ejecutar consulta y pasarlo a un array con solo el primer campo
     public function consultaToArrayUnico(string $consulta):array {
         $array = [];
         $sql = $this->conectar()->prepare($consulta);
@@ -42,6 +45,7 @@ class mainModel {
         return $array;
     }
 
+    // Método para limpiar cadenas y prevenir SQLInjection
     public function limpiarCadena(string $cadena):string {
         $palabras = ["<script>","</script>","<script src","<script type=",
         "SELECT * FROM","SELECT "," SELECT ","DELETE FROM","INSERT INTO","DROP TABLE",
@@ -61,6 +65,7 @@ class mainModel {
         return $cadena;
     }
 
+    // Método para comprobar patrones
     protected function verificarDatos(string $filtro, string $cadena):bool {
         if (preg_match("/^".$filtro."$/", $cadena)) {
             return true;
@@ -70,6 +75,7 @@ class mainModel {
         }
     }
 
+    // Método para insertar datos en la base de datos
     public function guardarDatos(string $tabla, array $datos) {
         $consulta = "INSERT INTO $tabla (";
 
@@ -101,6 +107,7 @@ class mainModel {
         return $sql;
     }
 
+    // Método para actualizar datos en la base de datos
     public function actualizarDatos(string $tabla, array $datos, string $condicion) {
         $consulta = "UPDATE $tabla SET ";
     
@@ -123,8 +130,6 @@ class mainModel {
     
         return $sql;
     }
-
-
 }
 
 ?>

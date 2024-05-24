@@ -4,6 +4,7 @@ namespace app\controllers;
 use app\models\mainModel;
 
 class vehiculoController extends mainModel {
+    // Método para añadir vehículos
     public function anadirVehiculoControlador():string {
         $matricula = $this->limpiarCadena($_POST["nuevo-vehiculo-matricula"]);
         $cargaUtil = $this->limpiarCadena($_POST["nuevo-vehiculo-carga"]);
@@ -50,6 +51,7 @@ class vehiculoController extends mainModel {
             return $alerta;
         }
 
+        // Datos del vehículo a insertar
         $datosVehiculo = [
             [
                 "campo_nombre" => "matricula",
@@ -86,6 +88,7 @@ class vehiculoController extends mainModel {
         return $alerta;
     }
 
+    // Método para listar vehículos
     public function listarVehiculosControlador():string {
         $contenido = '';
 
@@ -206,6 +209,7 @@ class vehiculoController extends mainModel {
         return $contenido;
     }
 
+    // Método para eliminar un vehículo
     public function eliminarVehiculoControlador (string $matricula):string {
         $consultaVehiculos = "SELECT matricula FROM vehiculos WHERE matricula = '$matricula'";
         $consultaVehiculos = $this->ejecutarConsulta($consultaVehiculos);
@@ -226,6 +230,7 @@ class vehiculoController extends mainModel {
         return $alerta;
     }
 
+    // Método para eliminar mercancía de un vehículo
     public function eliminarMercanciaVehiculo(string $vehiculo, string $localizador):string {
         $consultaMercancia = "SELECT localizador FROM transporte_mercancia WHERE localizador = '$localizador' AND matricula = '$vehiculo'";
         $consultaMercancia = $this->ejecutarConsulta($consultaMercancia);
@@ -246,7 +251,9 @@ class vehiculoController extends mainModel {
         return $alerta;
     }
 
+    // Método para actualizar vehículo
     public function actualizarVehiculoControlador():string {
+        // Borrrado de caché, por si se actualiza la mercancía varias veces
         clearstatcache();
         $matricula = $this->limpiarCadena($_POST["vehiculoMatricula"]);
 

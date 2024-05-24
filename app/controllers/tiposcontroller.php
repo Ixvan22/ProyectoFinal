@@ -4,6 +4,7 @@ namespace app\controllers;
 use app\models\mainModel;
 
 class tiposController extends mainModel {
+    // Método para listar cargos
     public function listarCargosControlador(string $cargo = null):string {
         $contenido = '<select class="form-select w-75" id="trabajador-cargo" name="trabajador-cargo" autocomplete="none">';
         if (is_null($cargo)) $contenido .= '<option selected value="default"></option>';
@@ -23,7 +24,8 @@ class tiposController extends mainModel {
 
         return $contenido;
     }
-
+    
+    // Método para listar pesos
     public function listarPesosControlador():string {
         $contenido = '<select class="form-select w-25" name="tipo-peso" id="tipo-peso">';
 
@@ -38,6 +40,7 @@ class tiposController extends mainModel {
         return $contenido;
     }
 
+    // Método para listar tipos de estado de la mercancía
     public function listarMercanciaControlador(int $tipo = null):string{
         $contenido = '<select class="form-select w-75" name="mercancia-tipo-estado" id="mercancia-tipo-estado">';
 
@@ -61,6 +64,7 @@ class tiposController extends mainModel {
         return $contenido;
     }
 
+    // Método para listar tipo de estado de los vehículos
     public function listarVehiculosControlador(string $estado = null):string {
         $contenido = '<select class="form-select w-75" id="vehiculo-tipo-estado" name="vehiculo-tipo-estado">';
          if (is_null($estado)) {
@@ -83,7 +87,7 @@ class tiposController extends mainModel {
         return $contenido;
     }
 
-
+    // Método para listar las matriculas de los vehículos
     public function listarMatriculasVehiculosControlador(string $vehiculo = null):string{
         $contenido = '<select class="form-select w-75" name="matricula-vehiculo" id="matricula-vehiculo">';
 
@@ -107,28 +111,30 @@ class tiposController extends mainModel {
         return $contenido;
     }
 
-        public function listarDniClientesControlador(string $dni = null):string {
-            $contenido = '<select class="form-select w-75" name="dni-cliente" id="dni-cliente">';
+    // Método para listar DNI de clientes
+    public function listarDniClientesControlador(string $dni = null):string {
+        $contenido = '<select class="form-select w-75" name="dni-cliente" id="dni-cliente">';
 
-            if (is_null($dni)) {
-                $contenido .= '<option selected></option>';
-            }
-
-            $consultaCliente = 'SELECT dni FROM usuarios ORDER BY nombre';
-            $consultaCliente = $this->ejecutarConsulta($consultaCliente);
-
-            while ($result = $consultaCliente->fetch(\PDO::FETCH_ASSOC)) {
-                if (!is_null($dni) && $result["dni"] == $dni) {
-                    $contenido .= '<option selected value="' . $result["dni"] . '">' . mb_strtoupper($result["dni"]) . '</option>';
-                } else {
-                    $contenido .= '<option value="' . $result["dni"] . '">' . mb_strtoupper($result["dni"]) . '</option>';
-                }
-            }
-            $contenido .= '</select>';
-
-            return $contenido;
+        if (is_null($dni)) {
+            $contenido .= '<option selected></option>';
         }
 
+        $consultaCliente = 'SELECT dni FROM usuarios ORDER BY nombre';
+        $consultaCliente = $this->ejecutarConsulta($consultaCliente);
+
+        while ($result = $consultaCliente->fetch(\PDO::FETCH_ASSOC)) {
+            if (!is_null($dni) && $result["dni"] == $dni) {
+                $contenido .= '<option selected value="' . $result["dni"] . '">' . mb_strtoupper($result["dni"]) . '</option>';
+            } else {
+                $contenido .= '<option value="' . $result["dni"] . '">' . mb_strtoupper($result["dni"]) . '</option>';
+            }
+        }
+        $contenido .= '</select>';
+
+        return $contenido;
+    }
+
+    // Método para listar DNI de empleados
     public function listarDniEmpleadosControlador():string {
         $contenido = '<select class="form-select w-75" name="dni-cliente" id="dni-cliente">
                         <option selected></option>';
@@ -145,23 +151,22 @@ class tiposController extends mainModel {
         return $contenido;
     }
 
-        public function listarVehiculoMercancias(string $matricula, string $tipo_peso):string {
-            $contenido = '<select class="form-select w-50" id="asignar-mercancia" name="asignar-mercancia">
-                            <option selected></option>';
+    // Método para listar mercancias que no lleve un vehículo y que sean de su tipo de peso
+    public function listarVehiculoMercancias(string $matricula, string $tipo_peso):string {
+        $contenido = '<select class="form-select w-50" id="asignar-mercancia" name="asignar-mercancia">
+                        <option selected></option>';
 
-            $consultaMercancia = "SELECT localizador FROM mercancia WHERE localizador NOT IN 
-                                    (SELECT DISTINCT localizador FROM transporte_mercancia WHERE matricula = '".$matricula."')
-                                    AND tipo_peso = '".$tipo_peso."'";
-            $consultaMercancia = $this->ejecutarConsulta($consultaMercancia);
-            while ($result = $consultaMercancia->fetch(\PDO::FETCH_ASSOC)) {
-                $contenido .= '<option value="'.$result["localizador"].'">'.$result["localizador"].'</option>';
-            }
-            $contenido .= '</select>';
-
-            return $contenido;
+        $consultaMercancia = "SELECT localizador FROM mercancia WHERE localizador NOT IN 
+                                (SELECT DISTINCT localizador FROM transporte_mercancia WHERE matricula = '".$matricula."')
+                                AND tipo_peso = '".$tipo_peso."'";
+        $consultaMercancia = $this->ejecutarConsulta($consultaMercancia);
+        while ($result = $consultaMercancia->fetch(\PDO::FETCH_ASSOC)) {
+            $contenido .= '<option value="'.$result["localizador"].'">'.$result["localizador"].'</option>';
         }
+        $contenido .= '</select>';
 
-
+        return $contenido;
+    }
 }
 
 ?>

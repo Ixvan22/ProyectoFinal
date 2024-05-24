@@ -3,9 +3,8 @@
 namespace app\controllers;
 use app\models\mainModel;
 
-class userController extends mainModel
-{
-    // Controlador para anadir usuarios
+class userController extends mainModel {
+    // Método para añadir usuarios
     public function anadirUsuarioControlador():string {
         $dni = $this->limpiarCadena($_POST["nuevo-trabajador-dni"]);
         $nombre = $this->limpiarCadena($_POST["nuevo-trabajador-nombre"]);
@@ -52,7 +51,7 @@ class userController extends mainModel
             return $alerta;
         }
 
-
+        // Datos para insertar el usuario
         $datosUsuario = [
             [
                 "campo_nombre" => "dni",
@@ -112,6 +111,7 @@ class userController extends mainModel
         return $alerta;
     }
 
+    // Método para añadir cuentas web
     public function anadirCuentaControlador (string $dni) {
         $verificarCuenta = "SELECT dni_empleado FROM cuentas_web WHERE dni_empleado = '$dni'";
         $verificarCuenta = $this->ejecutarConsulta($verificarCuenta);
@@ -151,6 +151,7 @@ class userController extends mainModel
         return $alerta;
     }
 
+    // Método para eliminar empleados y cuentas
     public function eliminarCuentaControlador (string $dni, bool $empleado):string {
         // Verificar cuenta web
         $consultaCuenta = "SELECT dni_empleado FROM cuentas_web WHERE dni_empleado = '$dni'";
@@ -184,6 +185,7 @@ class userController extends mainModel
 
     }
 
+    // Método para listar empleados
     public function listarUsuariosControlador():string {
         $contenido = '';
 
@@ -219,6 +221,7 @@ class userController extends mainModel
         return $contenido;
     }
 
+    // Método para listar cuentas web
     public function listarCuentasControlador():string {
         $contenido = '';
 
@@ -246,6 +249,7 @@ class userController extends mainModel
         return $contenido;
     }
 
+    // Método para listar encabezado navbar
     public function listarUsuarioNavbarControlador(string $dni):string {
 
         $consultaUsuario = "SELECT nombre, cargo FROM empleados where dni = '$dni'";
@@ -261,6 +265,7 @@ class userController extends mainModel
         return $contenido;
     }
 
+    // Método para añadir jornada de un usuario, usa ajax/jorandaajax.php y workday.js
     public function anadirJornadaControlador(array $horaInicio, array $horaFin, string $dni):bool {
         $datosJornada = [
             [
@@ -291,6 +296,7 @@ class userController extends mainModel
         return true;
     }
 
+    // Método para listar jornadas de un empleado
     public function listarJornadaUsuarioControlador():string {
         $contenido = '';
 
@@ -314,6 +320,7 @@ class userController extends mainModel
 
     }
 
+    // Método para listar planificación de los empleados el día actual
     public function listarPlanificacionUsuarioControlador():string {
         $contenido = '';
 
@@ -339,6 +346,7 @@ class userController extends mainModel
         return $contenido;
     }
 
+    // Método para añadir planificación de un usuario
     public function anadirPlanificacionUsuarioControlador():string {
         $fecha = $this->limpiarCadena($_POST["nueva-planificacion-fecha"]);
         $dni = $this->limpiarCadena($_POST["dni-cliente"]);

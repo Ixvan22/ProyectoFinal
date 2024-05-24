@@ -5,6 +5,7 @@ use app\models\mainModel;
 use app\controllers\tiposController;
 
 class configController extends mainModel {
+    // Método para editar empleados
     public function editarUsuarioControlador(string $usuario):string {
         $nombre = $this->limpiarCadena($_POST["edit-trabajador-nombre"]);
         $apellidos = $this->limpiarCadena($_POST["edit-trabajador-apellidos"]);
@@ -29,6 +30,7 @@ class configController extends mainModel {
 
         $datosUsuario = [];
 
+        // Comprobacicón si ha modificado algún campo para actualizar
         if ($nombre != $verificarUsuario["nombre"]) {
             $datosUsuario[] = [
                 "campo_nombre" => "nombre",
@@ -100,6 +102,7 @@ class configController extends mainModel {
             ];
         }
 
+        // Verificar si va a modificar la contraseña de la cuenta
         $datosCuentaUsuario = [];
         if ($password != '') {
             $password = password_hash($password, PASSWORD_BCRYPT, ["cost" => 10]);
@@ -137,6 +140,7 @@ class configController extends mainModel {
         return $alerta;
     }
 
+    // Método para mostrar formulario de configuración
     public function listarFormConfigControlador(string $dni):string {
         $contenido = '';
 
@@ -197,6 +201,7 @@ class configController extends mainModel {
                 </div>
         ';
 
+        // Listar input password si tiene cuenta
         $verificarCuenta = "SELECT * FROM cuentas_web WHERE dni_empleado = '".$usuario["dni"]."'";
         $verificarCuenta = $this->ejecutarConsulta($verificarCuenta);
         if ($verificarCuenta->rowCount() == 1) {
