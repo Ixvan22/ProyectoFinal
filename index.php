@@ -33,6 +33,7 @@ $vista = $viewsController->obtenerVistasControlador($url[0]);
 
 
 // TODO REALIZAR COMPROBACIONES
+clearstatcache();
 
 require_once $vista;
 

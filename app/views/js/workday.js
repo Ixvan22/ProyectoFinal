@@ -36,17 +36,21 @@ btnWorkday.addEventListener('click', e => {
 document.addEventListener('DOMContentLoaded', () => {
     if (localStorage.getItem('workday')) {
         let date = JSON.parse(localStorage.getItem('workday'))[0];
-        
+
         const [dateString, timeString] = date;
-        const [day, month, year] = dateString.split('/');
+
+        const year = dateString.substring(0, 4);
+        const month = dateString.substring(4, 6);
+        const day = dateString.substring(6, 8)
         const [hour, minute, second] = timeString.split(':');
+
         const fechaStart = new Date(year, month - 1, day, hour, minute, second);
         
         escribirFecha(fechaStart, workdayStart);
         botonIniciar();
 
     }
-})
+});
 
 function escribirFecha(date, html) {
         html.innerHTML = date.getHours().toString().padStart(2, '0') + ':' + date.getMinutes().toString().padStart(2, '0') +
