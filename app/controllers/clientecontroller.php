@@ -91,8 +91,9 @@ class clienteController extends mainModel {
                                 <p class="p-0 m-0">Apellidos: <span id="clientes-datos-apellidos">'.$cliente["apellidos"].'</span></p>
                                 <p class="p-0 m-0">Teléfono: <span id="clientes-datos-telefono">'.$cliente["telefono"].'</span></p>
                                 <p class="p-0 m-0">Correo: <span id="clientes-datos-correo">'.$cliente["correo"].'</span></p>
-                                <div class="d-flex gap-1">
+                                <div class="d-flex flex-column gap-2">
                                     <a href="'.APP_URL.'clientes/eliminarCliente/'.$cliente["dni"].'" class="btn btn-danger"><i class="fa-solid fa-x"></i></a>
+                                    <sub>Se eliminará la mercancía asociada</sub>
                                 </div>
                             </div>
                         </div>';
