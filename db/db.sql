@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 19-05-2024 a las 16:23:17
+-- Tiempo de generación: 25-05-2024 a las 13:27:48
 -- Versión del servidor: 8.0.36-0ubuntu0.22.04.1
 -- Versión de PHP: 8.1.2-1ubuntu2.14
 
@@ -50,6 +50,7 @@ CREATE TABLE `empleados` (
   `cargo` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
+
 -- --------------------------------------------------------
 
 --
@@ -62,6 +63,7 @@ CREATE TABLE `jornada_empleados` (
   `hora_entrada` varchar(20) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `hora_salida` varchar(20) COLLATE utf8mb4_spanish2_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+
 
 -- --------------------------------------------------------
 
@@ -77,6 +79,7 @@ CREATE TABLE `mercancia` (
   `tipo_peso` int NOT NULL,
   `descripcion` varchar(255) COLLATE utf8mb4_spanish2_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+
 
 -- --------------------------------------------------------
 
@@ -107,7 +110,9 @@ CREATE TABLE `tipo_cargo` (
 
 INSERT INTO `tipo_cargo` (`tipo`, `nombre`) VALUES
 (1, 'ADMINISTRADOR'),
-(2, 'TRANSPORTISTA');
+(2, 'TRANSPORTISTA'),
+(3, 'MOZO ALMACÉN'),
+(4, 'RR.HH');
 
 -- --------------------------------------------------------
 
@@ -210,18 +215,6 @@ CREATE TABLE `vehiculos` (
   `tipo_estado` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `vehiculos_empleados`
---
-
-CREATE TABLE `vehiculos_empleados` (
-  `empleado` varchar(9) COLLATE utf8mb4_spanish2_ci NOT NULL,
-  `vehiculo` varchar(7) COLLATE utf8mb4_spanish2_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
-
 --
 -- Índices para tablas volcadas
 --
@@ -250,9 +243,9 @@ ALTER TABLE `jornada_empleados`
 --
 ALTER TABLE `mercancia`
   ADD PRIMARY KEY (`localizador`),
-  ADD KEY `fk-tipo-peso-mercancia` (`tipo_peso`),
   ADD KEY `fk-cliente-mercancia` (`cliente`),
-  ADD KEY `fk-tipo-estado-mercancia` (`tipo_estado`);
+  ADD KEY `fk-tipo-estado-mercancia` (`tipo_estado`),
+  ADD KEY `fk-tipo-peso-mercancia` (`tipo_peso`);
 
 --
 -- Indices de la tabla `planificacion_empleados`
@@ -303,15 +296,8 @@ ALTER TABLE `usuarios`
 --
 ALTER TABLE `vehiculos`
   ADD PRIMARY KEY (`matricula`),
-  ADD KEY `fk-tipo-peso-vehiculo` (`tipo_peso`),
-  ADD KEY `fk-tipo-estado-vehiculo` (`tipo_estado`);
-
---
--- Indices de la tabla `vehiculos_empleados`
---
-ALTER TABLE `vehiculos_empleados`
-  ADD PRIMARY KEY (`empleado`,`vehiculo`),
-  ADD KEY `fk-vehiculo-empleado` (`vehiculo`);
+  ADD KEY `fk-tipo-estado-vehiculo` (`tipo_estado`),
+  ADD KEY `fk-tipo-peso-vehiculo` (`tipo_peso`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -337,7 +323,7 @@ ALTER TABLE `transporte_mercancia`
 -- Filtros para la tabla `cuentas_web`
 --
 ALTER TABLE `cuentas_web`
-  ADD CONSTRAINT `fk-cuentas-empleado` FOREIGN KEY (`dni_empleado`) REFERENCES `empleados` (`dni`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `fk-cuentas-empleado` FOREIGN KEY (`dni_empleado`) REFERENCES `empleados` (`dni`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `empleados`
@@ -349,42 +335,35 @@ ALTER TABLE `empleados`
 -- Filtros para la tabla `jornada_empleados`
 --
 ALTER TABLE `jornada_empleados`
-  ADD CONSTRAINT `fk-empleado-jornada` FOREIGN KEY (`dni_empleado`) REFERENCES `empleados` (`dni`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `fk-empleado-jornada` FOREIGN KEY (`dni_empleado`) REFERENCES `empleados` (`dni`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `mercancia`
 --
 ALTER TABLE `mercancia`
-  ADD CONSTRAINT `fk-cliente-mercancia` FOREIGN KEY (`cliente`) REFERENCES `usuarios` (`dni`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  ADD CONSTRAINT `fk-tipo-estado-mercancia` FOREIGN KEY (`tipo_estado`) REFERENCES `tipo_estado_mercancia` (`tipo`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk-tipo-peso-mercancia` FOREIGN KEY (`tipo_peso`) REFERENCES `tipo_peso` (`tipo`);
+  ADD CONSTRAINT `fk-cliente-mercancia` FOREIGN KEY (`cliente`) REFERENCES `usuarios` (`dni`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk-tipo-estado-mercancia` FOREIGN KEY (`tipo_estado`) REFERENCES `tipo_estado_mercancia` (`tipo`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk-tipo-peso-mercancia` FOREIGN KEY (`tipo_peso`) REFERENCES `tipo_peso` (`tipo`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `planificacion_empleados`
 --
 ALTER TABLE `planificacion_empleados`
-  ADD CONSTRAINT `fk-planificacion-empleado` FOREIGN KEY (`empleado`) REFERENCES `empleados` (`dni`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `fk-planificacion-empleado` FOREIGN KEY (`empleado`) REFERENCES `empleados` (`dni`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `transporte_mercancia`
 --
 ALTER TABLE `transporte_mercancia`
-  ADD CONSTRAINT `fk-localizador-transporte` FOREIGN KEY (`localizador`) REFERENCES `mercancia` (`localizador`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  ADD CONSTRAINT `fk-matricula-transporte` FOREIGN KEY (`matricula`) REFERENCES `vehiculos` (`matricula`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `fk-localizador-transporte` FOREIGN KEY (`localizador`) REFERENCES `mercancia` (`localizador`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk-matricula-transporte` FOREIGN KEY (`matricula`) REFERENCES `vehiculos` (`matricula`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `vehiculos`
 --
 ALTER TABLE `vehiculos`
-  ADD CONSTRAINT `fk-tipo-estado-vehiculo` FOREIGN KEY (`tipo_estado`) REFERENCES `tipo_estado_vehiculo` (`tipo`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  ADD CONSTRAINT `fk-tipo-peso-vehiculo` FOREIGN KEY (`tipo_peso`) REFERENCES `tipo_peso` (`tipo`) ON DELETE RESTRICT ON UPDATE RESTRICT;
-
---
--- Filtros para la tabla `vehiculos_empleados`
---
-ALTER TABLE `vehiculos_empleados`
-  ADD CONSTRAINT `fk-empleado-vehiculo` FOREIGN KEY (`empleado`) REFERENCES `empleados` (`dni`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  ADD CONSTRAINT `fk-vehiculo-empleado` FOREIGN KEY (`vehiculo`) REFERENCES `vehiculos` (`matricula`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `fk-tipo-estado-vehiculo` FOREIGN KEY (`tipo_estado`) REFERENCES `tipo_estado_vehiculo` (`tipo`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk-tipo-peso-vehiculo` FOREIGN KEY (`tipo_peso`) REFERENCES `tipo_peso` (`tipo`) ON DELETE RESTRICT ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
