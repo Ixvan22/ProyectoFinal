@@ -38,7 +38,7 @@ if (!isset($_SESSION["empleado"])) header("Location: ".APP_URL.'login');
 
                 <?php
 
-                    if (isset($url[1]) && $url[1] != '' && $_SESSION["cargo_empleado"] == 1) {
+                    if (isset($url[1]) && $url[1] != '' && ($_SESSION["cargo_empleado"] == 1 || $_SESSION["cargo_empleado"] == 4)) {
                         echo $insConfig->listarFormConfigControlador($url[1]);
                     }
                     else {

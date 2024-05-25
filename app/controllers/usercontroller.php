@@ -172,6 +172,14 @@ class userController extends mainModel {
 
             if ($deleteUser->rowCount() == 1) {
                 $alerta = $this->alertController->alertaRecargar('success', 'Trabajador eliminado', APP_URL.'trabajadores');
+                if ($dni == $_SESSION["empleado"]) {
+                    if (headers_sent()) {
+                        return "<script>window.location.href = '".APP_URL."login';</script>";
+                    }
+                    else {
+                        header("Location: ".APP_URL."login");
+                    }
+                }
             }
             else {
                 $alerta = $this->alertController->alertaSimple('error', 'Fallo al eliminar el trabajador');
@@ -179,6 +187,14 @@ class userController extends mainModel {
         }
         else {
             $alerta = $this->alertController->alertaRecargar('success', 'Cuenta eliminada', APP_URL.'usuarios');
+            if ($dni == $_SESSION["empleado"]) {
+                if (headers_sent()) {
+                    return "<script>window.location.href = '".APP_URL."login';</script>";
+                }
+                else {
+                    header("Location: ".APP_URL."login");
+                }
+            }
         }
 
         return $alerta;
@@ -195,17 +211,25 @@ class userController extends mainModel {
         $consultaCuentas = $this->consultaToArrayUnico($consultaCuentas);
 
         while ($empleado = $consultaEmpleados->fetch(\PDO::FETCH_ASSOC)) {
+            $fecha_nacimiento = substr($empleado["fecha_nacimiento"], 6, 2)."/".
+                substr($empleado["fecha_nacimiento"], 4, 2)."/".
+                substr($empleado["fecha_nacimiento"], 0, 4);
+
+            $fecha_inicio_empresa = substr($empleado["fecha_inicio_empresa"], 6, 2)."/".
+                substr($empleado["fecha_inicio_empresa"], 4, 2)."/".
+                substr($empleado["fecha_inicio_empresa"], 0, 4);
+
             $contenido .= '<tr class="align-middle">
                             <th scope="row">'.$empleado["dni"].'</th>
                             <td>'.$empleado["nombre"].'</td>
                             <td>'.$empleado["apellidos"].'</td>
                             <td>'.$empleado["telefono"].'</td>
                             <td>'.$empleado["correo"].'</td>
-                            <td>'.$empleado["fecha_nacimiento"].'</td>
-                            <td>'.$empleado["fecha_inicio_empresa"].'</td>
+                            <td>'.$fecha_nacimiento.'</td>
+                            <td>'.$fecha_inicio_empresa.'</td>
                             <td>'.$empleado["cargo"].'</td>';
             if (in_array($empleado['dni'], $consultaCuentas)) {
-                $contenido .= '<td class="d-flex"><a href="'.APP_URL.'trabajadores/eliminarCuenta/'.$empleado["dni"].'" 
+                $contenido .= '<td class="d-flex"><a href="'.APP_URL.'trabajadores/eliminarEmpleado/'.$empleado["dni"].'" 
                 class="btn btn-danger mx-2">Eliminar trabajador</a>
                 <a href="'.APP_URL.'configuracion/'.$empleado["dni"].'" class="btn btn-success mx-2">Editar</a></td></td>';
             }
@@ -232,6 +256,13 @@ class userController extends mainModel {
             $empleado = "SELECT * FROM empleados WHERE dni = '$cuenta'";
             $empleado = $this->ejecutarConsulta($empleado);
             $empleado = $empleado->fetch(\PDO::FETCH_ASSOC);
+            $fecha_nacimiento = substr($empleado["fecha_nacimiento"], 6, 2)."/".
+                substr($empleado["fecha_nacimiento"], 4, 2)."/".
+                substr($empleado["fecha_nacimiento"], 0, 4);
+
+            $fecha_inicio_empresa = substr($empleado["fecha_inicio_empresa"], 6, 2)."/".
+                substr($empleado["fecha_inicio_empresa"], 4, 2)."/".
+                substr($empleado["fecha_inicio_empresa"], 0, 4);
 
             $contenido .= '<tr class="align-middle">
                             <th scope="row">'.$empleado["dni"].'</th>
@@ -239,11 +270,10 @@ class userController extends mainModel {
                             <td>'.$empleado["apellidos"].'</td>
                             <td>'.$empleado["telefono"].'</td>
                             <td>'.$empleado["correo"].'</td>
-                            <td>'.$empleado["fecha_nacimiento"].'</td>
-                            <td>'.$empleado["fecha_inicio_empresa"].'</td>
+                            <td>'.$fecha_nacimiento.'</td>
+                            <td>'.$fecha_inicio_empresa.'</td>
                             <td>'.$empleado["cargo"].'</td>
-                            <td class="d-flex"><a href="'.APP_URL.'usuarios/eliminarCuenta/'.$empleado["dni"].'" class="btn btn-danger">Eliminar</a>
-                            <a href="" class="btn btn-success mx-2">Editar</a></td>';
+                            <td class="d-flex"><a href="'.APP_URL.'usuarios/eliminarCuenta/'.$empleado["dni"].'" class="btn btn-danger">Eliminar</a>';
         }
 
         return $contenido;

@@ -68,7 +68,7 @@ if ($_SESSION["cargo_empleado"] != 1 && $_SESSION["cargo_empleado"] != 4) header
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-success" name="anadirCliente">Guardar cambios</button>
+                                <button type="submit" class="btn btn-success" name="anadirCliente">Añadir</button>
                             </div>
                         </form>
                     </div>

@@ -144,7 +144,7 @@ class vehiculoController extends mainModel {
                             <div class="modal-body">
                                 <div class="-modal-mercancia">
                                     <div class="row d-flex align-items-center">
-                                        <label class="w-50" for="asignar-mercancia">Añadir mercancia:</label>';
+                                        <label class="w-50" for="asignar-mercancia">Añadir mercancía:</label>';
             
             $contenido .= $insTipos->listarVehiculoMercancias($vehiculo["matricula"], $vehiculo["tipo_peso"]);
 
@@ -160,7 +160,7 @@ class vehiculoController extends mainModel {
                             </div>
                             <div class="modal-footer">
                                 <a href="'.APP_URL.'vehiculos/eliminarVehiculo/'.$vehiculo["matricula"].'" class="btn btn-danger">Eliminar</a>
-                                <div class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modal-mercanciaAsignada-'.$vehiculo["matricula"].'">Mercancia asignada</div>
+                                <div class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modal-mercanciaAsignada-'.$vehiculo["matricula"].'">Mercancía asignada</div>
                                 <input type="hidden" value="'.$vehiculo["matricula"].'" name="vehiculoMatricula"/>
                                 <button type="submit" class="btn btn-success" name="guardar-estado-vehículo">Guardar cambios</button>
                             </div>
