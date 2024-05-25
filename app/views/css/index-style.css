@@ -21,12 +21,13 @@ img {
 
 /* Packages */
 .-box-package {
+    padding: 20px 0;
     width: 40%;
     height: 125px;
     margin: 0 auto;
     margin-top: -5%;
     
-    background-color: yellow;
+    background-color: #cccccc;
     border-radius: 12px;
 
     display: flex;
@@ -50,7 +51,7 @@ img {
     width: 70%;
     height: 100%;
     outline: none;
-    border: 2px solid black;
+    border: 2px solid #292c37;
 }
 
 .-box-package-form .btn {
