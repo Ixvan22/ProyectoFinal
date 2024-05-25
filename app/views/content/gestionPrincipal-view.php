@@ -87,9 +87,6 @@ if (!isset($_SESSION["empleado"])) header("Location: ".APP_URL.'login');
 
             <div class="-header-estructura m-0">
                 <h2>Jornadas recientes</h2>
-                <div class="-header-buttons">
-                    <a href="" class="btn btn-secondary">Filtros?</a>
-                </div>
             </div>
 
             <div class="table-responsive">

@@ -9,7 +9,7 @@ $insUsuario = new \app\controllers\userController();
         <?php echo $insUsuario->listarUsuarioNavbarControlador($_SESSION["empleado"]); ?>
         <ul class="p-0 my-4">
             <a href="<?php echo APP_URL ?>gestionPrincipal"><li>Inicio</li></a>
-            <?php if ($_SESSION["cargo_empleado"] == 1 || $_SESSION["cargo_empleado"] == 2) { ?>
+            <?php if ($_SESSION["cargo_empleado"] == 1 || $_SESSION["cargo_empleado"] == 2 || $_SESSION["cargo_empleado"] == 3) { ?>
             <a href="<?php echo APP_URL ?>vehiculos"><li>Vehículos</li></a>
             <?php } ?>
             <?php if ($_SESSION["cargo_empleado"] == 1 || $_SESSION["cargo_empleado"] == 3) { ?>

@@ -148,13 +148,15 @@ class vehiculoController extends mainModel {
             
             $contenido .= $insTipos->listarVehiculoMercancias($vehiculo["matricula"], $vehiculo["tipo_peso"]);
 
-            $contenido .= '     </div>
+            $contenido .= '     </div>';
+            if ($_SESSION["cargo_empleado"] == 1 || $_SESSION["cargo_empleado"] == 2) {
+                $contenido .= '
                                     <div class="row d-flex align-items-center my-2">
                                         <label class="w-25" for="vehiculo-tipo-estado">Estado:</label>
-                                        '.$insTipos->listarVehiculosControlador($vehiculo["tipo_estado"]).'
-                                    </div>
-
-                                </div>
+                                        ' . $insTipos->listarVehiculosControlador($vehiculo["tipo_estado"]) . '
+                                    </div>';
+            }
+            $contenido .= '</div>
                             </div>
                             <div class="modal-footer">
                                 <a href="'.APP_URL.'vehiculos/eliminarVehiculo/'.$vehiculo["matricula"].'" class="btn btn-danger">Eliminar</a>

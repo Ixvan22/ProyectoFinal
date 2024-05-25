@@ -1,7 +1,9 @@
 <?php
 
 if (!isset($_SESSION["empleado"])) header("Location: ".APP_URL.'login');
-if ($_SESSION["cargo_empleado"] != 1 && $_SESSION["cargo_empleado"] != 2) header("Location: ".APP_URL.'gestionPrincipal');
+if ($_SESSION["cargo_empleado"] != 1 && $_SESSION["cargo_empleado"] != 2 && $_SESSION["cargo_empleado"] != 3) {
+    header("Location: " . APP_URL . 'gestionPrincipal');
+}
 
 ?>
 
@@ -29,7 +31,6 @@ if ($_SESSION["cargo_empleado"] != 1 && $_SESSION["cargo_empleado"] != 2) header
             <div class="-header-vehicles">
                 <h2>Mis vehículos</h2>
                 <div class="-header-buttons">
-                    <a href="" class="btn btn-secondary">Filtros?</a>
                     <?php if ($_SESSION["cargo_empleado"] == 1) { ?>
                     <div class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal-addVehiculo">Añadir vehículo</div>
                     <?php } ?>
