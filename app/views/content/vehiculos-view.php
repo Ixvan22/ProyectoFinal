@@ -1,6 +1,7 @@
 <?php
 
 if (!isset($_SESSION["empleado"])) header("Location: ".APP_URL.'login');
+if ($_SESSION["cargo_empleado"] != 1 && $_SESSION["cargo_empleado"] != 2) header("Location: ".APP_URL.'gestionPrincipal');
 
 ?>
 
