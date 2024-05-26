@@ -211,6 +211,11 @@ class userController extends mainModel {
         $consultaCuentas = $this->consultaToArrayUnico($consultaCuentas);
 
         while ($empleado = $consultaEmpleados->fetch(\PDO::FETCH_ASSOC)) {
+
+            $cargo = 'SELECT nombre FROM tipo_cargo WHERE tipo = "'.$empleado["cargo"].'"';
+            $cargo = $this->ejecutarConsulta($cargo);
+            $cargo = $cargo->fetch(\PDO::FETCH_ASSOC);
+
             $fecha_nacimiento = substr($empleado["fecha_nacimiento"], 6, 2)."/".
                 substr($empleado["fecha_nacimiento"], 4, 2)."/".
                 substr($empleado["fecha_nacimiento"], 0, 4);
@@ -227,7 +232,7 @@ class userController extends mainModel {
                             <td>'.$empleado["correo"].'</td>
                             <td>'.$fecha_nacimiento.'</td>
                             <td>'.$fecha_inicio_empresa.'</td>
-                            <td>'.$empleado["cargo"].'</td>';
+                            <td>'.ucfirst(mb_strtolower($cargo["nombre"])).'</td>';
             if (in_array($empleado['dni'], $consultaCuentas)) {
                 $contenido .= '<td class="d-flex"><a href="'.APP_URL.'trabajadores/eliminarEmpleado/'.$empleado["dni"].'" 
                 class="btn btn-danger mx-2">Eliminar trabajador</a>
