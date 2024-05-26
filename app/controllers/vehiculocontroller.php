@@ -157,7 +157,7 @@ class vehiculoController extends mainModel {
                                     <div class="row d-flex align-items-center">
                                         <label class="w-50" for="asignar-mercancia">Añadir mercancía:</label>';
             
-            $contenido .= $insTipos->listarVehiculoMercancias($vehiculo["matricula"], $vehiculo["tipo_peso"]);
+            $contenido .= $insTipos->listarVehiculoMercancias($vehiculo["tipo_peso"]);
 
             $contenido .= '     </div>';
             if ($_SESSION["cargo_empleado"] == 1 || $_SESSION["cargo_empleado"] == 2) {

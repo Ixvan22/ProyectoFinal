@@ -152,12 +152,12 @@ class tiposController extends mainModel {
     }
 
     // Método para listar mercancias que no lleve un vehículo y que sean de su tipo de peso
-    public function listarVehiculoMercancias(string $matricula, string $tipo_peso):string {
+    public function listarVehiculoMercancias(string $tipo_peso):string {
         $contenido = '<select class="form-select w-50" id="asignar-mercancia" name="asignar-mercancia">
                         <option selected></option>';
 
         $consultaMercancia = "SELECT localizador FROM mercancia WHERE localizador NOT IN 
-                                (SELECT DISTINCT localizador FROM transporte_mercancia WHERE matricula = '".$matricula."')
+                                (SELECT DISTINCT localizador FROM transporte_mercancia)
                                 AND tipo_peso = '".$tipo_peso."'";
         $consultaMercancia = $this->ejecutarConsulta($consultaMercancia);
         while ($result = $consultaMercancia->fetch(\PDO::FETCH_ASSOC)) {
