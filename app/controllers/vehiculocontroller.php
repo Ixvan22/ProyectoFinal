@@ -114,8 +114,19 @@ class vehiculoController extends mainModel {
             $contenido .= '
             <div class="col-lg-3 col-md-4 col-sm-6 col-12" data-bs-toggle="modal" data-bs-target="#modal-'.$vehiculo["matricula"].'">
                 <div class="-card-vehicle">
-                    <div class="-card-vehicle-header">
-                        <p><span id="-card-vehicle-status-icon"><i class="fa-solid fa-circle" style="color: green;"></i></span> Listo</p>
+                    <div class="-card-vehicle-header">';
+
+            $consultaTipoEstado = "SELECT nombre FROM tipo_estado_vehiculo WHERE tipo = '".$vehiculo["tipo_estado"]."'";
+            $consultaTipoEstado = $this->ejecutarConsulta($consultaTipoEstado);
+            $consultaTipoEstado = $consultaTipoEstado->fetch(\PDO::FETCH_ASSOC);
+            if ($vehiculo["tipo_estado"] == 4) {
+                $contenido .= '<p><span id="-card-vehicle-status-icon"><i class="fa-solid fa-circle" style="color: green;"></i></span> '.$consultaTipoEstado["nombre"].'</p>';
+            }
+            else {
+                $contenido .= '<p><span id="-card-vehicle-status-icon"><i class="fa-solid fa-circle" style="color: orange;"></i></span> '.$consultaTipoEstado["nombre"].'</p>';
+            }
+
+            $contenido .= '
                         <p>
                             <span id="-card-vehicle-status-weight">'.$peso.'</span>
                             / 
