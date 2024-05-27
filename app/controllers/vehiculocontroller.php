@@ -153,13 +153,16 @@ class vehiculoController extends mainModel {
                         </div>
                         <form action="'.APP_URL.'vehiculos" method="post">
                             <div class="modal-body">
-                                <div class="-modal-mercancia">
-                                    <div class="row d-flex align-items-center">
-                                        <label class="w-50" for="asignar-mercancia">Añadir mercancía:</label>';
-            
-            $contenido .= $insTipos->listarVehiculoMercancias($vehiculo["tipo_peso"]);
+                            <div class="-modal-mercancia">';
 
-            $contenido .= '     </div>';
+            if ($_SESSION["cargo_empleado"] == 1 || $_SESSION["cargo_empleado"] == 3) {
+                $contenido .= '<div class="row d-flex align-items-center">
+                                    <label class="w-50" for="asignar-mercancia">Añadir mercancía:</label>';
+
+                $contenido .= $insTipos->listarVehiculoMercancias($vehiculo["tipo_peso"]);
+
+                $contenido .= '     </div>';
+            }
             if ($_SESSION["cargo_empleado"] == 1 || $_SESSION["cargo_empleado"] == 2) {
                 $contenido .= '
                                     <div class="row d-flex align-items-center my-2">
@@ -170,9 +173,11 @@ class vehiculoController extends mainModel {
             $contenido .= '</div>
                             </div>
                             <div class="modal-footer">
-                                <a href="'.APP_URL.'vehiculos/eliminarVehiculo/'.$vehiculo["matricula"].'" class="btn btn-danger">Eliminar</a>
-                                <div class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modal-mercanciaAsignada-'.$vehiculo["matricula"].'">Mercancía asignada</div>
-                                <input type="hidden" value="'.$vehiculo["matricula"].'" name="vehiculoMatricula"/>
+                                <a href="'.APP_URL.'vehiculos/eliminarVehiculo/'.$vehiculo["matricula"].'" class="btn btn-danger">Eliminar</a>';
+            if ($_SESSION["cargo_empleado"] == 1 || $_SESSION["cargo_empleado"] == 3) {
+                $contenido .= '<div class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modal-mercanciaAsignada-' . $vehiculo["matricula"] . '">Mercancía asignada</div>';
+            }
+            $contenido .= '<input type="hidden" value="'.$vehiculo["matricula"].'" name="vehiculoMatricula"/>
                                 <button type="submit" class="btn btn-success" name="guardar-estado-vehículo">Guardar cambios</button>
                             </div>
                         </form>
