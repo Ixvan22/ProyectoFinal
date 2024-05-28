@@ -271,8 +271,6 @@ class vehiculoController extends mainModel {
 
     // Método para actualizar vehículo
     public function actualizarVehiculoControlador():string {
-        // Borrrado de caché, por si se actualiza la mercancía varias veces
-        clearstatcache();
         $matricula = $this->limpiarCadena($_POST["vehiculoMatricula"]);
 
         // Alerta por defecto en caso de que no se actualice nada

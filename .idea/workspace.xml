@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="93f6cb49-8a86-4920-a337-bcbd2775ffad" name="Changes" comment="creacion archivo index">
+      <change beforePath="$PROJECT_DIR$/app/controllers/vehiculocontroller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/vehiculocontroller.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/.htaccess" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="/bin/php" />
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2fjMpR1i0MoTVe9346woob3hJHa" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/var/www/ProyectoFinal/app/views/css&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;web-ide.project.structure&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/views/css" />
+      <recent name="$PROJECT_DIR$/app/views/content" />
+      <recent name="$PROJECT_DIR$/app/views/img" />
+      <recent name="$PROJECT_DIR$/app/views/js" />
+      <recent name="$PROJECT_DIR$/app/views/inc" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/views/css" />
+      <recent name="$PROJECT_DIR$/app/views" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-PS-241.15989.102" />
+        <option value="bundled-php-predefined-ba97393d7c68-c76157a7178b-com.jetbrains.php.sharedIndexes-PS-241.15989.102" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="93f6cb49-8a86-4920-a337-bcbd2775ffad" name="Changes" comment="" />
+      <created>1714070052592</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1714070052592</updated>
+      <workItem from="1714070054045" duration="1600000" />
+      <workItem from="1714310220215" duration="431000" />
+      <workItem from="1714310699041" duration="820000" />
+      <workItem from="1714417703132" duration="1746000" />
+      <workItem from="1714559970264" duration="2197000" />
+      <workItem from="1714731677228" duration="4630000" />
+      <workItem from="1714736518822" duration="1622000" />
+      <workItem from="1714738171431" duration="916000" />
+      <workItem from="1714816799165" duration="6504000" />
+      <workItem from="1714835198972" duration="2991000" />
+      <workItem from="1714858304341" duration="4862000" />
+      <workItem from="1715117683761" duration="1022000" />
+      <workItem from="1715193234046" duration="3626000" />
+      <workItem from="1715279186581" duration="3171000" />
+      <workItem from="1715624304527" duration="2263000" />
+      <workItem from="1715722270307" duration="3119000" />
+      <workItem from="1715769799335" duration="2948000" />
+      <workItem from="1715773103856" duration="1694000" />
+      <workItem from="1715796233581" duration="4166000" />
+      <workItem from="1716124652699" duration="5031000" />
+      <workItem from="1716559700130" duration="583000" />
+      <workItem from="1716631256839" duration="1357000" />
+      <workItem from="1716636007289" duration="605000" />
+      <workItem from="1716639160448" duration="3696000" />
+      <workItem from="1716721564992" duration="2070000" />
+      <workItem from="1716847761515" duration="820000" />
+      <workItem from="1716923767179" duration="339000" />
+    </task>
+    <task id="LOCAL-00001" summary="comment line">
+      <option name="closed" value="true" />
+      <created>1714071481101</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1714071481101</updated>
+    </task>
+    <task id="LOCAL-00002" summary="link bootstrap">
+      <option name="closed" value="true" />
+      <created>1714071509694</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1714071509694</updated>
+    </task>
+    <task id="LOCAL-00003" summary="class html">
+      <option name="closed" value="true" />
+      <created>1714071516730</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1714071516730</updated>
+    </task>
+    <task id="LOCAL-00004" summary="refactor directory">
+      <option name="closed" value="true" />
+      <created>1714311221993</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1714311221993</updated>
+    </task>
+    <task id="LOCAL-00005" summary="views">
+      <option name="closed" value="true" />
+      <created>1714311289091</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1714311289091</updated>
+    </task>
+    <task id="LOCAL-00006" summary="creacion archivo index">
+      <option name="closed" value="true" />
+      <created>1714311299364</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1714311299364</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="comment line" />
+    <MESSAGE value="link bootstrap" />
+    <MESSAGE value="class html" />
+    <MESSAGE value="index" />
+    <MESSAGE value="refactor directory" />
+    <MESSAGE value="views" />
+    <MESSAGE value="creacion archivo index" />
+    <option name="LAST_COMMIT_MESSAGE" value="creacion archivo index" />
+  </component>
+</project>
