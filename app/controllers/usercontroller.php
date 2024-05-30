@@ -261,6 +261,11 @@ class userController extends mainModel {
             $empleado = "SELECT * FROM empleados WHERE dni = '$cuenta'";
             $empleado = $this->ejecutarConsulta($empleado);
             $empleado = $empleado->fetch(\PDO::FETCH_ASSOC);
+
+            $cargo = 'SELECT nombre FROM tipo_cargo WHERE tipo = "'.$empleado["cargo"].'"';
+            $cargo = $this->ejecutarConsulta($cargo);
+            $cargo = $cargo->fetch(\PDO::FETCH_ASSOC);
+
             $fecha_nacimiento = substr($empleado["fecha_nacimiento"], 6, 2)."/".
                 substr($empleado["fecha_nacimiento"], 4, 2)."/".
                 substr($empleado["fecha_nacimiento"], 0, 4);
@@ -277,7 +282,7 @@ class userController extends mainModel {
                             <td>'.$empleado["correo"].'</td>
                             <td>'.$fecha_nacimiento.'</td>
                             <td>'.$fecha_inicio_empresa.'</td>
-                            <td>'.$empleado["cargo"].'</td>
+                            <td>'.ucfirst(mb_strtolower($cargo["nombre"])).'</td>
                             <td class="d-flex"><a href="'.APP_URL.'usuarios/eliminarCuenta/'.$empleado["dni"].'" class="btn btn-danger">Eliminar</a>';
         }
 

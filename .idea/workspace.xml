@@ -6,9 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="93f6cb49-8a86-4920-a337-bcbd2775ffad" name="Changes" comment="creacion archivo index">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/content/index-view.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/content/index-view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/css/index-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/css/index-style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/inc/navbar-index.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/inc/navbar-index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/usercontroller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/usercontroller.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,7 +106,7 @@
       <workItem from="1716847761515" duration="820000" />
       <workItem from="1716923767179" duration="456000" />
       <workItem from="1716924227659" duration="74000" />
-      <workItem from="1717098047997" duration="4025000" />
+      <workItem from="1717098047997" duration="4622000" />
     </task>
     <task id="LOCAL-00001" summary="comment line">
       <option name="closed" value="true" />
