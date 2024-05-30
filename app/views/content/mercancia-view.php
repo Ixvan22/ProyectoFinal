@@ -112,6 +112,9 @@ if ($_SESSION["cargo_empleado"] != 1 && $_SESSION["cargo_empleado"] != 3) header
     if (isset($_POST["guardar-estado-mercancia"])) {
         echo $insMercancia->actualizarMercanciaControlador();
     }
+    if (isset($url[1]) && $url[1] == "eliminarMercancia") {
+        echo $insMercancia->eliminarMercanciaControlador($url[2]);
+    }
 
     ?>
 </body>

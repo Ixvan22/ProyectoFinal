@@ -166,6 +166,7 @@ class mercanciaController extends mainModel {
                                     </div>
                                     <div class="modal-footer">
                                         <input type="hidden" value="'.$mercancia["localizador"].'" name="mercanciaLocalizador"/>
+                                        <a class="btn btn-danger" href="'.APP_URL.'mercancia/eliminarMercancia/'.$mercancia["localizador"].'">Eliminar</a>
                                         <button type="submit" class="btn btn-success" name="guardar-estado-mercancia">Guardar cambios</button>
                                     </div>
                                 </form>
@@ -260,7 +261,7 @@ class mercanciaController extends mainModel {
                 $alerta = $this->alertController->alertaSimple('error', 'Fallo al eliminar la mercancía');
                 return $alerta;
             }
-            $alerta = $this->alertController->alertaRecargar('success', 'Mercancía eliminada', APP_URL.'vehiculos');
+            $alerta = $this->alertController->alertaRecargar('success', 'Mercancía eliminada', APP_URL.'mercancia');
         }
         else {
             $alerta = $this->alertController->alertaSimple('error', 'No existe la mercancía');
