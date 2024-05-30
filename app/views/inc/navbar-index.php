@@ -8,7 +8,7 @@
                 <p class="p-0 m-0 fw-bold"><i class="fa-solid fa-phone mx-2"></i>666 666 666</p>
             </div>
             <div class="navbar-contact-email">
-                <p class="p-0 m-0 fw-bold"><i class="fa-solid fa-envelope mx-2"></i>logisitca@logistica.com</p>
+                <p class="p-0 m-0 fw-bold"><i class="fa-solid fa-envelope mx-2"></i>contacto@tesseractsolutions.com</p>
             </div>
         </div>
     </div>
