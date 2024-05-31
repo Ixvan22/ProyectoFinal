@@ -1,8 +1,5 @@
 Paleta: https://paletadecolores.com.mx/paleta/000000/9f111b/b11623/292c37/cccccc/
 
 Restante:
-Interfaz principal
-Eliminar mercancia
 Documentacion falta por poner ajax y git
 Poner en no action la bd
-Pagina 404
