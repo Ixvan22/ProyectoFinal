@@ -138,6 +138,7 @@ class mercanciaController extends mainModel {
                         </div>
                         <div class="-card-mercancia-main">
                             <p>'.$mercancia["localizador"].'</p>
+                            <p class="text-center">'.$mercancia["descripcion"].'</p>
                         </div>
                     </div>
             ';
