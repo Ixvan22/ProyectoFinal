@@ -357,10 +357,12 @@ class mercanciaController extends mainModel {
                     <div class="-card-mercancia-entregada py-3 px-1">
                         <h5 class="p-0 m-0" id="card-mercancia-entregada-localizador">Localizador: '.$mercancia["localizador"].'</h5>
                         <div class="card-mercancia-entregada-datos">
+                            <p class="p-0 m-0">Descripción: <span id="mercancia-entregada-datos-descripcion">'.$mercancia["descripcion"].'</span></p>
                             <p class="p-0 m-0">Vehículo: <span id="mercancia-entregada-datos-vehiculo">'.$vehiculo.'</span></p>
                             <p class="p-0 m-0">Cliente: <span id="mercancia-entregada-datos-cliente">'.$mercancia["cliente"].'</span></p>
                             <p class="p-0 m-0">Peso: <span id="mercancia-entregada-datos-peso">'.$mercancia["peso"].'</span> 
                             <span id="mercancia-entregada-datos-peso-tipo">'.mb_strtoupper($tipoPeso["nombre"]).'</span></p>
+                            <a class="btn btn-danger" href="'.APP_URL.'mercanciaEntregada/eliminarMercancia/'.$mercancia["localizador"].'">X</a>
                         </div>
                     </div>
                 </div>

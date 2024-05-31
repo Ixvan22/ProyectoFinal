@@ -35,6 +35,13 @@ if ($_SESSION["cargo_empleado"] != 1 && $_SESSION["cargo_empleado"] != 3) header
 
     </div>
     
-    <?php require_once 'app/views/inc/scripts.php'; ?>
+    <?php
+    require_once 'app/views/inc/scripts.php';
+
+    if (isset($url[1]) && $url[1] == "eliminarMercancia") {
+        echo $insMercancia->eliminarMercanciaControlador($url[2]);
+    }
+
+    ?>
 </body>
 </html>
