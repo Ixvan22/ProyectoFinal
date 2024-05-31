@@ -136,9 +136,9 @@ class mercanciaController extends mainModel {
                                 <span id="-card-mercancia-status-weight-type">'.$consultaTipoPeso.'</span>
                             </p>
                         </div>
-                        <div class="-card-mercancia-main">
-                            <p>'.$mercancia["localizador"].'</p>
-                            <p class="text-center">'.$mercancia["descripcion"].'</p>
+                        <div class="-card-mercancia-main ">
+                            <h2>'.$mercancia["localizador"].'</h2>
+                            <h5 class="text-center fw-lighter">'.$mercancia["descripcion"].'</h5>
                         </div>
                     </div>
             ';

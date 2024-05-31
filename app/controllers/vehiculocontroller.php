@@ -172,8 +172,11 @@ class vehiculoController extends mainModel {
             }
             $contenido .= '</div>
                             </div>
-                            <div class="modal-footer">
-                                <a href="'.APP_URL.'vehiculos/eliminarVehiculo/'.$vehiculo["matricula"].'" class="btn btn-danger">Eliminar</a>';
+                            <div class="modal-footer">';
+            if ($_SESSION["cargo_empleado"] == 1) {
+                $contenido .= '<a href="'.APP_URL.'vehiculos/eliminarVehiculo/'.$vehiculo["matricula"].'" class="btn btn-danger">Eliminar</a>';
+            }
+            
             if ($_SESSION["cargo_empleado"] == 1 || $_SESSION["cargo_empleado"] == 3) {
                 $contenido .= '<div class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modal-mercanciaAsignada-' . $vehiculo["matricula"] . '">Mercancía asignada</div>';
             }
