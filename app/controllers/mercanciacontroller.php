@@ -101,7 +101,7 @@ class mercanciaController extends mainModel {
     public function listarMercanciaControlador():string {
         $contenido = '';
 
-        $consultaMercancia = "SELECT * FROM mercancia ORDER BY localizador";
+        $consultaMercancia = "SELECT * FROM mercancia WHERE tipo_estado != 5 ORDER BY localizador";
         $consultaMercancia = $this->ejecutarConsulta($consultaMercancia);
 
         $insTipos = new tiposController();

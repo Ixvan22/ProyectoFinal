@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="93f6cb49-8a86-4920-a337-bcbd2775ffad" name="Changes" comment="creacion archivo index">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/usercontroller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/usercontroller.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/mercanciacontroller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/mercanciacontroller.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,7 +109,7 @@
       <workItem from="1717098047997" duration="5859000" />
       <workItem from="1717160184780" duration="3477000" />
       <workItem from="1717339034756" duration="133000" />
-      <workItem from="1717342963910" duration="155000" />
+      <workItem from="1717342963910" duration="335000" />
     </task>
     <task id="LOCAL-00001" summary="comment line">
       <option name="closed" value="true" />
