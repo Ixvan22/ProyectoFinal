@@ -113,10 +113,7 @@ class mercanciaController extends mainModel {
             $consultaTipoEstado = "SELECT * FROM tipo_estado_mercancia WHERE tipo = '".$mercancia["tipo_estado"]."'";
             $consultaTipoEstado = $this->ejecutarConsulta($consultaTipoEstado);
             $consultaTipoEstado = $consultaTipoEstado->fetch(\PDO::FETCH_ASSOC);
-
-            $vehiculoMercancia = "SELECT matricula FROM transporte_mercancia WHERE localizador = '".$mercancia["localizador"]."'";
-            $vehiculoMercancia = $this->consultaToArrayUnico($vehiculoMercancia);
-
+            
             $contenido .= '
                     <div class="col-lg-3 col-md-4 col-sm-6 col-12">
                     <div class="-card-mercancia" data-bs-toggle="modal" data-bs-target="#modal-'.$mercancia["localizador"].'">
