@@ -86,7 +86,7 @@ class configController extends mainModel {
             ];
         }
 
-        if ($cargo != $verificarUsuario["cargo"]) {
+        if ($cargo != $verificarUsuario["cargo"] && $_SESSION["cargo_empleado"] == 1) {
             $verificarCargo = "SELECT tipo FROM tipo_cargo where tipo = '$cargo'";
             $verificarCargo = $this->ejecutarConsulta($verificarCargo);
     
