@@ -395,6 +395,14 @@ class userController extends mainModel {
         // Formato fecha
         $fecha = str_replace("-", "", $fecha);
 
+        $fechaActual = getdate();
+        $fechaActual = $fechaActual["year"].str_pad($fechaActual["mon"], 2, 0, STR_PAD_LEFT).str_pad($fechaActual["mday"], 2, 0, STR_PAD_LEFT);
+
+        if ($fecha < $fechaActual) {
+            $alerta = $this->alertController->alertaSimple('error', 'La fecha debe ser actual o mayor al día actual');
+            return $alerta;
+        }
+
         $verificarEmpleado = "SELECT dni_empleado FROM cuentas_web WHERE dni_empleado = '$dni'";
         $verificarEmpleado = $this->ejecutarConsulta($verificarEmpleado);
 
