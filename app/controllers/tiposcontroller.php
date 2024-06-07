@@ -6,7 +6,12 @@ use app\models\mainModel;
 class tiposController extends mainModel {
     // Método para listar cargos
     public function listarCargosControlador(string $cargo = null):string {
-        $contenido = '<select class="form-select w-75" id="trabajador-cargo" name="trabajador-cargo" autocomplete="none">';
+        if ($_SESSION["cargo_empleado"] == 1) {
+            $contenido = '<select class="form-select w-75" id="trabajador-cargo" name="trabajador-cargo" autocomplete="none">';
+        }
+        else {
+            $contenido = '<select disabled class="form-select w-75" id="trabajador-cargo" name="trabajador-cargo" autocomplete="none">';
+        }
         if (is_null($cargo)) $contenido .= '<option selected value="default"></option>';
 
         $consultaCargo = 'SELECT * FROM tipo_cargo ORDER BY tipo';
