@@ -29,7 +29,7 @@ class mercanciaController extends mainModel {
         }
 
         // Verificar cliente
-        $verificarCliente = "SELECT dni FROM usuarios WHERE dni = '$cliente'";
+        $verificarCliente = "SELECT dni, correo FROM usuarios WHERE dni = '$cliente'";
         $verificarCliente = $this->ejecutarConsulta($verificarCliente);
 
         if ($verificarCliente->rowCount() == 0) {
@@ -303,11 +303,11 @@ class mercanciaController extends mainModel {
             </div>
             <div class="-localizar-paquete-card-group">
                 <p class="p-0 m-0 fw-bold">Nombre: </p>
-                <p class="p-0 m-0">'.ucfirst(mb_strtolower($consultaCliente["nombre"])).'</p>
+                <p class="p-0 m-0">'.ucfirst(mb_strtolower($consultaCliente["nombre"]??'')).'</p>
             </div>
             <div class="-localizar-paquete-card-group">
                 <p class="p-0 m-0 fw-bold">Apellidos: </p>
-                <p class="p-0 m-0">'.ucfirst(mb_strtolower($consultaCliente["apellidos"])).'</p>
+                <p class="p-0 m-0">'.ucfirst(mb_strtolower($consultaCliente["apellidos"]??'')).'</p>
             </div>
             <div class="-localizar-paquete-card-group">
                 <p class="p-0 m-0 fw-bold">Estado: </p>
@@ -315,7 +315,7 @@ class mercanciaController extends mainModel {
             </div>
             <div class="-localizar-paquete-card-group">
                 <p class="p-0 m-0 fw-bold">Peso: </p>
-                <p class="p-0 m-0">'.$mercancia["peso"].' '.mb_strtoupper($consultaPeso["nombre"]).'</p>
+                <p class="p-0 m-0">'.$mercancia["peso"].' '.mb_strtoupper($consultaPeso["nombre"]??'').'</p>
             </div>
             ';
         }   
