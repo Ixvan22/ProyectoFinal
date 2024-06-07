@@ -290,12 +290,18 @@ class vehiculoController extends mainModel {
             if (isset($_POST["asignar-mercancia"]) && $_POST["asignar-mercancia"] != '') {
                 $mercancia = $this->limpiarCadena($_POST["asignar-mercancia"]);
 
-                $verificarMercancia = "SELECT localizador, peso, tipo_peso FROM mercancia WHERE localizador = '$mercancia'";
+                $verificarMercancia = "SELECT * FROM mercancia WHERE localizador = '$mercancia'";
                 $verificarMercancia = $this->ejecutarConsulta($verificarMercancia);
 
                 if ($verificarMercancia->rowCount() == 1) {
 
                     $verificarMercancia = $verificarMercancia->fetch(\PDO::FETCH_ASSOC);
+
+                    if ($verificarMercancia["tipo_estado"] == 5) {
+                        $alerta = $this->alertController->alertaSimple('error', 'La mercancía ya fue entregada');
+                        return $alerta;
+                    }
+
                     $verificarVehiculo = $verificarVehiculo->fetch(\PDO::FETCH_ASSOC);
                     if ($verificarMercancia["tipo_peso"] != $verificarVehiculo["tipo_peso"]) {
                         $alerta = $this->alertController->alertaSimple('error', 'El tipo de la mercancia no correspone con el vehículo');

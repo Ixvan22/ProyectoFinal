@@ -158,7 +158,8 @@ class tiposController extends mainModel {
 
         $consultaMercancia = "SELECT localizador FROM mercancia WHERE localizador NOT IN 
                                 (SELECT DISTINCT localizador FROM transporte_mercancia)
-                                AND tipo_peso = '".$tipo_peso."'";
+                                AND tipo_peso = '".$tipo_peso."'
+                                AND tipo_estado != 5";
         $consultaMercancia = $this->ejecutarConsulta($consultaMercancia);
         while ($result = $consultaMercancia->fetch(\PDO::FETCH_ASSOC)) {
             $contenido .= '<option value="'.$result["localizador"].'">'.$result["localizador"].'</option>';
