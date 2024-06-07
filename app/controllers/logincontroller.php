@@ -28,6 +28,8 @@ class loginController extends mainModel {
                 // Variable de sesión para conocer el cargo del empleado
                 $_SESSION["cargo_empleado"] = $consultaTipoEmpleado["cargo"];
 
+                $this->generarLoginLog();
+
                 if (headers_sent()) {
                     return "<script>window.location.href = '".APP_URL."gestionPrincipal';</script>";
                 }
@@ -44,6 +46,19 @@ class loginController extends mainModel {
         }
         return '';
 
+    }
+
+    public function generarLoginLog() {
+        $file = fopen('login.log', 'a');
+        $fechaActual = getdate();
+        $fechaActual = $fechaActual["year"].str_pad($fechaActual["mon"], 2, 0, STR_PAD_LEFT).
+            str_pad($fechaActual["mday"], 2, 0, STR_PAD_LEFT).';'.
+            str_pad($fechaActual["hours"], 2, 0, STR_PAD_LEFT).
+            str_pad($fechaActual["minutes"], 2, 0, STR_PAD_LEFT).
+            str_pad($fechaActual["seconds"], 2, 0, STR_PAD_LEFT);
+
+        fwrite($file, $_SESSION["empleado"].';'.$fechaActual.PHP_EOL);
+        fclose($file);
     }
 
 }
