@@ -28,7 +28,7 @@
         </div>
     </div>
 
-    <div class="-box-package">
+    <div class="-box-package py-2 px-3">
         <h5>Localiza tu paquete</h5>
         <form action="<?php echo APP_URL ?>localizarPaquete" method="post" class="-box-package-form">
             <input type="text" name="localizador" placeholder="Número de seguimiento"/>
