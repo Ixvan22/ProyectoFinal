@@ -31,7 +31,7 @@ class configController extends mainModel {
         $datosUsuario = [];
 
         // Comprobacicón si ha modificado algún campo para actualizar
-        if ($nombre != $verificarUsuario["nombre"]) {
+        if ($nombre != $verificarUsuario["nombre"] && $nombre != '') {
             $datosUsuario[] = [
                 "campo_nombre" => "nombre",
                 "campo_marcador" => ":nombre",
@@ -39,7 +39,7 @@ class configController extends mainModel {
             ];
         }
 
-        if ($apellidos != $verificarUsuario["apellidos"]) {
+        if ($apellidos != $verificarUsuario["apellidos"] && $apellidos != '') {
             $datosUsuario[] = [
                 "campo_nombre" => "apellidos",
                 "campo_marcador" => ":apellidos",
@@ -47,7 +47,7 @@ class configController extends mainModel {
             ];
         }
 
-        if ($telefono != $verificarUsuario["telefono"]) {
+        if ($telefono != $verificarUsuario["telefono"] && $telefono != '') {
             if (!$this->verificarDatos('[67]{1}[0-9]{8}', $telefono)) {
                 $alerta = $this->alertController->alertaSimple('error', 'El teléfono no es válido');
                 return $alerta;
@@ -59,7 +59,7 @@ class configController extends mainModel {
             ];
         }
 
-        if ($correo != $verificarUsuario["correo"]) {
+        if ($correo != $verificarUsuario["correo"] && $correo != '') {
             $datosUsuario[] = [
                 "campo_nombre" => "correo",
                 "campo_marcador" => ":correo",
@@ -69,7 +69,7 @@ class configController extends mainModel {
         }
 
         $fecha_nacimiento = str_replace("-", "", $fecha_nacimiento);
-        if ($fecha_nacimiento != $verificarUsuario["fecha_nacimiento"]) {
+        if ($fecha_nacimiento != $verificarUsuario["fecha_nacimiento"] && $fecha_nacimiento != '') {
             $datosUsuario[] = [
                 "campo_nombre" => "fecha_nacimiento",
                 "campo_marcador" => ":fecha_nacimiento",
@@ -78,7 +78,7 @@ class configController extends mainModel {
         }
 
         $fecha_inicio = str_replace("-", "", $fecha_inicio);
-        if ($fecha_inicio != $verificarUsuario["fecha_inicio_empresa"]) {
+        if ($fecha_inicio != $verificarUsuario["fecha_inicio_empresa"] && $fecha_inicio != '') {
             $datosUsuario[] = [
                 "campo_nombre" => "fecha_inicio_empresa",
                 "campo_marcador" => ":fecha_inicio_empresa",
