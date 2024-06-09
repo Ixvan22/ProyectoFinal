@@ -36,12 +36,16 @@
 
 .-navbar-links ul a {
     padding: 10px 20px;
-    border: 1px solid #292c37;
-    border-right: 0px;
-    border-collapse: collapse;
     color: #000000;
     text-transform: uppercase;
     text-decoration: none;
+    transition: .2s;
+}
+
+.-navbar-links ul a:hover {
+    transition: .2s;
+    background-color: #292c37;
+    color: #ffffff;
 }
 
 .-navbar-config {
@@ -52,6 +56,10 @@
 .-navbar-exit {
     background-color: #9f111b;
     color: #ffffff !important;
+}
+
+.-navbar-exit:hover {
+    background-color: #9f111b !important;
 }
 
 .-navbar-responsive-closed {
