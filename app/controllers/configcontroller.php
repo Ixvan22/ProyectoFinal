@@ -13,7 +13,7 @@ class configController extends mainModel {
         $correo = $this->limpiarCadena($_POST["edit-trabajador-correo"]);
         $fecha_nacimiento = $this->limpiarCadena($_POST["edit-trabajador-fecha-nacimiento"]);
         $fecha_inicio = $this->limpiarCadena($_POST["edit-trabajador-fecha-inicio"]);
-        $cargo = $this->limpiarCadena($_POST["trabajador-cargo"]);
+        $cargo = $this->limpiarCadena($_POST["trabajador-cargo"]??'');
         $password = $this->limpiarCadena($_POST["edit-trabajador-password"]);
 
 
